@@ -1,0 +1,78 @@
+asset_id,grade,status,alpha,transparent_ratio,dimensions,size_mb,issues,recommended_action
+state_card_holographic_de_notifications_neon,B,review,False,0.0,1024x1536,1.73,"opaque background; use as scene/card, not floating asset",review/optimize
+ui_card_holographic_de_security_cyberpunk,B,review,True,0.3478,1024x1536,1.95,subject touches canvas edge; verify crop at small sizes,review/optimize
+device_card_holographic_des_connected_devices,A,approved,True,0.28,1024x1536,2.14,subject touches canvas edge; verify crop at small sizes,ship
+scene_command_center_holographic_futuristic,A,approved,True,0.3397,1254x1254,2.87,subject touches canvas edge; verify crop at small sizes,ship
+capability_cur_energy_holographic_futuristic,A,approved,True,0.8051,1254x1254,1.89,subject touches canvas edge; verify crop at small sizes,ship
+device_emblem_cyberpunk_du_laptop_holographic,A,approved,True,0.3747,1254x1254,2.2,subject touches canvas edge; verify crop at small sizes,ship
+agent_emblem_de_cybersecurity_holographic,A,approved,True,0.2975,1254x1254,2.33,subject touches canvas edge; verify crop at small sizes,ship
+voice_emblem_futuristic_d_assistant_voice_neon,A,approved,True,0.3762,1254x1254,2.17,subject touches canvas edge; verify crop at small sizes,ship
+state_emblem_holographic_cyberpunk_en_pause,A,approved,True,0.4157,1254x1254,2.34,subject touches canvas edge; verify crop at small sizes,ship
+state_emblem_holographic_d_alert_futuristic,A,approved,True,0.3724,1254x1254,2.52,subject touches canvas edge; verify crop at small sizes,ship
+device_emblem_holographic_de_camera_cybernetique,A,approved,True,0.4033,1254x1254,2.01,subject touches canvas edge; verify crop at small sizes,ship
+agent_emblem_holographic_de_communication_ia,A,approved,True,0.3904,1254x1254,1.98,subject touches canvas edge; verify crop at small sizes,ship
+memory_emblem_holographic_de_control_ia,A,approved,True,0.4165,1254x1254,2.13,subject touches canvas edge; verify crop at small sizes,ship
+agent_emblem_holographic_de_creation_futuristic,A,approved,True,0.3832,1254x1254,2.15,subject touches canvas edge; verify crop at small sizes,ship
+device_emblem_holographic_de_smart_home,A,approved,True,0.382,1254x1254,2.08,subject touches canvas edge; verify crop at small sizes,ship
+voice_emblem_holographic_de_microphonephone_neon,A,approved,True,0.6936,1254x1254,1.36,subject touches canvas edge; verify crop at small sizes,ship
+agent_emblem_holographic_de_protection_cybernetique,A,approved,True,0.7591,1536x1024,1.97,subject touches canvas edge; verify crop at small sizes,ship
+state_emblem_holographic_de_download_futuristic,A,approved,True,0.3794,1254x1254,2.37,subject touches canvas edge; verify crop at small sizes,ship
+state_emblem_holographic_de_upload_cyberpunk,A,approved,True,0.4144,1254x1254,2.25,subject touches canvas edge; verify crop at small sizes,ship
+state_emblem_holographic_de_verification_futuristic,A,approved,True,0.3373,1254x1254,2.37,subject touches canvas edge; verify crop at small sizes,ship
+device_emblem_holographic_du_sensor_futuristic,A,approved,True,0.4354,1254x1254,1.89,subject touches canvas edge; verify crop at small sizes,ship
+memory_emblem_holographic_du_core_memory_ia,A,approved,True,0.3398,1254x1254,2.44,subject touches canvas edge; verify crop at small sizes,ship
+device_emblem_holographic_du_desktop_cyberpunk,A,approved,True,0.3417,1254x1254,2.53,subject touches canvas edge; verify crop at small sizes,ship
+state_emblem_holographic_du_power_neon,A,approved,True,0.5302,1254x1254,2.01,subject touches canvas edge; verify crop at small sizes,ship
+memory_emblem_neon_d_analysis_spatial,A,approved,True,0.3541,1254x1254,2.23,,ship
+capability_emblem_neon_d_automation_futuristic,A,approved,True,0.7537,1536x1024,2.1,subject touches canvas edge; verify crop at small sizes,ship
+state_emblem_neon_de_sync_futuristic,A,approved,True,0.3809,1254x1254,2.33,subject touches canvas edge; verify crop at small sizes,ship
+core_emblem_orbital_quantum_lumineux,A,approved,True,0.924,1536x1024,1.71,subject touches canvas edge; verify crop at small sizes,ship
+device_emblem_satellite_holographic_futuristic,A,approved,True,0.4016,1254x1254,2.32,subject touches canvas edge; verify crop at small sizes,ship
+device_emblem_smartphone_orbital_neon_futuristic,A,approved,True,0.4468,1254x1254,1.89,subject touches canvas edge; verify crop at small sizes,ship
+core_globe_holographic_neon_futuristic,A,approved,True,0.5493,1254x1254,1.8,subject touches canvas edge; verify crop at small sizes,ship
+scene_hangar_futuristic_de_drones_en_orbit,A,approved,True,0.4133,1254x1254,2.7,subject touches canvas edge; verify crop at small sizes,ship
+voice_icon_holographic_de_microphone_permission,A,approved,True,0.6292,1254x1254,1.52,subject touches canvas edge; verify crop at small sizes,ship
+scene_secure_data_vault_environment,A,approved,True,0.3861,1254x1254,2.59,,ship
+ui_interface_de_research_futuristic_jarvis_x2,B,review,False,0.0,1024x1536,1.63,,review/optimize
+state_interface_holographic_d_approval_futuristic,B,review,False,0.0,1024x1536,1.78,"opaque background; use as scene/card, not floating asset",review/optimize
+ui_interface_holographic_de_secure_vault,B,review,False,0.0,1024x1536,1.76,,review/optimize
+ui_interface_holographic_focus_deep_work,B,review,False,0.0,1024x1536,1.81,,review/optimize
+ui_interface_holographic_jarvis_x2,B,review,False,0.0,1024x1536,1.65,,review/optimize
+memory_interface_holographic_knowledge_futuristic,B,review,False,0.0,1024x1536,1.93,"opaque background; use as scene/card, not floating asset",review/optimize
+capability_jarvis_x2_local_ai_futuristic,B,review,False,0.0,1672x941,1.59,"opaque background; use as scene/card, not floating asset",review/optimize
+device_wearable_holographic_futuristic,A,approved,True,0.4259,1254x1254,2.09,subject touches canvas edge; verify crop at small sizes,ship
+scene_metropolis_cyberpunk_flottante_neon,A,approved,True,0.5662,1254x1254,1.96,subject touches canvas edge; verify crop at small sizes,ship
+core_nexus_cosmic_holographic_neon,A,approved,True,0.6811,1254x1254,2.11,subject touches canvas edge; verify crop at small sizes,ship
+core_nexus_holographic_orbital_futuristic,A,approved,True,0.8147,1254x1254,1.83,subject touches canvas edge; verify crop at small sizes,ship
+scene_nexus_energy_futuristic_en_orbit,A,approved,True,0.6549,1254x1254,2.17,subject touches canvas edge; verify crop at small sizes,ship
+voice_core_d_energy_audio_futuristic_symmetric,A,approved,True,0.7744,1536x1024,2.08,subject touches canvas edge; verify crop at small sizes,ship
+core_d_energy_holographic_futuristic,A,approved,True,0.5117,1254x1254,2.3,subject touches canvas edge; verify crop at small sizes,ship
+memory_core_de_data_holographic_futuristic,A,approved,True,0.683,1254x1254,2.21,subject touches canvas edge; verify crop at small sizes,ship
+core_holographic_d_energy_futuristic,A,approved,True,0.7646,1536x1024,1.96,subject touches canvas edge; verify crop at small sizes,ship
+core_nebula_d_energy_cosmic_neon,A,approved,True,0.8922,1536x1024,1.9,subject touches canvas edge; verify crop at small sizes,ship
+device_nud_quantum_iot_en_orbit,A,approved,True,0.7992,1536x1024,2.04,subject touches canvas edge; verify crop at small sizes,ship
+voice_orbe_d_alert_voicee_cybernetique,A,approved,True,0.692,1254x1254,1.64,subject touches canvas edge; verify crop at small sizes,ship
+memory_orbe_holographic_d_ai,A,approved,True,0.622,1254x1254,1.73,subject touches canvas edge; verify crop at small sizes,ship
+core_orbe_hud_futuristic_neon_sur_transparence,A,approved,True,0.5609,1254x1254,1.88,subject touches canvas edge; verify crop at small sizes,ship
+core_orbe_energy_holographic_futuristic,A,approved,True,0.3987,1254x1254,2.37,subject touches canvas edge; verify crop at small sizes,ship
+state_panel_hud_futuristic_de_task_progress,A,approved,True,0.2794,1024x1536,1.91,subject touches canvas edge; verify crop at small sizes,ship
+scene_platform_energy_futuristic_en_levitation,A,approved,True,0.5843,1254x1254,2.06,subject touches canvas edge; verify crop at small sizes,ship
+scene_command_bridge_spatial_holographic,A,approved,True,0.388,1254x1254,2.43,subject touches canvas edge; verify crop at small sizes,ship
+scene_portal_cosmic_futuristic_aux_crystals_lumineux,A,approved,True,0.5044,1254x1254,2.28,subject touches canvas edge; verify crop at small sizes,ship
+core_portal_holographic_neon_symmetric,A,approved,True,0.8599,1536x1024,2.01,subject touches canvas edge; verify crop at small sizes,ship
+capability_portal_energy_futuristic_bleu_et_violet,A,approved,True,0.4234,1254x1254,2.64,subject touches canvas edge; verify crop at small sizes,ship
+scene_reactor_holographic_futuristic_en_levitation,A,approved,True,0.4672,1254x1254,2.82,subject touches canvas edge; verify crop at small sizes,ship
+memory_holographic_network_d_ai,A,approved,True,0.6791,1254x1254,2.29,subject touches canvas edge; verify crop at small sizes,ship
+memory_neural_network_holographic_neon,A,approved,True,0.9073,1254x1254,1.52,subject touches canvas edge; verify crop at small sizes,ship
+scene_vr_lounge_futuristic_holographic_luxueux,A,approved,True,0.294,1254x1254,2.7,subject touches canvas edge; verify crop at small sizes,ship
+capability_sphere_holographic_de_management_documents,A,approved,True,0.5436,1254x1254,2.23,subject touches canvas edge; verify crop at small sizes,ship
+ui_dashboard_d_automation_futuristic,B,review,False,0.0,1024x1536,1.77,,review/optimize
+ui_dashboard_futuristic_jarvis_x2,B,review,False,0.0,1024x1536,1.65,,review/optimize
+ui_dashboard_holographic_analytics,B,review,False,0.0,1024x1536,1.85,,review/optimize
+ui_dashboard_holographic_des_active_agents,B,review,False,0.0,1024x1536,1.81,,review/optimize
+ui_dashboard_holographic_des_documents,B,review,False,0.0,1024x1536,1.78,,review/optimize
+ui_dashboard_holographic_jarvis_x2,B,review,False,0.0,1024x1536,1.79,,review/optimize
+memory_dashboard_holographic_memory_connectee,A,approved,True,0.3268,1024x1536,2.09,subject touches canvas edge; verify crop at small sizes,ship
+ui_dashboard_jarvis_x2_dev_studio,B,review,False,0.0,1024x1536,1.69,,review/optimize
+capability_tableau_de_navigation_holographic_futuristic,B,review,False,0.0,1024x1536,1.78,"opaque background; use as scene/card, not floating asset",review/optimize
+capability_tableau_weather_futuristic_de_location,A,approved,True,0.3011,1024x1536,2.39,,ship

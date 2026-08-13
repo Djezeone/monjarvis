@@ -5,7 +5,7 @@ Desktop clap listener: reads the default microphone and logs when two loud trans
 
 Run:
   python -m pip install -r requirements.txt
-  python clap_listen.py
+  python jarvis.py
 
 Tuning (constants below):
   SAMPLE_RATE   — usually 44100 or 48000; match your device if needed.
