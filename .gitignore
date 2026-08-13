@@ -8,3 +8,9 @@ node_modules/
 apps/web/.next/
 apps/web/next-env.d.ts
 *.tsbuildinfo
+
+# Core runtime data (device registry) and per-device agent config
+apps/web/data/
+services/device-agent/config.json
+apps/web/test-results/
+apps/web/playwright-report/

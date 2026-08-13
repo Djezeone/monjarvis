@@ -9,7 +9,7 @@ Ce repo évolue vers **JARVIS X2**, un Personal Agent OS local-first (voir `docs
 | `apps/web/` | Application Next.js — landing cinématique `/`, cockpit `/app`, labs `/lab/*` (FR-014), routes API server-only `/api/jarvis/*` |
 | `apps/web/src/jarvis/` | Couches P0→P3 intégrées : composants 3D/UI, runtime voix, machine à états, adapters Hermes/Graphiti/HA/n8n, Policy Engine |
 | `assets/` | Masters PNG (`production/`), contact sheets (`previews/`), manifests (source de vérité, 77 assets) |
-| `services/` | Stacks locales : `voice-runtime` (wake word Python), `local-stack` (Graphiti+Neo4j, browser worker), `hermes` (config + plugin mémoire) |
+| `services/` | Stacks locales : `voice-runtime` (wake word Python), `local-stack` (Graphiti+Neo4j, browser worker), `hermes` (config + plugin mémoire), `device-agent` (satellite P4) |
 | `docs/` | Documentation complète : produit, sécurité (threat model, memory policy), technique (API contracts), UX, opérations, docs de couches P0→P3 |
 | `legacy/clap-listener/` | Outil desktop d'origine (double-clap → Spotify/Chrome/TTS/Cursor), conservé tel quel |
 
@@ -34,4 +34,18 @@ cp .env.example .env.local   # puis renseigner HERMES_API_KEY etc.
 - ⚠️ Les organes (Hermes, Ollama, Graphiti+Neo4j, whisper.cpp, Piper, n8n, Home Assistant) sont intégrés côté adapters mais **doivent tourner localement** pour passer « connecté » — démarrage : `services/` + `docs/operations/LOCAL_FIRST_DEPLOYMENT.md`. Le panneau Organes du cockpit reflète leur état réel via `/api/jarvis/health`, rien n'est simulé.
 - ⚠️ Browser worker désactivé par défaut tant que la sandbox n'est pas validée (invariant sécurité).
 
-Prochaines étapes : voir `AUDIT.md` §4 et `docs/build/MASTER_BUILD_PROMPT.md`.
+## P4 — Omnipresence Fabric (fondation livrée)
+
+Architecture **Core + Satellites** : le Core (machine toujours allumée) porte
+Hermes/Ollama/Graphiti ; chaque appareil devient un satellite léger relié par
+un mesh privé chiffré (Tailscale). Spécification : `docs/product/P4_OMNIPRESENCE_FABRIC.md`,
+décision d'architecture : `docs/adr/ADR-001-core-satellites-device-agent.md`.
+
+Déjà en place : Device Registry + présence par heartbeats (panneau dans
+`/app`), dispatch de capabilities passé au Policy Engine (CRITICAL bloqué
+sans approbation), Device Agent (`services/device-agent`) avec allowlist
+locale, contexte `device`/`location` sur les runs. Fabric éteint par défaut
+tant que `JARVIS_DEVICE_SHARED_SECRET` n'est pas défini.
+
+Prochaines étapes : voir `AUDIT.md` §4, `docs/build/MASTER_BUILD_PROMPT.md`
+et l'ordre de construction restant en fin de spec P4.
