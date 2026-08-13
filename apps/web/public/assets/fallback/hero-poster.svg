@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+<defs>
+ <radialGradient id="a"><stop stop-color="#5DEBFF" stop-opacity=".22"/><stop offset=".45" stop-color="#7867FF" stop-opacity=".08"/><stop offset="1" stop-color="#05070A"/></radialGradient>
+ <filter id="n"><feTurbulence baseFrequency=".5" numOctaves="4" seed="7"/><feColorMatrix values=".25 0 0 0 0 .25 0 0 0 0 .3 0 0 0 0 0 0 0 .12 0"/></filter>
+</defs>
+<rect width="1920" height="1080" fill="#05070A"/>
+<rect width="1920" height="1080" fill="url(#a)"/>
+<rect width="1920" height="1080" filter="url(#n)" opacity=".18"/>
+<circle cx="1320" cy="470" r="250" fill="none" stroke="#5DEBFF" stroke-opacity=".22" stroke-width="2"/>
+<circle cx="1320" cy="470" r="170" fill="#5DEBFF" fill-opacity=".035" stroke="#7867FF" stroke-opacity=".24"/>
+<circle cx="1320" cy="470" r="330" fill="none" stroke="#D5A85A" stroke-opacity=".08"/>
+<path d="M1120 470h400M1320 270v400" stroke="#5DEBFF" stroke-opacity=".06"/>
+<text x="140" y="790" fill="#EDF6FF" font-size="92" font-family="Arial,Helvetica,sans-serif" font-weight="500" letter-spacing="-3">Presence, not interface.</text>
+<text x="145" y="850" fill="#8EA1B4" font-size="28" font-family="Arial,Helvetica,sans-serif" letter-spacing="3">JARVIS X2 — PERSONAL AGENT OS</text>
+</svg>

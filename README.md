@@ -1,71 +1,37 @@
-# Desktop clap → Jarvis-style welcome
+# monjarvis → JARVIS X2
 
-Python script that listens to your default microphone and runs a **double-clap** welcome flow (Spotify, Chrome windows, ElevenLabs voice, Cursor). See constants at the top of `jarvis.py` for behavior and tuning.
+Ce repo évolue vers **JARVIS X2**, un Personal Agent OS local-first (voir `docs/product/PRD_JARVIS_X2.md`). L'audit qui a motivé la restructuration est dans [`AUDIT.md`](AUDIT.md).
 
-## Setup
+## Structure
 
-From this project directory:
+| Dossier | Contenu |
+| --- | --- |
+| `apps/web/` | Application Next.js — landing cinématique `/`, cockpit `/app`, labs `/lab/*` (FR-014), routes API server-only `/api/jarvis/*` |
+| `apps/web/src/jarvis/` | Couches P0→P3 intégrées : composants 3D/UI, runtime voix, machine à états, adapters Hermes/Graphiti/HA/n8n, Policy Engine |
+| `assets/` | Masters PNG (`production/`), contact sheets (`previews/`), manifests (source de vérité, 77 assets) |
+| `services/` | Stacks locales : `voice-runtime` (wake word Python), `local-stack` (Graphiti+Neo4j, browser worker), `hermes` (config + plugin mémoire) |
+| `docs/` | Documentation complète : produit, sécurité (threat model, memory policy), technique (API contracts), UX, opérations, docs de couches P0→P3 |
+| `legacy/clap-listener/` | Outil desktop d'origine (double-clap → Spotify/Chrome/TTS/Cursor), conservé tel quel |
 
-```bash
-python -m pip install -r requirements.txt
-```
-
-## Environment variables
-
-The script loads a **`.env` file** in the same folder as `jarvis.py` (via `python-dotenv`). You can also set variables in the shell.
-
-### Required (ElevenLabs welcome line)
-
-| Variable | Purpose |
-| -------- | ------- |
-| `ELEVENLABS_API_KEY` | API key from [ElevenLabs](https://elevenlabs.io). |
-| `ELEVENLABS_VOICE_ID` | Voice ID from the ElevenLabs app (My Voices / library). |
-
-Without these, the welcome speech is skipped (other actions may still run).
-
-### Optional
-
-| Variable | Purpose |
-| -------- | ------- |
-| `ELEVENLABS_MODEL_ID` | TTS model (default in code: `eleven_multilingual_v2`). |
-| `ELEVENLABS_OUTPUT_FORMAT` | e.g. `pcm_24000` (must match playback expectations). |
-| `ELEVENLABS_PCM_SAMPLE_RATE` | Override PCM sample rate if it differs from the format name. |
-| `JARVIS_WELCOME_CACHE_DIR` | Custom folder for cached welcome WAV (default: `.cache/jarvis_welcome/` under the project). |
-| `CLAUDE_CODE_URL` | URL opened for Claude in Chrome (default: new chat). |
-| `BINANCE_BTC_URL` | URL opened for Binance in Chrome (default: BTC spot trade). |
-| `CHROME_NEW_WINDOW_WAIT_S` | Seconds to wait for a new Chrome window on Windows (default `25`). |
-| `CHROME_WINDOW_WIDTH` / `CHROME_WINDOW_HEIGHT` | Windowed Chrome size when not fullscreen. |
-
-Example `.env`:
-
-```env
-ELEVENLABS_API_KEY=your_key_here
-ELEVENLABS_VOICE_ID=your_voice_id_here
-```
-
-## Run
+## Démarrer l'app web
 
 ```bash
-python jarvis.py
+cd apps/web
+npm install
+npm run dev        # http://localhost:3000
+npm run build      # vérification de compilation
+npm run test:state # cas de test de la machine à états (pack P2)
+npm run generate:assets   # régénère src/lib/assets.ts depuis le manifest
+cp .env.example .env.local   # puis renseigner HERMES_API_KEY etc.
 ```
 
-Allow the microphone if Windows prompts you. Stop with **Ctrl+C**.
+## État actuel (honnête)
 
-## Tuning
+- ✅ Pack d'assets complet importé et **vérifié** (77 assets, 493 SHA-256 conformes) ; WebP runtime servis depuis `public/assets/`.
+- ✅ Couches P0→P3 intégrées et compilées : Core 3D huit états (shaders GLSL), expérience cinématique `/`, interface vivante (voix/permissions/approbations), labs branchés sur les vrais composants.
+- ✅ Routes API server-only `/api/jarvis/*` : run, statut, stop, approbation, proxy SSE assainissant, santé des organes. Les secrets (HERMES_API_KEY…) ne quittent jamais le serveur.
+- ✅ Machine à états P2 validée : 9/9 cas du pack passent (`npm run test:state`).
+- ⚠️ Les organes (Hermes, Ollama, Graphiti+Neo4j, whisper.cpp, Piper, n8n, Home Assistant) sont intégrés côté adapters mais **doivent tourner localement** pour passer « connecté » — démarrage : `services/` + `docs/operations/LOCAL_FIRST_DEPLOYMENT.md`. Le panneau Organes du cockpit reflète leur état réel via `/api/jarvis/health`, rien n'est simulé.
+- ⚠️ Browser worker désactivé par défaut tant que la sandbox n'est pas validée (invariant sécurité).
 
-Edit the constants at the top of `jarvis.py`:
-
-| Constant      | Effect                                                            |
-| ------------- | ----------------------------------------------------------------- |
-| `SPIKE_RATIO` | Increase if you get false triggers; decrease if claps are missed. |
-| `COOLDOWN_S`  | Minimum time between two logged claps.                            |
-| `BLOCK_MS`    | Larger = slightly less CPU, a bit less precise timing.            |
-| `MIN_RMS`     | Floor on how loud a block must be (helps in very quiet rooms).  |
-| `SAMPLE_RATE` | Try `48000` if your device does not like `44100`.                 |
-
-## Troubleshooting
-
-- **PortAudio / audio errors:** Update audio drivers or try another `SAMPLE_RATE`.
-- **No reaction to claps:** Lower `SPIKE_RATIO` slightly or speak/clap closer to the mic.
-- **Spam logs:** Raise `SPIKE_RATIO` or `COOLDOWN_S`.
-- **No welcome speech:** Set `ELEVENLABS_API_KEY` and `ELEVENLABS_VOICE_ID` in `.env` and restart the terminal so variables load.
+Prochaines étapes : voir `AUDIT.md` §4 et `docs/build/MASTER_BUILD_PROMPT.md`.

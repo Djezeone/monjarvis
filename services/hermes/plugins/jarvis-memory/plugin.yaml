@@ -1,0 +1,8 @@
+name: jarvis-memory
+version: 0.1.0
+description: JARVIS X2 temporal memory tools backed by the local Graphiti REST service
+requires_env:
+  - JARVIS_GRAPHITI_URL
+provides_tools:
+  - jarvis_memory_search
+  - jarvis_memory_remember

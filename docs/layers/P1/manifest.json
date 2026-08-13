@@ -1,0 +1,27 @@
+{
+  "name": "JARVIS X2 P1 Cinematic",
+  "version": "0.1.0",
+  "generated": "2026-08-12",
+  "requires": "JARVIS X2 P0 Visual Foundation",
+  "strategy": "code-rendered cinematic; prerecorded video optional",
+  "entrypoint": "components/cinematic/CinematicExperience.tsx",
+  "chapters": [
+    "boot",
+    "presence",
+    "memory",
+    "perception",
+    "action",
+    "physical",
+    "handoff"
+  ],
+  "fallbacks": [
+    "hero-poster.svg",
+    "memory-poster.svg",
+    "physical-poster.svg"
+  ],
+  "audio": [
+    "boot-bed.wav",
+    "memory-bed.wav",
+    "physical-bed.wav"
+  ]
+}

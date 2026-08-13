@@ -1,0 +1,39 @@
+{
+  "product": "JARVIS X2",
+  "category": "Personal Agent OS",
+  "version": "1.0",
+  "release_target": "local-first V1",
+  "core_principles": [
+    "local-first",
+    "hands-free-first",
+    "explicit approval",
+    "temporal memory",
+    "progressive enhancement"
+  ],
+  "layers": [
+    "P0 Visual Foundation",
+    "P1 Cinematic",
+    "P2 Living Interface",
+    "P3 Intelligence Core",
+    "P4 Personalization",
+    "P5 Multi-device",
+    "P6 Distribution"
+  ],
+  "v1_requirements": [
+    "FR-001",
+    "FR-002",
+    "FR-003",
+    "FR-004",
+    "FR-005",
+    "FR-006",
+    "FR-007",
+    "FR-008",
+    "FR-009",
+    "FR-010",
+    "FR-011",
+    "FR-012",
+    "FR-013",
+    "FR-014",
+    "FR-015"
+  ]
+}

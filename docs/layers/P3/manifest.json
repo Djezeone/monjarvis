@@ -1,0 +1,23 @@
+{
+  "name": "JARVIS X2 P3 Intelligence Core",
+  "version": "0.1.0",
+  "generated": "2026-08-12",
+  "requires": [
+    "P0 Visual Foundation",
+    "P1 Cinematic",
+    "P2 Living Interface"
+  ],
+  "core": "Hermes Agent API server",
+  "local_inference": "Ollama custom OpenAI-compatible endpoint",
+  "memory": "Graphiti + Neo4j + local Ollama",
+  "automation": "Hermes Jobs + n8n",
+  "physical": "Home Assistant",
+  "browser": "gated worker boundary; executor disabled by default",
+  "security": [
+    "server-only secrets",
+    "loopback defaults",
+    "tool registry",
+    "policy engine",
+    "human approval"
+  ]
+}

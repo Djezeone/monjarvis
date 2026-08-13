@@ -1,0 +1,44 @@
+{
+  "name": "JARVIS X2 P0 Visual Foundation",
+  "version": "0.1.0",
+  "generated": "2026-08-12",
+  "principles": [
+    "local-first",
+    "hands-free-first",
+    "progressive-enhancement",
+    "award-level-minimalism",
+    "accessible-fallbacks"
+  ],
+  "counts": {
+    "ui_icons_svg": 32,
+    "agent_assets_svg": 6,
+    "device_assets_svg": 6,
+    "texture_assets_svg": 6,
+    "particle_assets_svg": 2,
+    "ui_sounds_wav": 8,
+    "brand_assets_svg": 2
+  },
+  "states": [
+    "idle",
+    "wake",
+    "listening",
+    "understanding",
+    "thinking",
+    "acting",
+    "speaking",
+    "warning"
+  ],
+  "deferred": [
+    "photorealistic hero environment",
+    "intro film",
+    "advanced humanoid model",
+    "final sonic identity"
+  ],
+  "entrypoints": {
+    "dashboard": "components/ui/JarvisDashboard.tsx",
+    "demo": "components/ui/JarvisP0DemoPage.tsx",
+    "cinematic": "components/cinematic/CinematicLanding.tsx",
+    "core": "components/jarvis-core/JarvisCoreScene.tsx",
+    "handsfree": "components/voice/HandsFreeDock.tsx"
+  }
+}

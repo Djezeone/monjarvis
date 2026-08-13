@@ -1,0 +1,15 @@
+model:
+  default: qwen3.5:27b
+  provider: custom
+  base_url: http://127.0.0.1:11434/v1
+
+gateway:
+  api_server:
+    enabled: true
+    host: 127.0.0.1
+    port: 8642
+    key: CHANGE_ME_WITH_A_RANDOM_LOCAL_SECRET
+    max_concurrent_runs: 4
+
+# Keep sensitive external tool surfaces narrow.
+# Add Graphiti via MCP separately, or use the P3 memory service through a custom tool.

@@ -1,0 +1,1929 @@
+{
+  "name": "JARVIS X2 MASTER ASSET PACK",
+  "version": "1.0.0",
+  "generated": "2026-08-13",
+  "visual_asset_count": 77,
+  "principles": [
+    "local-first",
+    "hands-free-first",
+    "contemporary cinematic design",
+    "progressive enhancement",
+    "explicit approval for critical actions",
+    "no mandatory paid cloud dependency"
+  ],
+  "categories": [
+    "00-concepts-reference",
+    "01-core-system",
+    "02-system-capabilities",
+    "03-product-ui",
+    "04-voice-presence",
+    "05-memory-intelligence",
+    "06-agents",
+    "07-physical-world",
+    "08-actions-states",
+    "09-cinematic-environments",
+    "99-unclassified"
+  ],
+  "assets": [
+    {
+      "id": "state_card_holographic_de_notifications_neon",
+      "category": "08-actions-states",
+      "source_filename": "carte_holographique_de_notifications_néon.png",
+      "png_path": "/assets/production/08-actions-states/state_card_holographic_de_notifications_neon.png",
+      "webp_path": "/assets/web/08-actions-states/state_card_holographic_de_notifications_neon.webp",
+      "thumbnail_path": "/assets/thumbnails/08-actions-states/state_card_holographic_de_notifications_neon.webp",
+      "width": 1024,
+      "height": 1536,
+      "aspect_ratio": 0.6667,
+      "mode": "RGB",
+      "has_alpha": false,
+      "transparent_ratio": 0.0,
+      "size_bytes": 1817760,
+      "grade": "B",
+      "tags": [
+        "state",
+        "action",
+        "status"
+      ],
+      "issues": [
+        "opaque background; use as scene/card, not floating asset"
+      ],
+      "status": "review"
+    },
+    {
+      "id": "ui_card_holographic_de_security_cyberpunk",
+      "category": "03-product-ui",
+      "source_filename": "carte_holographique_de_sécurité_cyberpunk.png",
+      "png_path": "/assets/production/03-product-ui/ui_card_holographic_de_security_cyberpunk.png",
+      "webp_path": "/assets/web/03-product-ui/ui_card_holographic_de_security_cyberpunk.webp",
+      "thumbnail_path": "/assets/thumbnails/03-product-ui/ui_card_holographic_de_security_cyberpunk.webp",
+      "width": 1024,
+      "height": 1536,
+      "aspect_ratio": 0.6667,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.3478,
+      "size_bytes": 2039627,
+      "grade": "B",
+      "tags": [
+        "ui",
+        "dashboard",
+        "product"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "review"
+    },
+    {
+      "id": "device_card_holographic_des_connected_devices",
+      "category": "07-physical-world",
+      "source_filename": "carte_holographique_des_appareils_connectés.png",
+      "png_path": "/assets/production/07-physical-world/device_card_holographic_des_connected_devices.png",
+      "webp_path": "/assets/web/07-physical-world/device_card_holographic_des_connected_devices.webp",
+      "thumbnail_path": "/assets/thumbnails/07-physical-world/device_card_holographic_des_connected_devices.webp",
+      "width": 1024,
+      "height": 1536,
+      "aspect_ratio": 0.6667,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.28,
+      "size_bytes": 2245230,
+      "grade": "A",
+      "tags": [
+        "device",
+        "physical-world",
+        "connected"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "scene_command_center_holographic_futuristic",
+      "category": "09-cinematic-environments",
+      "source_filename": "centre_de_commande_holographique_futuriste.png",
+      "png_path": "/assets/production/09-cinematic-environments/scene_command_center_holographic_futuristic.png",
+      "webp_path": "/assets/web/09-cinematic-environments/scene_command_center_holographic_futuristic.webp",
+      "thumbnail_path": "/assets/thumbnails/09-cinematic-environments/scene_command_center_holographic_futuristic.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.3397,
+      "size_bytes": 3008511,
+      "grade": "A",
+      "tags": [
+        "cinematic",
+        "environment",
+        "scene"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "capability_cur_energy_holographic_futuristic",
+      "category": "02-system-capabilities",
+      "source_filename": "cœur_énergétique_holographique_futuriste.png",
+      "png_path": "/assets/production/02-system-capabilities/capability_cur_energy_holographic_futuristic.png",
+      "webp_path": "/assets/web/02-system-capabilities/capability_cur_energy_holographic_futuristic.webp",
+      "thumbnail_path": "/assets/thumbnails/02-system-capabilities/capability_cur_energy_holographic_futuristic.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.8051,
+      "size_bytes": 1983630,
+      "grade": "A",
+      "tags": [
+        "system",
+        "general"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "device_emblem_cyberpunk_du_laptop_holographic",
+      "category": "07-physical-world",
+      "source_filename": "emblème_cyberpunk_du_laptop_holographique.png",
+      "png_path": "/assets/production/07-physical-world/device_emblem_cyberpunk_du_laptop_holographic.png",
+      "webp_path": "/assets/web/07-physical-world/device_emblem_cyberpunk_du_laptop_holographic.webp",
+      "thumbnail_path": "/assets/thumbnails/07-physical-world/device_emblem_cyberpunk_du_laptop_holographic.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.3747,
+      "size_bytes": 2308577,
+      "grade": "A",
+      "tags": [
+        "device",
+        "physical-world",
+        "connected"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "agent_emblem_de_cybersecurity_holographic",
+      "category": "06-agents",
+      "source_filename": "emblème_de_cybersécurité_holographiqueеқин.png",
+      "png_path": "/assets/production/06-agents/agent_emblem_de_cybersecurity_holographic.png",
+      "webp_path": "/assets/web/06-agents/agent_emblem_de_cybersecurity_holographic.webp",
+      "thumbnail_path": "/assets/thumbnails/06-agents/agent_emblem_de_cybersecurity_holographic.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.2975,
+      "size_bytes": 2447830,
+      "grade": "A",
+      "tags": [
+        "agent",
+        "role",
+        "identity"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "voice_emblem_futuristic_d_assistant_voice_neon",
+      "category": "04-voice-presence",
+      "source_filename": "emblème_futuriste_d_assistant_vocal_néon.png",
+      "png_path": "/assets/production/04-voice-presence/voice_emblem_futuristic_d_assistant_voice_neon.png",
+      "webp_path": "/assets/web/04-voice-presence/voice_emblem_futuristic_d_assistant_voice_neon.webp",
+      "thumbnail_path": "/assets/thumbnails/04-voice-presence/voice_emblem_futuristic_d_assistant_voice_neon.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.3762,
+      "size_bytes": 2276129,
+      "grade": "A",
+      "tags": [
+        "voice",
+        "hands-free",
+        "presence"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "state_emblem_holographic_cyberpunk_en_pause",
+      "category": "08-actions-states",
+      "source_filename": "emblème_holographique_cyberpunk_en_pause.png",
+      "png_path": "/assets/production/08-actions-states/state_emblem_holographic_cyberpunk_en_pause.png",
+      "webp_path": "/assets/web/08-actions-states/state_emblem_holographic_cyberpunk_en_pause.webp",
+      "thumbnail_path": "/assets/thumbnails/08-actions-states/state_emblem_holographic_cyberpunk_en_pause.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.4157,
+      "size_bytes": 2456755,
+      "grade": "A",
+      "tags": [
+        "state",
+        "action",
+        "status"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "state_emblem_holographic_d_alert_futuristic",
+      "category": "08-actions-states",
+      "source_filename": "emblème_holographique_d_alerte_futuriste.png",
+      "png_path": "/assets/production/08-actions-states/state_emblem_holographic_d_alert_futuristic.png",
+      "webp_path": "/assets/web/08-actions-states/state_emblem_holographic_d_alert_futuristic.webp",
+      "thumbnail_path": "/assets/thumbnails/08-actions-states/state_emblem_holographic_d_alert_futuristic.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.3724,
+      "size_bytes": 2637487,
+      "grade": "A",
+      "tags": [
+        "state",
+        "action",
+        "status"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "device_emblem_holographic_de_camera_cybernetique",
+      "category": "07-physical-world",
+      "source_filename": "emblème_holographique_de_caméra_cybernétique.png",
+      "png_path": "/assets/production/07-physical-world/device_emblem_holographic_de_camera_cybernetique.png",
+      "webp_path": "/assets/web/07-physical-world/device_emblem_holographic_de_camera_cybernetique.webp",
+      "thumbnail_path": "/assets/thumbnails/07-physical-world/device_emblem_holographic_de_camera_cybernetique.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.4033,
+      "size_bytes": 2106612,
+      "grade": "A",
+      "tags": [
+        "device",
+        "physical-world",
+        "connected"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "agent_emblem_holographic_de_communication_ia",
+      "category": "06-agents",
+      "source_filename": "emblème_holographique_de_communication_ia.png",
+      "png_path": "/assets/production/06-agents/agent_emblem_holographic_de_communication_ia.png",
+      "webp_path": "/assets/web/06-agents/agent_emblem_holographic_de_communication_ia.webp",
+      "thumbnail_path": "/assets/thumbnails/06-agents/agent_emblem_holographic_de_communication_ia.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.3904,
+      "size_bytes": 2078502,
+      "grade": "A",
+      "tags": [
+        "agent",
+        "role",
+        "identity"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "memory_emblem_holographic_de_control_ia",
+      "category": "05-memory-intelligence",
+      "source_filename": "emblème_holographique_de_contrôle_ia.png",
+      "png_path": "/assets/production/05-memory-intelligence/memory_emblem_holographic_de_control_ia.png",
+      "webp_path": "/assets/web/05-memory-intelligence/memory_emblem_holographic_de_control_ia.webp",
+      "thumbnail_path": "/assets/thumbnails/05-memory-intelligence/memory_emblem_holographic_de_control_ia.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.4165,
+      "size_bytes": 2233562,
+      "grade": "A",
+      "tags": [
+        "memory",
+        "intelligence",
+        "context"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "agent_emblem_holographic_de_creation_futuristic",
+      "category": "06-agents",
+      "source_filename": "emblème_holographique_de_création_futuriste.png",
+      "png_path": "/assets/production/06-agents/agent_emblem_holographic_de_creation_futuristic.png",
+      "webp_path": "/assets/web/06-agents/agent_emblem_holographic_de_creation_futuristic.webp",
+      "thumbnail_path": "/assets/thumbnails/06-agents/agent_emblem_holographic_de_creation_futuristic.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.3832,
+      "size_bytes": 2256578,
+      "grade": "A",
+      "tags": [
+        "agent",
+        "role",
+        "identity"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "device_emblem_holographic_de_smart_home",
+      "category": "07-physical-world",
+      "source_filename": "emblème_holographique_de_maison_connectée.png",
+      "png_path": "/assets/production/07-physical-world/device_emblem_holographic_de_smart_home.png",
+      "webp_path": "/assets/web/07-physical-world/device_emblem_holographic_de_smart_home.webp",
+      "thumbnail_path": "/assets/thumbnails/07-physical-world/device_emblem_holographic_de_smart_home.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.382,
+      "size_bytes": 2185339,
+      "grade": "A",
+      "tags": [
+        "device",
+        "physical-world",
+        "connected"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "voice_emblem_holographic_de_microphonephone_neon",
+      "category": "04-voice-presence",
+      "source_filename": "emblème_holographique_de_microphone_néon.png",
+      "png_path": "/assets/production/04-voice-presence/voice_emblem_holographic_de_microphonephone_neon.png",
+      "webp_path": "/assets/web/04-voice-presence/voice_emblem_holographic_de_microphonephone_neon.webp",
+      "thumbnail_path": "/assets/thumbnails/04-voice-presence/voice_emblem_holographic_de_microphonephone_neon.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.6936,
+      "size_bytes": 1426591,
+      "grade": "A",
+      "tags": [
+        "voice",
+        "hands-free",
+        "presence"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "agent_emblem_holographic_de_protection_cybernetique",
+      "category": "06-agents",
+      "source_filename": "emblème_holographique_de_protection_cybernétique.png",
+      "png_path": "/assets/production/06-agents/agent_emblem_holographic_de_protection_cybernetique.png",
+      "webp_path": "/assets/web/06-agents/agent_emblem_holographic_de_protection_cybernetique.webp",
+      "thumbnail_path": "/assets/thumbnails/06-agents/agent_emblem_holographic_de_protection_cybernetique.webp",
+      "width": 1536,
+      "height": 1024,
+      "aspect_ratio": 1.5,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.7591,
+      "size_bytes": 2064515,
+      "grade": "A",
+      "tags": [
+        "agent",
+        "role",
+        "identity"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "state_emblem_holographic_de_download_futuristic",
+      "category": "08-actions-states",
+      "source_filename": "emblème_holographique_de_téléchargement_futuriste.png",
+      "png_path": "/assets/production/08-actions-states/state_emblem_holographic_de_download_futuristic.png",
+      "webp_path": "/assets/web/08-actions-states/state_emblem_holographic_de_download_futuristic.webp",
+      "thumbnail_path": "/assets/thumbnails/08-actions-states/state_emblem_holographic_de_download_futuristic.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.3794,
+      "size_bytes": 2486377,
+      "grade": "A",
+      "tags": [
+        "state",
+        "action",
+        "status"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "state_emblem_holographic_de_upload_cyberpunk",
+      "category": "08-actions-states",
+      "source_filename": "emblème_holographique_de_téléversement_cyberpunk.png",
+      "png_path": "/assets/production/08-actions-states/state_emblem_holographic_de_upload_cyberpunk.png",
+      "webp_path": "/assets/web/08-actions-states/state_emblem_holographic_de_upload_cyberpunk.webp",
+      "thumbnail_path": "/assets/thumbnails/08-actions-states/state_emblem_holographic_de_upload_cyberpunk.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.4144,
+      "size_bytes": 2362818,
+      "grade": "A",
+      "tags": [
+        "state",
+        "action",
+        "status"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "state_emblem_holographic_de_verification_futuristic",
+      "category": "08-actions-states",
+      "source_filename": "emblème_holographique_de_vérification_futuriste.png",
+      "png_path": "/assets/production/08-actions-states/state_emblem_holographic_de_verification_futuristic.png",
+      "webp_path": "/assets/web/08-actions-states/state_emblem_holographic_de_verification_futuristic.webp",
+      "thumbnail_path": "/assets/thumbnails/08-actions-states/state_emblem_holographic_de_verification_futuristic.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.3373,
+      "size_bytes": 2484182,
+      "grade": "A",
+      "tags": [
+        "state",
+        "action",
+        "status"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "device_emblem_holographic_du_sensor_futuristic",
+      "category": "07-physical-world",
+      "source_filename": "emblème_holographique_du_capteur_futuriste.png",
+      "png_path": "/assets/production/07-physical-world/device_emblem_holographic_du_sensor_futuristic.png",
+      "webp_path": "/assets/web/07-physical-world/device_emblem_holographic_du_sensor_futuristic.webp",
+      "thumbnail_path": "/assets/thumbnails/07-physical-world/device_emblem_holographic_du_sensor_futuristic.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.4354,
+      "size_bytes": 1985640,
+      "grade": "A",
+      "tags": [
+        "device",
+        "physical-world",
+        "connected"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "memory_emblem_holographic_du_core_memory_ia",
+      "category": "05-memory-intelligence",
+      "source_filename": "emblème_holographique_du_noyau_mémoire_ia.png",
+      "png_path": "/assets/production/05-memory-intelligence/memory_emblem_holographic_du_core_memory_ia.png",
+      "webp_path": "/assets/web/05-memory-intelligence/memory_emblem_holographic_du_core_memory_ia.webp",
+      "thumbnail_path": "/assets/thumbnails/05-memory-intelligence/memory_emblem_holographic_du_core_memory_ia.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.3398,
+      "size_bytes": 2559170,
+      "grade": "A",
+      "tags": [
+        "memory",
+        "intelligence",
+        "context"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "device_emblem_holographic_du_desktop_cyberpunk",
+      "category": "07-physical-world",
+      "source_filename": "emblème_holographique_du_poste_cyberpunk.png",
+      "png_path": "/assets/production/07-physical-world/device_emblem_holographic_du_desktop_cyberpunk.png",
+      "webp_path": "/assets/web/07-physical-world/device_emblem_holographic_du_desktop_cyberpunk.webp",
+      "thumbnail_path": "/assets/thumbnails/07-physical-world/device_emblem_holographic_du_desktop_cyberpunk.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.3417,
+      "size_bytes": 2649824,
+      "grade": "A",
+      "tags": [
+        "device",
+        "physical-world",
+        "connected"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "state_emblem_holographic_du_power_neon",
+      "category": "08-actions-states",
+      "source_filename": "emblème_holographique_du_pouvoir_néon.png",
+      "png_path": "/assets/production/08-actions-states/state_emblem_holographic_du_power_neon.png",
+      "webp_path": "/assets/web/08-actions-states/state_emblem_holographic_du_power_neon.webp",
+      "thumbnail_path": "/assets/thumbnails/08-actions-states/state_emblem_holographic_du_power_neon.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.5302,
+      "size_bytes": 2106034,
+      "grade": "A",
+      "tags": [
+        "state",
+        "action",
+        "status"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "memory_emblem_neon_d_analysis_spatial",
+      "category": "05-memory-intelligence",
+      "source_filename": "emblème_néon_d_analyse_spatiale.png",
+      "png_path": "/assets/production/05-memory-intelligence/memory_emblem_neon_d_analysis_spatial.png",
+      "webp_path": "/assets/web/05-memory-intelligence/memory_emblem_neon_d_analysis_spatial.webp",
+      "thumbnail_path": "/assets/thumbnails/05-memory-intelligence/memory_emblem_neon_d_analysis_spatial.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.3541,
+      "size_bytes": 2336788,
+      "grade": "A",
+      "tags": [
+        "memory",
+        "intelligence",
+        "context"
+      ],
+      "issues": [],
+      "status": "approved"
+    },
+    {
+      "id": "capability_emblem_neon_d_automation_futuristic",
+      "category": "02-system-capabilities",
+      "source_filename": "emblème_néon_d_automatisation_futuriste.png",
+      "png_path": "/assets/production/02-system-capabilities/capability_emblem_neon_d_automation_futuristic.png",
+      "webp_path": "/assets/web/02-system-capabilities/capability_emblem_neon_d_automation_futuristic.webp",
+      "thumbnail_path": "/assets/thumbnails/02-system-capabilities/capability_emblem_neon_d_automation_futuristic.webp",
+      "width": 1536,
+      "height": 1024,
+      "aspect_ratio": 1.5,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.7537,
+      "size_bytes": 2205522,
+      "grade": "A",
+      "tags": [
+        "capability",
+        "system"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "state_emblem_neon_de_sync_futuristic",
+      "category": "08-actions-states",
+      "source_filename": "emblème_néon_de_synchronisation_futuriste.png",
+      "png_path": "/assets/production/08-actions-states/state_emblem_neon_de_sync_futuristic.png",
+      "webp_path": "/assets/web/08-actions-states/state_emblem_neon_de_sync_futuristic.webp",
+      "thumbnail_path": "/assets/thumbnails/08-actions-states/state_emblem_neon_de_sync_futuristic.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.3809,
+      "size_bytes": 2438488,
+      "grade": "A",
+      "tags": [
+        "state",
+        "action",
+        "status"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "core_emblem_orbital_quantum_lumineux",
+      "category": "01-core-system",
+      "source_filename": "emblème_orbital_quantique_lumineux.png",
+      "png_path": "/assets/production/01-core-system/core_emblem_orbital_quantum_lumineux.png",
+      "webp_path": "/assets/web/01-core-system/core_emblem_orbital_quantum_lumineux.webp",
+      "thumbnail_path": "/assets/thumbnails/01-core-system/core_emblem_orbital_quantum_lumineux.webp",
+      "width": 1536,
+      "height": 1024,
+      "aspect_ratio": 1.5,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.924,
+      "size_bytes": 1790542,
+      "grade": "A",
+      "tags": [
+        "core",
+        "system",
+        "hero"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "device_emblem_satellite_holographic_futuristic",
+      "category": "07-physical-world",
+      "source_filename": "emblème_satellite_holographique_futuriste.png",
+      "png_path": "/assets/production/07-physical-world/device_emblem_satellite_holographic_futuristic.png",
+      "webp_path": "/assets/web/07-physical-world/device_emblem_satellite_holographic_futuristic.webp",
+      "thumbnail_path": "/assets/thumbnails/07-physical-world/device_emblem_satellite_holographic_futuristic.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.4016,
+      "size_bytes": 2431458,
+      "grade": "A",
+      "tags": [
+        "device",
+        "physical-world",
+        "connected"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "device_emblem_smartphone_orbital_neon_futuristic",
+      "category": "07-physical-world",
+      "source_filename": "emblème_smartphone_orbital_néon_futuriste.png",
+      "png_path": "/assets/production/07-physical-world/device_emblem_smartphone_orbital_neon_futuristic.png",
+      "webp_path": "/assets/web/07-physical-world/device_emblem_smartphone_orbital_neon_futuristic.webp",
+      "thumbnail_path": "/assets/thumbnails/07-physical-world/device_emblem_smartphone_orbital_neon_futuristic.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.4468,
+      "size_bytes": 1981892,
+      "grade": "A",
+      "tags": [
+        "device",
+        "physical-world",
+        "connected"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "core_globe_holographic_neon_futuristic",
+      "category": "01-core-system",
+      "source_filename": "globe_holographique_néon_futuriste.png",
+      "png_path": "/assets/production/01-core-system/core_globe_holographic_neon_futuristic.png",
+      "webp_path": "/assets/web/01-core-system/core_globe_holographic_neon_futuristic.webp",
+      "thumbnail_path": "/assets/thumbnails/01-core-system/core_globe_holographic_neon_futuristic.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.5493,
+      "size_bytes": 1882661,
+      "grade": "A",
+      "tags": [
+        "core",
+        "system",
+        "hero"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "scene_hangar_futuristic_de_drones_en_orbit",
+      "category": "09-cinematic-environments",
+      "source_filename": "hangar_futuriste_de_drones_en_orbite.png",
+      "png_path": "/assets/production/09-cinematic-environments/scene_hangar_futuristic_de_drones_en_orbit.png",
+      "webp_path": "/assets/web/09-cinematic-environments/scene_hangar_futuristic_de_drones_en_orbit.webp",
+      "thumbnail_path": "/assets/thumbnails/09-cinematic-environments/scene_hangar_futuristic_de_drones_en_orbit.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.4133,
+      "size_bytes": 2832246,
+      "grade": "A",
+      "tags": [
+        "cinematic",
+        "environment",
+        "scene"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "voice_icon_holographic_de_microphone_permission",
+      "category": "04-voice-presence",
+      "source_filename": "icône_holographique_de_micro_autorisé.png",
+      "png_path": "/assets/production/04-voice-presence/voice_icon_holographic_de_microphone_permission.png",
+      "webp_path": "/assets/web/04-voice-presence/voice_icon_holographic_de_microphone_permission.webp",
+      "thumbnail_path": "/assets/thumbnails/04-voice-presence/voice_icon_holographic_de_microphone_permission.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.6292,
+      "size_bytes": 1593398,
+      "grade": "A",
+      "tags": [
+        "voice",
+        "hands-free",
+        "presence"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "scene_secure_data_vault_environment",
+      "category": "09-cinematic-environments",
+      "source_filename": "imagegen.png",
+      "png_path": "/assets/production/09-cinematic-environments/scene_secure_data_vault_environment.png",
+      "webp_path": "/assets/web/09-cinematic-environments/scene_secure_data_vault_environment.webp",
+      "thumbnail_path": "/assets/thumbnails/09-cinematic-environments/scene_secure_data_vault_environment.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.3861,
+      "size_bytes": 2714916,
+      "grade": "A",
+      "tags": [
+        "cinematic",
+        "environment",
+        "secure-vault",
+        "data"
+      ],
+      "issues": [],
+      "status": "approved"
+    },
+    {
+      "id": "ui_interface_de_research_futuristic_jarvis_x2",
+      "category": "03-product-ui",
+      "source_filename": "interface_de_recherche_futuriste_jarvis_x2.png",
+      "png_path": "/assets/production/03-product-ui/ui_interface_de_research_futuristic_jarvis_x2.png",
+      "webp_path": "/assets/web/03-product-ui/ui_interface_de_research_futuristic_jarvis_x2.webp",
+      "thumbnail_path": "/assets/thumbnails/03-product-ui/ui_interface_de_research_futuristic_jarvis_x2.webp",
+      "width": 1024,
+      "height": 1536,
+      "aspect_ratio": 0.6667,
+      "mode": "RGB",
+      "has_alpha": false,
+      "transparent_ratio": 0.0,
+      "size_bytes": 1708811,
+      "grade": "B",
+      "tags": [
+        "ui",
+        "dashboard",
+        "product"
+      ],
+      "issues": [],
+      "status": "review"
+    },
+    {
+      "id": "state_interface_holographic_d_approval_futuristic",
+      "category": "08-actions-states",
+      "source_filename": "interface_holographique_d_approbation_futuriste.png",
+      "png_path": "/assets/production/08-actions-states/state_interface_holographic_d_approval_futuristic.png",
+      "webp_path": "/assets/web/08-actions-states/state_interface_holographic_d_approval_futuristic.webp",
+      "thumbnail_path": "/assets/thumbnails/08-actions-states/state_interface_holographic_d_approval_futuristic.webp",
+      "width": 1024,
+      "height": 1536,
+      "aspect_ratio": 0.6667,
+      "mode": "RGB",
+      "has_alpha": false,
+      "transparent_ratio": 0.0,
+      "size_bytes": 1864432,
+      "grade": "B",
+      "tags": [
+        "state",
+        "action",
+        "status"
+      ],
+      "issues": [
+        "opaque background; use as scene/card, not floating asset"
+      ],
+      "status": "review"
+    },
+    {
+      "id": "ui_interface_holographic_de_secure_vault",
+      "category": "03-product-ui",
+      "source_filename": "interface_holographique_de_coffre_sécurisé.png",
+      "png_path": "/assets/production/03-product-ui/ui_interface_holographic_de_secure_vault.png",
+      "webp_path": "/assets/web/03-product-ui/ui_interface_holographic_de_secure_vault.webp",
+      "thumbnail_path": "/assets/thumbnails/03-product-ui/ui_interface_holographic_de_secure_vault.webp",
+      "width": 1024,
+      "height": 1536,
+      "aspect_ratio": 0.6667,
+      "mode": "RGB",
+      "has_alpha": false,
+      "transparent_ratio": 0.0,
+      "size_bytes": 1845419,
+      "grade": "B",
+      "tags": [
+        "ui",
+        "dashboard",
+        "product"
+      ],
+      "issues": [],
+      "status": "review"
+    },
+    {
+      "id": "ui_interface_holographic_focus_deep_work",
+      "category": "03-product-ui",
+      "source_filename": "interface_holographique_focus_deep_work.png",
+      "png_path": "/assets/production/03-product-ui/ui_interface_holographic_focus_deep_work.png",
+      "webp_path": "/assets/web/03-product-ui/ui_interface_holographic_focus_deep_work.webp",
+      "thumbnail_path": "/assets/thumbnails/03-product-ui/ui_interface_holographic_focus_deep_work.webp",
+      "width": 1024,
+      "height": 1536,
+      "aspect_ratio": 0.6667,
+      "mode": "RGB",
+      "has_alpha": false,
+      "transparent_ratio": 0.0,
+      "size_bytes": 1893293,
+      "grade": "B",
+      "tags": [
+        "ui",
+        "dashboard",
+        "product"
+      ],
+      "issues": [],
+      "status": "review"
+    },
+    {
+      "id": "ui_interface_holographic_jarvis_x2",
+      "category": "03-product-ui",
+      "source_filename": "interface_holographique_jarvis_x2.png",
+      "png_path": "/assets/production/03-product-ui/ui_interface_holographic_jarvis_x2.png",
+      "webp_path": "/assets/web/03-product-ui/ui_interface_holographic_jarvis_x2.webp",
+      "thumbnail_path": "/assets/thumbnails/03-product-ui/ui_interface_holographic_jarvis_x2.webp",
+      "width": 1024,
+      "height": 1536,
+      "aspect_ratio": 0.6667,
+      "mode": "RGB",
+      "has_alpha": false,
+      "transparent_ratio": 0.0,
+      "size_bytes": 1734425,
+      "grade": "B",
+      "tags": [
+        "ui",
+        "dashboard",
+        "product"
+      ],
+      "issues": [],
+      "status": "review"
+    },
+    {
+      "id": "memory_interface_holographic_knowledge_futuristic",
+      "category": "05-memory-intelligence",
+      "source_filename": "interface_holographique_knowledge_futuriste.png",
+      "png_path": "/assets/production/05-memory-intelligence/memory_interface_holographic_knowledge_futuristic.png",
+      "webp_path": "/assets/web/05-memory-intelligence/memory_interface_holographic_knowledge_futuristic.webp",
+      "thumbnail_path": "/assets/thumbnails/05-memory-intelligence/memory_interface_holographic_knowledge_futuristic.webp",
+      "width": 1024,
+      "height": 1536,
+      "aspect_ratio": 0.6667,
+      "mode": "RGB",
+      "has_alpha": false,
+      "transparent_ratio": 0.0,
+      "size_bytes": 2021929,
+      "grade": "B",
+      "tags": [
+        "memory",
+        "intelligence",
+        "context"
+      ],
+      "issues": [
+        "opaque background; use as scene/card, not floating asset"
+      ],
+      "status": "review"
+    },
+    {
+      "id": "capability_jarvis_x2_local_ai_futuristic",
+      "category": "02-system-capabilities",
+      "source_filename": "jarvis_x2_intelligence_locale_futuriste.png",
+      "png_path": "/assets/production/02-system-capabilities/capability_jarvis_x2_local_ai_futuristic.png",
+      "webp_path": "/assets/web/02-system-capabilities/capability_jarvis_x2_local_ai_futuristic.webp",
+      "thumbnail_path": "/assets/thumbnails/02-system-capabilities/capability_jarvis_x2_local_ai_futuristic.webp",
+      "width": 1672,
+      "height": 941,
+      "aspect_ratio": 1.7768,
+      "mode": "RGB",
+      "has_alpha": false,
+      "transparent_ratio": 0.0,
+      "size_bytes": 1669250,
+      "grade": "B",
+      "tags": [
+        "system",
+        "general"
+      ],
+      "issues": [
+        "opaque background; use as scene/card, not floating asset"
+      ],
+      "status": "review"
+    },
+    {
+      "id": "device_wearable_holographic_futuristic",
+      "category": "07-physical-world",
+      "source_filename": "montre_connectée_holographique_futuriste.png",
+      "png_path": "/assets/production/07-physical-world/device_wearable_holographic_futuristic.png",
+      "webp_path": "/assets/web/07-physical-world/device_wearable_holographic_futuristic.webp",
+      "thumbnail_path": "/assets/thumbnails/07-physical-world/device_wearable_holographic_futuristic.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.4259,
+      "size_bytes": 2195589,
+      "grade": "A",
+      "tags": [
+        "device",
+        "physical-world",
+        "connected"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "scene_metropolis_cyberpunk_flottante_neon",
+      "category": "09-cinematic-environments",
+      "source_filename": "métropole_cyberpunk_flottante_néon.png",
+      "png_path": "/assets/production/09-cinematic-environments/scene_metropolis_cyberpunk_flottante_neon.png",
+      "webp_path": "/assets/web/09-cinematic-environments/scene_metropolis_cyberpunk_flottante_neon.webp",
+      "thumbnail_path": "/assets/thumbnails/09-cinematic-environments/scene_metropolis_cyberpunk_flottante_neon.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.5662,
+      "size_bytes": 2054002,
+      "grade": "A",
+      "tags": [
+        "cinematic",
+        "environment",
+        "scene"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "core_nexus_cosmic_holographic_neon",
+      "category": "01-core-system",
+      "source_filename": "nexus_cosmique_holographique_néon.png",
+      "png_path": "/assets/production/01-core-system/core_nexus_cosmic_holographic_neon.png",
+      "webp_path": "/assets/web/01-core-system/core_nexus_cosmic_holographic_neon.webp",
+      "thumbnail_path": "/assets/thumbnails/01-core-system/core_nexus_cosmic_holographic_neon.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.6811,
+      "size_bytes": 2212019,
+      "grade": "A",
+      "tags": [
+        "core",
+        "system",
+        "hero"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "core_nexus_holographic_orbital_futuristic",
+      "category": "01-core-system",
+      "source_filename": "nexus_holographique_orbital_futuriste.png",
+      "png_path": "/assets/production/01-core-system/core_nexus_holographic_orbital_futuristic.png",
+      "webp_path": "/assets/web/01-core-system/core_nexus_holographic_orbital_futuristic.webp",
+      "thumbnail_path": "/assets/thumbnails/01-core-system/core_nexus_holographic_orbital_futuristic.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.8147,
+      "size_bytes": 1921213,
+      "grade": "A",
+      "tags": [
+        "core",
+        "system",
+        "hero"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "scene_nexus_energy_futuristic_en_orbit",
+      "category": "09-cinematic-environments",
+      "source_filename": "nexus_énergétique_futuriste_en_orbite.png",
+      "png_path": "/assets/production/09-cinematic-environments/scene_nexus_energy_futuristic_en_orbit.png",
+      "webp_path": "/assets/web/09-cinematic-environments/scene_nexus_energy_futuristic_en_orbit.webp",
+      "thumbnail_path": "/assets/thumbnails/09-cinematic-environments/scene_nexus_energy_futuristic_en_orbit.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.6549,
+      "size_bytes": 2272832,
+      "grade": "A",
+      "tags": [
+        "cinematic",
+        "environment",
+        "scene"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "voice_core_d_energy_audio_futuristic_symmetric",
+      "category": "04-voice-presence",
+      "source_filename": "noyau_d_énergie_audio_futuriste_symétrique.png",
+      "png_path": "/assets/production/04-voice-presence/voice_core_d_energy_audio_futuristic_symmetric.png",
+      "webp_path": "/assets/web/04-voice-presence/voice_core_d_energy_audio_futuristic_symmetric.webp",
+      "thumbnail_path": "/assets/thumbnails/04-voice-presence/voice_core_d_energy_audio_futuristic_symmetric.webp",
+      "width": 1536,
+      "height": 1024,
+      "aspect_ratio": 1.5,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.7744,
+      "size_bytes": 2184729,
+      "grade": "A",
+      "tags": [
+        "voice",
+        "hands-free",
+        "presence"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "core_d_energy_holographic_futuristic",
+      "category": "01-core-system",
+      "source_filename": "noyau_d_énergie_holographique_futuriste.png",
+      "png_path": "/assets/production/01-core-system/core_d_energy_holographic_futuristic.png",
+      "webp_path": "/assets/web/01-core-system/core_d_energy_holographic_futuristic.webp",
+      "thumbnail_path": "/assets/thumbnails/01-core-system/core_d_energy_holographic_futuristic.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.5117,
+      "size_bytes": 2411496,
+      "grade": "A",
+      "tags": [
+        "core",
+        "system",
+        "hero"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "memory_core_de_data_holographic_futuristic",
+      "category": "05-memory-intelligence",
+      "source_filename": "noyau_de_données_holographique_futuriste.png",
+      "png_path": "/assets/production/05-memory-intelligence/memory_core_de_data_holographic_futuristic.png",
+      "webp_path": "/assets/web/05-memory-intelligence/memory_core_de_data_holographic_futuristic.webp",
+      "thumbnail_path": "/assets/thumbnails/05-memory-intelligence/memory_core_de_data_holographic_futuristic.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.683,
+      "size_bytes": 2312784,
+      "grade": "A",
+      "tags": [
+        "memory",
+        "intelligence",
+        "context"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "core_holographic_d_energy_futuristic",
+      "category": "01-core-system",
+      "source_filename": "noyau_holographique_d_énergie_futuriste.png",
+      "png_path": "/assets/production/01-core-system/core_holographic_d_energy_futuristic.png",
+      "webp_path": "/assets/web/01-core-system/core_holographic_d_energy_futuristic.webp",
+      "thumbnail_path": "/assets/thumbnails/01-core-system/core_holographic_d_energy_futuristic.webp",
+      "width": 1536,
+      "height": 1024,
+      "aspect_ratio": 1.5,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.7646,
+      "size_bytes": 2051074,
+      "grade": "A",
+      "tags": [
+        "core",
+        "system",
+        "hero"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "core_nebula_d_energy_cosmic_neon",
+      "category": "01-core-system",
+      "source_filename": "nébuleuse_d_énergie_cosmique_néon.png",
+      "png_path": "/assets/production/01-core-system/core_nebula_d_energy_cosmic_neon.png",
+      "webp_path": "/assets/web/01-core-system/core_nebula_d_energy_cosmic_neon.webp",
+      "thumbnail_path": "/assets/thumbnails/01-core-system/core_nebula_d_energy_cosmic_neon.webp",
+      "width": 1536,
+      "height": 1024,
+      "aspect_ratio": 1.5,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.8922,
+      "size_bytes": 1997153,
+      "grade": "A",
+      "tags": [
+        "core",
+        "system",
+        "hero"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "device_nud_quantum_iot_en_orbit",
+      "category": "07-physical-world",
+      "source_filename": "nœud_quantique_iot_en_orbite.png",
+      "png_path": "/assets/production/07-physical-world/device_nud_quantum_iot_en_orbit.png",
+      "webp_path": "/assets/web/07-physical-world/device_nud_quantum_iot_en_orbit.webp",
+      "thumbnail_path": "/assets/thumbnails/07-physical-world/device_nud_quantum_iot_en_orbit.webp",
+      "width": 1536,
+      "height": 1024,
+      "aspect_ratio": 1.5,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.7992,
+      "size_bytes": 2136076,
+      "grade": "A",
+      "tags": [
+        "device",
+        "physical-world",
+        "connected"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "voice_orbe_d_alert_voicee_cybernetique",
+      "category": "04-voice-presence",
+      "source_filename": "orbe_d_alerte_vocale_cybernétique.png",
+      "png_path": "/assets/production/04-voice-presence/voice_orbe_d_alert_voicee_cybernetique.png",
+      "webp_path": "/assets/web/04-voice-presence/voice_orbe_d_alert_voicee_cybernetique.webp",
+      "thumbnail_path": "/assets/thumbnails/04-voice-presence/voice_orbe_d_alert_voicee_cybernetique.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.692,
+      "size_bytes": 1721595,
+      "grade": "A",
+      "tags": [
+        "voice",
+        "hands-free",
+        "presence"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "memory_orbe_holographic_d_ai",
+      "category": "05-memory-intelligence",
+      "source_filename": "orbe_holographique_d_intelligence_artificielle.png",
+      "png_path": "/assets/production/05-memory-intelligence/memory_orbe_holographic_d_ai.png",
+      "webp_path": "/assets/web/05-memory-intelligence/memory_orbe_holographic_d_ai.webp",
+      "thumbnail_path": "/assets/thumbnails/05-memory-intelligence/memory_orbe_holographic_d_ai.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.622,
+      "size_bytes": 1813133,
+      "grade": "A",
+      "tags": [
+        "memory",
+        "intelligence",
+        "context"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "core_orbe_hud_futuristic_neon_sur_transparence",
+      "category": "01-core-system",
+      "source_filename": "orbe_hud_futuriste_néon_sur_transparence.png",
+      "png_path": "/assets/production/01-core-system/core_orbe_hud_futuristic_neon_sur_transparence.png",
+      "webp_path": "/assets/web/01-core-system/core_orbe_hud_futuristic_neon_sur_transparence.webp",
+      "thumbnail_path": "/assets/thumbnails/01-core-system/core_orbe_hud_futuristic_neon_sur_transparence.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.5609,
+      "size_bytes": 1967467,
+      "grade": "A",
+      "tags": [
+        "core",
+        "system",
+        "hero"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "core_orbe_energy_holographic_futuristic",
+      "category": "01-core-system",
+      "source_filename": "orbe_énergétique_holographique_futuriste.png",
+      "png_path": "/assets/production/01-core-system/core_orbe_energy_holographic_futuristic.png",
+      "webp_path": "/assets/web/01-core-system/core_orbe_energy_holographic_futuristic.webp",
+      "thumbnail_path": "/assets/thumbnails/01-core-system/core_orbe_energy_holographic_futuristic.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.3987,
+      "size_bytes": 2480398,
+      "grade": "A",
+      "tags": [
+        "core",
+        "system",
+        "hero"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "state_panel_hud_futuristic_de_task_progress",
+      "category": "08-actions-states",
+      "source_filename": "panneau_hud_futuriste_de_progression_de_tâche.png",
+      "png_path": "/assets/production/08-actions-states/state_panel_hud_futuristic_de_task_progress.png",
+      "webp_path": "/assets/web/08-actions-states/state_panel_hud_futuristic_de_task_progress.webp",
+      "thumbnail_path": "/assets/thumbnails/08-actions-states/state_panel_hud_futuristic_de_task_progress.webp",
+      "width": 1024,
+      "height": 1536,
+      "aspect_ratio": 0.6667,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.2794,
+      "size_bytes": 2000135,
+      "grade": "A",
+      "tags": [
+        "state",
+        "action",
+        "status"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "scene_platform_energy_futuristic_en_levitation",
+      "category": "09-cinematic-environments",
+      "source_filename": "plateforme_énergétique_futuriste_en_lévitation.png",
+      "png_path": "/assets/production/09-cinematic-environments/scene_platform_energy_futuristic_en_levitation.png",
+      "webp_path": "/assets/web/09-cinematic-environments/scene_platform_energy_futuristic_en_levitation.webp",
+      "thumbnail_path": "/assets/thumbnails/09-cinematic-environments/scene_platform_energy_futuristic_en_levitation.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.5843,
+      "size_bytes": 2162293,
+      "grade": "A",
+      "tags": [
+        "cinematic",
+        "environment",
+        "scene"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "scene_command_bridge_spatial_holographic",
+      "category": "09-cinematic-environments",
+      "source_filename": "pont_de_command_spatial_holographique.png",
+      "png_path": "/assets/production/09-cinematic-environments/scene_command_bridge_spatial_holographic.png",
+      "webp_path": "/assets/web/09-cinematic-environments/scene_command_bridge_spatial_holographic.webp",
+      "thumbnail_path": "/assets/thumbnails/09-cinematic-environments/scene_command_bridge_spatial_holographic.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.388,
+      "size_bytes": 2550898,
+      "grade": "A",
+      "tags": [
+        "cinematic",
+        "environment",
+        "scene"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "scene_portal_cosmic_futuristic_aux_crystals_lumineux",
+      "category": "09-cinematic-environments",
+      "source_filename": "portail_cosmique_futuriste_aux_cristaux_lumineux.png",
+      "png_path": "/assets/production/09-cinematic-environments/scene_portal_cosmic_futuristic_aux_crystals_lumineux.png",
+      "webp_path": "/assets/web/09-cinematic-environments/scene_portal_cosmic_futuristic_aux_crystals_lumineux.webp",
+      "thumbnail_path": "/assets/thumbnails/09-cinematic-environments/scene_portal_cosmic_futuristic_aux_crystals_lumineux.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.5044,
+      "size_bytes": 2391856,
+      "grade": "A",
+      "tags": [
+        "cinematic",
+        "environment",
+        "scene"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "core_portal_holographic_neon_symmetric",
+      "category": "01-core-system",
+      "source_filename": "portail_holographique_néon_symétrique.png",
+      "png_path": "/assets/production/01-core-system/core_portal_holographic_neon_symmetric.png",
+      "webp_path": "/assets/web/01-core-system/core_portal_holographic_neon_symmetric.webp",
+      "thumbnail_path": "/assets/thumbnails/01-core-system/core_portal_holographic_neon_symmetric.webp",
+      "width": 1536,
+      "height": 1024,
+      "aspect_ratio": 1.5,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.8599,
+      "size_bytes": 2106867,
+      "grade": "A",
+      "tags": [
+        "core",
+        "system",
+        "hero"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "capability_portal_energy_futuristic_bleu_et_violet",
+      "category": "02-system-capabilities",
+      "source_filename": "portail_énergétique_futuriste_bleu_et_violet.png",
+      "png_path": "/assets/production/02-system-capabilities/capability_portal_energy_futuristic_bleu_et_violet.png",
+      "webp_path": "/assets/web/02-system-capabilities/capability_portal_energy_futuristic_bleu_et_violet.webp",
+      "thumbnail_path": "/assets/thumbnails/02-system-capabilities/capability_portal_energy_futuristic_bleu_et_violet.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.4234,
+      "size_bytes": 2771399,
+      "grade": "A",
+      "tags": [
+        "system",
+        "general"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "scene_reactor_holographic_futuristic_en_levitation",
+      "category": "09-cinematic-environments",
+      "source_filename": "réacteur_holographique_futuriste_en_lévitation.png",
+      "png_path": "/assets/production/09-cinematic-environments/scene_reactor_holographic_futuristic_en_levitation.png",
+      "webp_path": "/assets/web/09-cinematic-environments/scene_reactor_holographic_futuristic_en_levitation.webp",
+      "thumbnail_path": "/assets/thumbnails/09-cinematic-environments/scene_reactor_holographic_futuristic_en_levitation.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.4672,
+      "size_bytes": 2957493,
+      "grade": "A",
+      "tags": [
+        "cinematic",
+        "environment",
+        "scene"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "memory_holographic_network_d_ai",
+      "category": "05-memory-intelligence",
+      "source_filename": "réseau_holographique_d_intelligence_artificielle.png",
+      "png_path": "/assets/production/05-memory-intelligence/memory_holographic_network_d_ai.png",
+      "webp_path": "/assets/web/05-memory-intelligence/memory_holographic_network_d_ai.webp",
+      "thumbnail_path": "/assets/thumbnails/05-memory-intelligence/memory_holographic_network_d_ai.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.6791,
+      "size_bytes": 2398196,
+      "grade": "A",
+      "tags": [
+        "memory",
+        "intelligence",
+        "context"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "memory_neural_network_holographic_neon",
+      "category": "05-memory-intelligence",
+      "source_filename": "réseau_neuronal_holographique_néon.png",
+      "png_path": "/assets/production/05-memory-intelligence/memory_neural_network_holographic_neon.png",
+      "webp_path": "/assets/web/05-memory-intelligence/memory_neural_network_holographic_neon.webp",
+      "thumbnail_path": "/assets/thumbnails/05-memory-intelligence/memory_neural_network_holographic_neon.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.9073,
+      "size_bytes": 1592623,
+      "grade": "A",
+      "tags": [
+        "memory",
+        "intelligence",
+        "context"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "scene_vr_lounge_futuristic_holographic_luxueux",
+      "category": "09-cinematic-environments",
+      "source_filename": "salon_vr_futuriste_holographique_luxueux.png",
+      "png_path": "/assets/production/09-cinematic-environments/scene_vr_lounge_futuristic_holographic_luxueux.png",
+      "webp_path": "/assets/web/09-cinematic-environments/scene_vr_lounge_futuristic_holographic_luxueux.webp",
+      "thumbnail_path": "/assets/thumbnails/09-cinematic-environments/scene_vr_lounge_futuristic_holographic_luxueux.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.294,
+      "size_bytes": 2832239,
+      "grade": "A",
+      "tags": [
+        "cinematic",
+        "environment",
+        "scene"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "capability_sphere_holographic_de_management_documents",
+      "category": "02-system-capabilities",
+      "source_filename": "sphère_holographique_de_gestion_documentaire.png",
+      "png_path": "/assets/production/02-system-capabilities/capability_sphere_holographic_de_management_documents.png",
+      "webp_path": "/assets/web/02-system-capabilities/capability_sphere_holographic_de_management_documents.webp",
+      "thumbnail_path": "/assets/thumbnails/02-system-capabilities/capability_sphere_holographic_de_management_documents.webp",
+      "width": 1254,
+      "height": 1254,
+      "aspect_ratio": 1.0,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.5436,
+      "size_bytes": 2342685,
+      "grade": "A",
+      "tags": [
+        "system",
+        "general"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "ui_dashboard_d_automation_futuristic",
+      "category": "03-product-ui",
+      "source_filename": "tableau_de_bord_d_automatisation_futuriste.png",
+      "png_path": "/assets/production/03-product-ui/ui_dashboard_d_automation_futuristic.png",
+      "webp_path": "/assets/web/03-product-ui/ui_dashboard_d_automation_futuristic.webp",
+      "thumbnail_path": "/assets/thumbnails/03-product-ui/ui_dashboard_d_automation_futuristic.webp",
+      "width": 1024,
+      "height": 1536,
+      "aspect_ratio": 0.6667,
+      "mode": "RGB",
+      "has_alpha": false,
+      "transparent_ratio": 0.0,
+      "size_bytes": 1853051,
+      "grade": "B",
+      "tags": [
+        "ui",
+        "dashboard",
+        "product"
+      ],
+      "issues": [],
+      "status": "review"
+    },
+    {
+      "id": "ui_dashboard_futuristic_jarvis_x2",
+      "category": "03-product-ui",
+      "source_filename": "tableau_de_bord_futuriste_jarvis_x2.png",
+      "png_path": "/assets/production/03-product-ui/ui_dashboard_futuristic_jarvis_x2.png",
+      "webp_path": "/assets/web/03-product-ui/ui_dashboard_futuristic_jarvis_x2.webp",
+      "thumbnail_path": "/assets/thumbnails/03-product-ui/ui_dashboard_futuristic_jarvis_x2.webp",
+      "width": 1024,
+      "height": 1536,
+      "aspect_ratio": 0.6667,
+      "mode": "RGB",
+      "has_alpha": false,
+      "transparent_ratio": 0.0,
+      "size_bytes": 1734596,
+      "grade": "B",
+      "tags": [
+        "ui",
+        "dashboard",
+        "product"
+      ],
+      "issues": [],
+      "status": "review"
+    },
+    {
+      "id": "ui_dashboard_holographic_analytics",
+      "category": "03-product-ui",
+      "source_filename": "tableau_de_bord_holographique_analytique.png",
+      "png_path": "/assets/production/03-product-ui/ui_dashboard_holographic_analytics.png",
+      "webp_path": "/assets/web/03-product-ui/ui_dashboard_holographic_analytics.webp",
+      "thumbnail_path": "/assets/thumbnails/03-product-ui/ui_dashboard_holographic_analytics.webp",
+      "width": 1024,
+      "height": 1536,
+      "aspect_ratio": 0.6667,
+      "mode": "RGB",
+      "has_alpha": false,
+      "transparent_ratio": 0.0,
+      "size_bytes": 1937530,
+      "grade": "B",
+      "tags": [
+        "ui",
+        "dashboard",
+        "product"
+      ],
+      "issues": [],
+      "status": "review"
+    },
+    {
+      "id": "ui_dashboard_holographic_des_active_agents",
+      "category": "03-product-ui",
+      "source_filename": "tableau_de_bord_holographique_des_agents_actifs.png",
+      "png_path": "/assets/production/03-product-ui/ui_dashboard_holographic_des_active_agents.png",
+      "webp_path": "/assets/web/03-product-ui/ui_dashboard_holographic_des_active_agents.webp",
+      "thumbnail_path": "/assets/thumbnails/03-product-ui/ui_dashboard_holographic_des_active_agents.webp",
+      "width": 1024,
+      "height": 1536,
+      "aspect_ratio": 0.6667,
+      "mode": "RGB",
+      "has_alpha": false,
+      "transparent_ratio": 0.0,
+      "size_bytes": 1901122,
+      "grade": "B",
+      "tags": [
+        "ui",
+        "dashboard",
+        "product"
+      ],
+      "issues": [],
+      "status": "review"
+    },
+    {
+      "id": "ui_dashboard_holographic_des_documents",
+      "category": "03-product-ui",
+      "source_filename": "tableau_de_bord_holographique_des_documents.png",
+      "png_path": "/assets/production/03-product-ui/ui_dashboard_holographic_des_documents.png",
+      "webp_path": "/assets/web/03-product-ui/ui_dashboard_holographic_des_documents.webp",
+      "thumbnail_path": "/assets/thumbnails/03-product-ui/ui_dashboard_holographic_des_documents.webp",
+      "width": 1024,
+      "height": 1536,
+      "aspect_ratio": 0.6667,
+      "mode": "RGB",
+      "has_alpha": false,
+      "transparent_ratio": 0.0,
+      "size_bytes": 1865556,
+      "grade": "B",
+      "tags": [
+        "ui",
+        "dashboard",
+        "product"
+      ],
+      "issues": [],
+      "status": "review"
+    },
+    {
+      "id": "ui_dashboard_holographic_jarvis_x2",
+      "category": "03-product-ui",
+      "source_filename": "tableau_de_bord_holographique_jarvis_x2.png",
+      "png_path": "/assets/production/03-product-ui/ui_dashboard_holographic_jarvis_x2.png",
+      "webp_path": "/assets/web/03-product-ui/ui_dashboard_holographic_jarvis_x2.webp",
+      "thumbnail_path": "/assets/thumbnails/03-product-ui/ui_dashboard_holographic_jarvis_x2.webp",
+      "width": 1024,
+      "height": 1536,
+      "aspect_ratio": 0.6667,
+      "mode": "RGB",
+      "has_alpha": false,
+      "transparent_ratio": 0.0,
+      "size_bytes": 1872676,
+      "grade": "B",
+      "tags": [
+        "ui",
+        "dashboard",
+        "product"
+      ],
+      "issues": [],
+      "status": "review"
+    },
+    {
+      "id": "memory_dashboard_holographic_memory_connectee",
+      "category": "05-memory-intelligence",
+      "source_filename": "tableau_de_bord_holographique_mémoire_connectée.png",
+      "png_path": "/assets/production/05-memory-intelligence/memory_dashboard_holographic_memory_connectee.png",
+      "webp_path": "/assets/web/05-memory-intelligence/memory_dashboard_holographic_memory_connectee.webp",
+      "thumbnail_path": "/assets/thumbnails/05-memory-intelligence/memory_dashboard_holographic_memory_connectee.webp",
+      "width": 1024,
+      "height": 1536,
+      "aspect_ratio": 0.6667,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.3268,
+      "size_bytes": 2187022,
+      "grade": "A",
+      "tags": [
+        "memory",
+        "intelligence",
+        "context"
+      ],
+      "issues": [
+        "subject touches canvas edge; verify crop at small sizes"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "ui_dashboard_jarvis_x2_dev_studio",
+      "category": "03-product-ui",
+      "source_filename": "tableau_de_bord_jarvis_x2_dev_studio.png",
+      "png_path": "/assets/production/03-product-ui/ui_dashboard_jarvis_x2_dev_studio.png",
+      "webp_path": "/assets/web/03-product-ui/ui_dashboard_jarvis_x2_dev_studio.webp",
+      "thumbnail_path": "/assets/thumbnails/03-product-ui/ui_dashboard_jarvis_x2_dev_studio.webp",
+      "width": 1024,
+      "height": 1536,
+      "aspect_ratio": 0.6667,
+      "mode": "RGB",
+      "has_alpha": false,
+      "transparent_ratio": 0.0,
+      "size_bytes": 1773427,
+      "grade": "B",
+      "tags": [
+        "ui",
+        "dashboard",
+        "product"
+      ],
+      "issues": [],
+      "status": "review"
+    },
+    {
+      "id": "capability_tableau_de_navigation_holographic_futuristic",
+      "category": "02-system-capabilities",
+      "source_filename": "tableau_de_navigation_holographique_futuriste.png",
+      "png_path": "/assets/production/02-system-capabilities/capability_tableau_de_navigation_holographic_futuristic.png",
+      "webp_path": "/assets/web/02-system-capabilities/capability_tableau_de_navigation_holographic_futuristic.webp",
+      "thumbnail_path": "/assets/thumbnails/02-system-capabilities/capability_tableau_de_navigation_holographic_futuristic.webp",
+      "width": 1024,
+      "height": 1536,
+      "aspect_ratio": 0.6667,
+      "mode": "RGB",
+      "has_alpha": false,
+      "transparent_ratio": 0.0,
+      "size_bytes": 1862228,
+      "grade": "B",
+      "tags": [
+        "capability",
+        "system"
+      ],
+      "issues": [
+        "opaque background; use as scene/card, not floating asset"
+      ],
+      "status": "review"
+    },
+    {
+      "id": "capability_tableau_weather_futuristic_de_location",
+      "category": "02-system-capabilities",
+      "source_filename": "tableau_météo_futuriste_de_concarneau.png",
+      "png_path": "/assets/production/02-system-capabilities/capability_tableau_weather_futuristic_de_location.png",
+      "webp_path": "/assets/web/02-system-capabilities/capability_tableau_weather_futuristic_de_location.webp",
+      "thumbnail_path": "/assets/thumbnails/02-system-capabilities/capability_tableau_weather_futuristic_de_location.webp",
+      "width": 1024,
+      "height": 1536,
+      "aspect_ratio": 0.6667,
+      "mode": "RGBA",
+      "has_alpha": true,
+      "transparent_ratio": 0.3011,
+      "size_bytes": 2503637,
+      "grade": "A",
+      "tags": [
+        "capability",
+        "system"
+      ],
+      "issues": [],
+      "status": "approved"
+    }
+  ],
+  "contact_sheets": [
+    "/assets/previews/asset_contact_sheet_01.jpg",
+    "/assets/previews/asset_contact_sheet_02.jpg",
+    "/assets/previews/asset_contact_sheet_03.jpg",
+    "/assets/previews/asset_contact_sheet_04.jpg"
+  ],
+  "screen_mapping": "/assets/manifests/screen_asset_mapping.json",
+  "legacy_reference_count": 4,
+  "legacy_reference_manifest": "/archives/legacy-visual-reference/legacy-assets.json"
+}

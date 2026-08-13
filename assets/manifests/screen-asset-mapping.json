@@ -1,0 +1,206 @@
+{
+  "/": {
+    "purpose": "Cinematic landing / first contact",
+    "primary_assets": [
+      "scene_command_center_holographic_futuristic",
+      "memory_emblem_holographic_du_core_memory_ia",
+      "core_emblem_orbital_quantum_lumineux",
+      "core_globe_holographic_neon_futuristic",
+      "scene_metropolis_cyberpunk_flottante_neon",
+      "core_nexus_cosmic_holographic_neon",
+      "core_nexus_holographic_orbital_futuristic",
+      "voice_core_d_energy_audio_futuristic_symmetric",
+      "core_d_energy_holographic_futuristic",
+      "memory_core_de_data_holographic_futuristic"
+    ],
+    "rules": [
+      "large negative space",
+      "lazy-load heavy media",
+      "no dense HUD wall",
+      "scroll remains native"
+    ]
+  },
+  "/app": {
+    "purpose": "Calm production cockpit",
+    "primary_assets": [
+      "ui_card_holographic_de_security_cyberpunk",
+      "device_card_holographic_des_connected_devices",
+      "memory_emblem_holographic_de_control_ia",
+      "memory_emblem_holographic_du_core_memory_ia",
+      "memory_emblem_neon_d_analysis_spatial",
+      "core_emblem_orbital_quantum_lumineux",
+      "core_globe_holographic_neon_futuristic",
+      "ui_interface_de_research_futuristic_jarvis_x2",
+      "ui_interface_holographic_de_secure_vault",
+      "ui_interface_holographic_focus_deep_work",
+      "ui_interface_holographic_jarvis_x2"
+    ],
+    "rules": [
+      "contextual disclosure",
+      "hands-free dock persistent",
+      "3D optional",
+      "keyboard/touch parity"
+    ]
+  },
+  "/app/memory": {
+    "purpose": "Temporal memory and recall",
+    "primary_assets": [
+      "memory_emblem_holographic_de_control_ia",
+      "memory_emblem_holographic_du_core_memory_ia",
+      "memory_emblem_neon_d_analysis_spatial",
+      "memory_interface_holographic_knowledge_futuristic",
+      "memory_core_de_data_holographic_futuristic",
+      "memory_orbe_holographic_d_ai",
+      "memory_holographic_network_d_ai",
+      "memory_neural_network_holographic_neon",
+      "memory_dashboard_holographic_memory_connectee"
+    ]
+  },
+  "/app/agents": {
+    "purpose": "Agent constellation and delegations",
+    "primary_assets": [
+      "agent_emblem_de_cybersecurity_holographic",
+      "agent_emblem_holographic_de_communication_ia",
+      "memory_emblem_holographic_de_control_ia",
+      "agent_emblem_holographic_de_creation_futuristic",
+      "agent_emblem_holographic_de_protection_cybernetique",
+      "memory_emblem_neon_d_analysis_spatial",
+      "ui_dashboard_holographic_des_active_agents"
+    ]
+  },
+  "/app/voice": {
+    "purpose": "Hands-free / voice presence",
+    "primary_assets": [
+      "voice_emblem_futuristic_d_assistant_voice_neon",
+      "voice_emblem_holographic_de_microphonephone_neon",
+      "voice_icon_holographic_de_microphone_permission",
+      "voice_core_d_energy_audio_futuristic_symmetric",
+      "voice_orbe_d_alert_voicee_cybernetique"
+    ]
+  },
+  "/app/devices": {
+    "purpose": "Physical world and connected devices",
+    "primary_assets": [
+      "device_card_holographic_des_connected_devices",
+      "device_emblem_cyberpunk_du_laptop_holographic",
+      "device_emblem_holographic_de_camera_cybernetique",
+      "device_emblem_holographic_de_smart_home",
+      "device_emblem_holographic_du_sensor_futuristic",
+      "device_emblem_holographic_du_desktop_cyberpunk",
+      "device_emblem_satellite_holographic_futuristic",
+      "device_emblem_smartphone_orbital_neon_futuristic",
+      "device_wearable_holographic_futuristic",
+      "device_nud_quantum_iot_en_orbit"
+    ]
+  },
+  "/app/automations": {
+    "purpose": "Jobs / n8n / scheduled actions",
+    "primary_assets": [
+      "state_emblem_holographic_de_download_futuristic",
+      "state_emblem_holographic_de_upload_cyberpunk",
+      "capability_emblem_neon_d_automation_futuristic",
+      "state_emblem_neon_de_sync_futuristic",
+      "state_panel_hud_futuristic_de_task_progress",
+      "ui_dashboard_d_automation_futuristic"
+    ]
+  },
+  "/app/security": {
+    "purpose": "Permissions, approvals and security",
+    "primary_assets": [
+      "ui_card_holographic_de_security_cyberpunk",
+      "agent_emblem_de_cybersecurity_holographic",
+      "state_emblem_holographic_d_alert_futuristic",
+      "agent_emblem_holographic_de_protection_cybernetique",
+      "state_emblem_holographic_de_verification_futuristic",
+      "state_interface_holographic_d_approval_futuristic",
+      "ui_interface_holographic_de_secure_vault",
+      "voice_orbe_d_alert_voicee_cybernetique"
+    ]
+  },
+  "/app/research": {
+    "purpose": "Research / browser / knowledge",
+    "primary_assets": [
+      "memory_emblem_neon_d_analysis_spatial",
+      "ui_interface_de_research_futuristic_jarvis_x2",
+      "memory_interface_holographic_knowledge_futuristic",
+      "capability_sphere_holographic_de_management_documents",
+      "ui_dashboard_holographic_des_documents"
+    ]
+  },
+  "/app/home": {
+    "purpose": "Home Assistant / physical environment",
+    "primary_assets": [
+      "device_card_holographic_des_connected_devices",
+      "device_emblem_cyberpunk_du_laptop_holographic",
+      "device_emblem_holographic_de_camera_cybernetique",
+      "device_emblem_holographic_de_smart_home",
+      "device_emblem_holographic_du_sensor_futuristic",
+      "device_emblem_holographic_du_desktop_cyberpunk",
+      "device_emblem_satellite_holographic_futuristic",
+      "device_emblem_smartphone_orbital_neon_futuristic",
+      "device_wearable_holographic_futuristic",
+      "device_nud_quantum_iot_en_orbit"
+    ]
+  },
+  "/lab/core": {
+    "purpose": "Eight-state Core visual lab",
+    "primary_assets": [
+      "capability_cur_energy_holographic_futuristic",
+      "memory_emblem_holographic_du_core_memory_ia",
+      "core_emblem_orbital_quantum_lumineux",
+      "device_emblem_smartphone_orbital_neon_futuristic",
+      "core_globe_holographic_neon_futuristic",
+      "scene_hangar_futuristic_de_drones_en_orbit",
+      "core_nexus_cosmic_holographic_neon",
+      "core_nexus_holographic_orbital_futuristic",
+      "scene_nexus_energy_futuristic_en_orbit",
+      "voice_core_d_energy_audio_futuristic_symmetric",
+      "core_d_energy_holographic_futuristic",
+      "memory_core_de_data_holographic_futuristic"
+    ]
+  },
+  "/lab/cinematic": {
+    "purpose": "Cinematic diagnostics",
+    "primary_assets": [
+      "scene_command_center_holographic_futuristic",
+      "scene_hangar_futuristic_de_drones_en_orbit",
+      "scene_metropolis_cyberpunk_flottante_neon",
+      "scene_nexus_energy_futuristic_en_orbit",
+      "scene_platform_energy_futuristic_en_levitation",
+      "scene_command_bridge_spatial_holographic",
+      "scene_portal_cosmic_futuristic_aux_crystals_lumineux",
+      "core_portal_holographic_neon_symmetric",
+      "capability_portal_energy_futuristic_bleu_et_violet",
+      "scene_reactor_holographic_futuristic_en_levitation",
+      "scene_vr_lounge_futuristic_holographic_luxueux"
+    ]
+  },
+  "/lab/living": {
+    "purpose": "Voice / permission diagnostics",
+    "primary_assets": [
+      "voice_emblem_futuristic_d_assistant_voice_neon",
+      "state_emblem_holographic_d_alert_futuristic",
+      "voice_emblem_holographic_de_microphonephone_neon",
+      "voice_icon_holographic_de_microphone_permission",
+      "state_interface_holographic_d_approval_futuristic",
+      "voice_core_d_energy_audio_futuristic_symmetric",
+      "voice_orbe_d_alert_voicee_cybernetique"
+    ]
+  },
+  "/lab/intelligence": {
+    "purpose": "Hermes / memory / agents diagnostics",
+    "primary_assets": [
+      "agent_emblem_de_cybersecurity_holographic",
+      "agent_emblem_holographic_de_communication_ia",
+      "memory_emblem_holographic_de_control_ia",
+      "agent_emblem_holographic_de_creation_futuristic",
+      "device_emblem_holographic_de_smart_home",
+      "agent_emblem_holographic_de_protection_cybernetique",
+      "memory_emblem_holographic_du_core_memory_ia",
+      "memory_emblem_neon_d_analysis_spatial",
+      "memory_interface_holographic_knowledge_futuristic",
+      "capability_jarvis_x2_local_ai_futuristic",
+      "memory_core_de_data_holographic_futuristic"
+    ]
+  }
+}

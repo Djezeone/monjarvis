@@ -1,0 +1,16 @@
+requirement,description,layer,routes
+FR-001,Conversation multimodale,P2,"/app,/lab/living"
+FR-002,Hands-free,P2,"/app/voice,/lab/living"
+FR-003,Mémoire temporelle,P3,"/app/memory,/lab/intelligence"
+FR-004,Core agent,P3,"/app,/lab/intelligence"
+FR-005,Sous-agents,P3,"/app/agents,/lab/intelligence"
+FR-006,Browser worker,P3,/app/research
+FR-007,Automation,P3,/app/automations
+FR-008,Physical world,P3,"/app/devices,/app/home"
+FR-009,Approval gate,P2/P3,/app/security
+FR-010,Jobs,P3/P4,/app/automations
+FR-011,Cinematic,P1,/
+FR-012,Progressive enhancement,P0/P1,all
+FR-013,Asset manifest,MASTER PACK,all
+FR-014,Diagnostics labs,P0-P3,/lab/*
+FR-015,Local mode,P2/P3,system

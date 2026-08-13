@@ -1,0 +1,55 @@
+{
+  "title": "JARVIS X2 P1 Cinematic Storyboard",
+  "version": "0.1.0",
+  "intro_seconds": 4.2,
+  "chapters": [
+    {
+      "id": "boot",
+      "visual": "black \u2192 faint signal \u2192 emerging Core",
+      "copy": "",
+      "interaction": "skip available",
+      "audio": "optional boot-bed.wav"
+    },
+    {
+      "id": "presence",
+      "visual": "Core suspended in negative space",
+      "copy": "Presence, not interface.",
+      "interaction": "subtle pointer proximity"
+    },
+    {
+      "id": "memory",
+      "visual": "temporal constellation world",
+      "copy": "Memory with history.",
+      "interaction": "native scroll, optional pointer orbit"
+    },
+    {
+      "id": "perception",
+      "visual": "context channels appear around Core",
+      "copy": "Voice. Screen. Browser. Environment.",
+      "interaction": "no blocking interaction"
+    },
+    {
+      "id": "action",
+      "visual": "intent \u2192 policy \u2192 agents \u2192 verified result",
+      "copy": "Intent becomes verified action.",
+      "interaction": "visual-only"
+    },
+    {
+      "id": "physical",
+      "visual": "home/device/sensor constellation",
+      "copy": "Digital intelligence, physical reach.",
+      "interaction": "subtle spatial movement"
+    },
+    {
+      "id": "handoff",
+      "visual": "scene resolves to clean product UI",
+      "copy": "Welcome to JARVIS X2.",
+      "interaction": "Enter system"
+    }
+  ],
+  "fallbacks": {
+    "hero": "/assets/fallback/hero-poster.svg",
+    "memory": "/assets/fallback/memory-poster.svg",
+    "physical": "/assets/fallback/physical-poster.svg"
+  }
+}
