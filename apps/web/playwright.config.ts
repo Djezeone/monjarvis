@@ -19,16 +19,28 @@ export default defineConfig({
       ? { executablePath: process.env.PLAYWRIGHT_CHROMIUM_PATH }
       : {},
   },
-  webServer: {
-    command: "npm run start -- --port 3100",
-    url: "http://127.0.0.1:3100",
-    reuseExistingServer: true,
-    timeout: 60_000,
-    env: {
-      // Isolated registry for the fabric contract tests (devices-api.spec.ts).
-      JARVIS_DATA_DIR: "./test-results/e2e-data",
+  webServer: [
+    {
+      // Hermes test double so run/session-handoff routes are exercised for
+      // real in CI (e2e/fixtures/mock-hermes.mjs).
+      command: "node e2e/fixtures/mock-hermes.mjs",
+      url: "http://127.0.0.1:3199/health",
+      reuseExistingServer: true,
+      timeout: 15_000,
     },
-  },
+    {
+      command: "npm run start -- --port 3100",
+      url: "http://127.0.0.1:3100",
+      reuseExistingServer: true,
+      timeout: 60_000,
+      env: {
+        // Isolated registry for the fabric contract tests (devices-api.spec.ts).
+        JARVIS_DATA_DIR: "./test-results/e2e-data",
+        HERMES_API_URL: "http://127.0.0.1:3199",
+        HERMES_API_KEY: "e2e-mock-key",
+      },
+    },
+  ],
   projects: [
     { name: "desktop", use: { ...devices["Desktop Chrome"] } },
     {

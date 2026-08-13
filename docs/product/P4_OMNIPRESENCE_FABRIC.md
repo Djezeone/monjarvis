@@ -82,9 +82,10 @@ comparaison temps constant), identité liée à l'appareil (403 croisé),
 Séparer USER / SESSION / DEVICE / LOCATION / CONTEXT. Une requête peut porter
 `{user, device, session, location, input}` — le Core recompose session
 récente + mémoire projet + contexte utilisateur + contexte appareil.
-**v0 livrée** : `/api/jarvis/run` accepte `device` et `location` et les
-transmet au run. Le handoff complet (continuer sur téléphone une conversation
-commencée sur PC) s'appuiera sur les sessions Hermes + group_ids Graphiti.
+**Livré** : `/api/jarvis/run` accepte `device`/`location`, attache chaque run
+à une session (`sessionKey`), et le registre de sessions expose la trace
+inter-appareils — continuer sur téléphone une conversation commencée sur PC
+fonctionne (sessions Hermes ; l'enrichissement group_ids Graphiti suivra).
 
 ### 6. Presence Bus
 v0 : la présence est dérivée des heartbeats réels du Device Registry (online
@@ -130,7 +131,12 @@ Offline Fallback · Capability Routing ✅(policy + allowlist) · Encrypted Sync
    CRITICAL depuis le cockpit ouvre `ActionApproval` (FR-009 : cible,
    réversibilité, données affectées) ; rien n'est mis en file avant
    « Approve once », et le refus n'enfile rien.
-3. Session handoff : reprise d'une session Hermes depuis un autre device.
+3. ~~Session handoff~~ ✅ — chaque run appartient à une session
+   (`sessionKey` généré et retourné par `/api/jarvis/run`) ; le registre de
+   sessions trace les appareils ; le cockpit liste les conversations
+   récentes avec « Reprendre ici » (`/lab/intelligence?session=KEY`).
+   Prouvé en CI contre un double Hermes : le tour 2 depuis un second
+   appareil porte le contexte du tour 1.
 4. Home node v1 : `voice-runtime` + `presence` sur un node dédié.
 5. Routage de sortie (Presence Bus) : choisir l'appareil de réponse.
 6. Offline Level 0 : petit modèle local + cache sur satellite.

@@ -1,5 +1,7 @@
+import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
 import { getJarvisService } from "@/server/jarvis";
+import { recordSessionActivity } from "@/server/session-registry";
 
 export async function POST(req: Request) {
   const { service, error } = getJarvisService();
@@ -21,16 +23,30 @@ export async function POST(req: Request) {
           .join(", ")}]`
       : "";
 
+  // P4 session handoff: every run belongs to a session. Reusing the returned
+  // sessionKey from any device continues the same conversation.
+  const sessionKey =
+    typeof body.sessionKey === "string" && body.sessionKey.trim()
+      ? body.sessionKey.trim()
+      : randomUUID();
+
   try {
     const run = await service.hermes.startRun({
       input,
       sessionId: body.sessionId,
-      sessionKey: body.sessionKey,
+      sessionKey,
       instructions: body.instructions
         ? `${body.instructions}${contextLine}`
         : contextLine || undefined,
     });
-    return NextResponse.json(run);
+    recordSessionActivity({
+      sessionKey,
+      runId: run.runId,
+      device,
+      location,
+      input,
+    });
+    return NextResponse.json({ ...run, sessionKey });
   } catch (e) {
     return NextResponse.json(
       { error: e instanceof Error ? e.message : "run failed to start" },

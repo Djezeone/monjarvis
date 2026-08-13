@@ -3,12 +3,14 @@ import { LivingInterfaceOverlay } from "@/jarvis/components/living/LivingInterfa
 import { OrganStatus } from "@/components/organ-status";
 import { RuntimeConnect } from "@/components/runtime-connect";
 import { DevicePresence } from "@/components/device-presence";
+import { SessionHandoff } from "@/components/session-handoff";
 
 export default function CockpitPage() {
   return (
     <div>
       <JarvisDashboard />
       <RuntimeConnect />
+      <SessionHandoff />
       <DevicePresence />
       <OrganStatus />
       <LivingInterfaceOverlay />
