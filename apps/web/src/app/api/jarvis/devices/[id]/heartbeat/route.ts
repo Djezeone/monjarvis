@@ -1,13 +1,13 @@
 import { NextResponse } from "next/server";
-import { checkDeviceAuth, heartbeat } from "@/server/device-registry";
+import { authenticateDevice, heartbeat } from "@/server/device-registry";
 
 export const dynamic = "force-dynamic";
 
 export async function POST(req: Request, { params }: { params: Promise<{ id: string }> }) {
-  const auth = checkDeviceAuth(req);
+  const { id } = await params;
+  const auth = authenticateDevice(req, id);
   if (!auth.ok) return NextResponse.json({ error: auth.error }, { status: auth.status });
 
-  const { id } = await params;
   const body = await req.json().catch(() => ({}));
   const status =
     body && typeof body.status === "object" && body.status !== null ? body.status : {};

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { checkDeviceAuth, completeCommand } from "@/server/device-registry";
+import { authenticateDevice, completeCommand } from "@/server/device-registry";
 
 export const dynamic = "force-dynamic";
 
@@ -8,10 +8,10 @@ export async function POST(
   req: Request,
   { params }: { params: Promise<{ id: string; cid: string }> }
 ) {
-  const auth = checkDeviceAuth(req);
+  const { id, cid } = await params;
+  const auth = authenticateDevice(req, id);
   if (!auth.ok) return NextResponse.json({ error: auth.error }, { status: auth.status });
 
-  const { id, cid } = await params;
   const body = await req.json().catch(() => ({}));
   const command = completeCommand(id, cid, {
     ok: Boolean(body.ok),

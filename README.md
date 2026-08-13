@@ -44,8 +44,9 @@ décision d'architecture : `docs/adr/ADR-001-core-satellites-device-agent.md`.
 Déjà en place : Device Registry + présence par heartbeats (panneau dans
 `/app`), dispatch de capabilities passé au Policy Engine (CRITICAL bloqué
 sans approbation), Device Agent (`services/device-agent`) avec allowlist
-locale, contexte `device`/`location` sur les runs. Fabric éteint par défaut
-tant que `JARVIS_DEVICE_SHARED_SECRET` n'est pas défini.
+locale, contexte `device`/`location` sur les runs, et **auth par token par
+appareil** (ADR-002) : enrôlement à code unique depuis le cockpit, tokens
+stockés hachés, révocation immédiate par appareil.
 
 Prochaines étapes : voir `AUDIT.md` §4, `docs/build/MASTER_BUILD_PROMPT.md`
 et l'ordre de construction restant en fin de spec P4.

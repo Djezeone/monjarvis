@@ -25,8 +25,7 @@ export default defineConfig({
     reuseExistingServer: true,
     timeout: 60_000,
     env: {
-      // Exercise the P4 fabric contract for real in devices-api.spec.ts.
-      JARVIS_DEVICE_SHARED_SECRET: "e2e-fabric-secret",
+      // Isolated registry for the fabric contract tests (devices-api.spec.ts).
       JARVIS_DATA_DIR: "./test-results/e2e-data",
     },
   },
