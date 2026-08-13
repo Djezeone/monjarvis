@@ -29,7 +29,7 @@
 
 import { readFileSync, writeFileSync, existsSync, chmodSync } from "node:fs";
 import { spawn } from "node:child_process";
-import { hostname, platform } from "node:os";
+import { hostname, platform, tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -112,6 +112,48 @@ function run(cmd, args) {
   });
 }
 
+function runToCompletion(cmd, args) {
+  return new Promise((resolve) => {
+    const child = spawn(cmd, args, { stdio: "ignore", detached: false });
+    child.on("error", (e) => resolve({ ok: false, error: e.message }));
+    child.on("exit", (code) =>
+      resolve(code === 0 ? { ok: true } : { ok: false, error: `${cmd} exited ${code}` })
+    );
+  });
+}
+
+/**
+ * speak (home node, ACT): synthesize text locally and play it. Piper HTTP if
+ * configured, else espeak-ng. Playback runs the owner-configured playCommand
+ * ({file} placeholder), defaulting to aplay. No cloud TTS here — local-first.
+ */
+async function speak(text, options) {
+  if (!text.trim()) return { ok: false, error: "empty text" };
+  const wavPath = join(tmpdir(), `jarvis-speak-${Date.now()}.wav`);
+
+  if (options?.piperUrl) {
+    try {
+      const r = await fetch(options.piperUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text }),
+      });
+      if (!r.ok) throw new Error(`piper ${r.status}`);
+      writeFileSync(wavPath, Buffer.from(await r.arrayBuffer()));
+    } catch (e) {
+      return { ok: false, error: `piper synthesis failed: ${e.message}` };
+    }
+  } else {
+    const synth = await runToCompletion("espeak-ng", ["-v", options?.voice || "fr", "-w", wavPath, text]);
+    if (!synth.ok) return { ok: false, error: `espeak-ng unavailable: ${synth.error}` };
+  }
+
+  const playCommand = Array.isArray(options?.playCommand) ? options.playCommand : ["aplay", "{file}"];
+  const [cmd, ...args] = playCommand.map((part) => part.replaceAll("{file}", wavPath));
+  const played = await runToCompletion(cmd, args);
+  return played.ok ? { ok: true, result: { spoke: text.slice(0, 120) } } : played;
+}
+
 async function notify(title, message) {
   const p = platform();
   if (p === "linux") return run("notify-send", [title, message]);
@@ -149,6 +191,10 @@ async function execute(command) {
     return { ok: true, result: { pong: true, at: new Date().toISOString() } };
   }
 
+  if (capability === "speak") {
+    return speak(String(args.text || ""), allowed && typeof allowed === "object" ? allowed : {});
+  }
+
   return { ok: false, error: `capability "${capability}" has no executor in this agent version` };
 }
 
@@ -163,12 +209,92 @@ async function heartbeat() {
   try {
     await api(`/api/jarvis/devices/${encodeURIComponent(DEVICE.id)}/heartbeat`, {
       method: "POST",
-      body: JSON.stringify({ status: { platform: platform(), foreground: true } }),
+      body: JSON.stringify({
+        status: {
+          platform: platform(),
+          foreground: true,
+          // Presence facts for output routing (P4 brick 5).
+          speaker: DEVICE.capabilities.includes("speak"),
+          voiceBridge: Boolean(config.voiceBridge),
+        },
+      }),
     });
   } catch (e) {
     fatalOnRevocation(e);
     console.error(`[heartbeat] ${e.message}`);
   }
+}
+
+/**
+ * Home-node voice bridge: subscribe to the local runtime event bus; a
+ * voice.final transcript becomes a Core run (this node's persistent session,
+ * so the room keeps one continuous conversation) and the answer is spoken
+ * locally when the speak capability is allow-listed.
+ */
+function startVoiceBridge() {
+  const wsUrl = String(config.voiceBridge?.events || "ws://127.0.0.1:8765/events");
+  const sessionPath = join(dirname(tokenPath), "node-session.json");
+  let nodeSessionKey = "";
+  try {
+    nodeSessionKey = JSON.parse(readFileSync(sessionPath, "utf8")).sessionKey || "";
+  } catch {
+    /* first run */
+  }
+
+  const connect = () => {
+    const ws = new WebSocket(wsUrl);
+    ws.onopen = () => console.log(`[bridge] connecté au bus voix ${wsUrl}`);
+    ws.onclose = () => setTimeout(connect, 3000);
+    ws.onerror = () => {
+      /* onclose follows and schedules the retry */
+    };
+    ws.onmessage = async (m) => {
+      let event;
+      try {
+        event = JSON.parse(String(m.data));
+      } catch {
+        return;
+      }
+      if (event.type !== "voice.final" || !String(event.text || "").trim()) return;
+      const input = String(event.text).trim();
+      console.log(`[bridge] transcript → Core: "${input}"`);
+      try {
+        const run = await api("/api/jarvis/run", {
+          method: "POST",
+          body: JSON.stringify({
+            input,
+            device: DEVICE.id,
+            location: config.location || "home",
+            sessionKey: nodeSessionKey || undefined,
+          }),
+        });
+        if (run.sessionKey && run.sessionKey !== nodeSessionKey) {
+          nodeSessionKey = run.sessionKey;
+          writeFileSync(sessionPath, JSON.stringify({ sessionKey: nodeSessionKey }, null, 2));
+        }
+        const deadline = Date.now() + 120_000;
+        let detail = run;
+        while (Date.now() < deadline && !["completed", "failed", "cancelled", "stopped"].includes(detail.status)) {
+          await new Promise((r) => setTimeout(r, 1200));
+          detail = await api(`/api/jarvis/run/${encodeURIComponent(run.runId)}`);
+        }
+        if (!detail.output) {
+          // The submission response never carries the output — fetch the
+          // final run detail even when the run completed immediately.
+          detail = await api(`/api/jarvis/run/${encodeURIComponent(run.runId)}`);
+        }
+        if (detail.status === "completed" && detail.output && config.capabilities?.speak !== undefined) {
+          const spoken = await speak(detail.output, config.capabilities.speak === true ? {} : config.capabilities.speak);
+          console.log(`[bridge] réponse ${spoken.ok ? "prononcée" : `non prononcée: ${spoken.error}`}`);
+        } else if (detail.status !== "completed") {
+          console.error(`[bridge] run ${run.runId} → ${detail.status}`);
+        }
+      } catch (e) {
+        console.error(`[bridge] ${e.message}`);
+      }
+    };
+  };
+  connect();
 }
 
 async function poll() {
@@ -205,5 +331,6 @@ console.log(`Capabilities: ${DEVICE.capabilities.join(", ") || "(none)"}`);
 
 setInterval(heartbeat, HEARTBEAT_S * 1000);
 setInterval(poll, POLL_S * 1000);
+if (config.voiceBridge) startVoiceBridge();
 await heartbeat();
 await poll();

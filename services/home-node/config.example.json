@@ -1,0 +1,22 @@
+{
+  "coreUrl": "http://100.64.0.10:3000",
+  "enrollmentCode": "COLLER_ICI_LE_CODE_D_ENROLEMENT_DU_COCKPIT",
+  "deviceId": "home-salon",
+  "deviceName": "Node Salon",
+  "kind": "home-node",
+  "location": "salon",
+  "heartbeatSeconds": 30,
+  "pollSeconds": 5,
+  "voiceBridge": {
+    "events": "ws://127.0.0.1:8765/events"
+  },
+  "capabilities": {
+    "presence.ping": true,
+    "notify": true,
+    "speak": {
+      "piperUrl": "",
+      "voice": "fr",
+      "playCommand": ["aplay", "{file}"]
+    }
+  }
+}

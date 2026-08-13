@@ -99,10 +99,12 @@ while-in-use). Modes retenus : push-to-talk / hands-free au premier plan /
 earbuds / notification "Ask JARVIS" / home node (wake word permanent local) /
 wearable. L'omniprésence mobile ne repose jamais sur une écoute secrète 24/7.
 
-### 8. Maison : ambiant pour de vrai
-Petits nodes par pièce : wake word + VAD + capture + playback + présence.
-Aucun LLM local sur les nodes ; le calcul reste au Core
-(`services/voice-runtime` est la base du node).
+### 8. Maison : ambiant pour de vrai ✅ (v1)
+Petits nodes par pièce : wake word + capture + playback + présence.
+Aucun LLM local sur les nodes ; le calcul reste au Core.
+**Livré** : `services/home-node` (voir brique 4 ci-dessous) — l'audio ne
+quitte jamais la pièce avant le wake, et seul le tour post-wake part vers le
+whisper local.
 
 ### 9. Mode Core inaccessible — trois niveaux
 - **LEVEL 0 — OFFLINE DEVICE** : petit modèle local, notes, commandes
@@ -137,7 +139,13 @@ Offline Fallback · Capability Routing ✅(policy + allowlist) · Encrypted Sync
    récentes avec « Reprendre ici » (`/lab/intelligence?session=KEY`).
    Prouvé en CI contre un double Hermes : le tour 2 depuis un second
    appareil porte le contexte du tour 1.
-4. Home node v1 : `voice-runtime` + `presence` sur un node dédié.
+4. ~~Home node v1~~ ✅ — `services/home-node` : boucle voix headless
+   (`node_voice.py` : mic → wake openWakeWord → tour avec fin par silence →
+   whisper.cpp → `voice.final` sur le bus local, relayé entre clients par le
+   runtime), pont agent→Core (session persistante par pièce), capability
+   `speak` (Piper ou espeak-ng + `playCommand`), facts de présence
+   `speaker`/`voiceBridge` dans les heartbeats. Boucle ambiante prouvée en
+   direct : transcript → run Core → réponse synthétisée et prononcée.
 5. Routage de sortie (Presence Bus) : choisir l'appareil de réponse.
 6. Offline Level 0 : petit modèle local + cache sur satellite.
 7. Identity Pack : scripts d'export/import chiffrés.
