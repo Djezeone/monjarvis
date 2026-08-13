@@ -126,8 +126,10 @@ Offline Fallback · Capability Routing ✅(policy + allowlist) · Encrypted Sync
 
 ## Ordre de construction restant
 1. ~~Token par appareil + révocation~~ ✅ (ADR-002).
-2. UI d'approbation CRITICAL branchée sur le dispatch (réutilise
-   `ActionApproval`).
+2. ~~UI d'approbation CRITICAL branchée sur le dispatch~~ ✅ — un dispatch
+   CRITICAL depuis le cockpit ouvre `ActionApproval` (FR-009 : cible,
+   réversibilité, données affectées) ; rien n'est mis en file avant
+   « Approve once », et le refus n'enfile rien.
 3. Session handoff : reprise d'une session Hermes depuis un autre device.
 4. Home node v1 : `voice-runtime` + `presence` sur un node dédié.
 5. Routage de sortie (Presence Bus) : choisir l'appareil de réponse.
