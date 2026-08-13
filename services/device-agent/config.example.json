@@ -1,0 +1,17 @@
+{
+  "coreUrl": "http://100.64.0.10:3000",
+  "deviceSecret": "CHANGE_ME_SAME_AS_CORE_JARVIS_DEVICE_SHARED_SECRET",
+  "deviceId": "desktop-home",
+  "deviceName": "PC Bureau",
+  "kind": "desktop",
+  "heartbeatSeconds": 30,
+  "pollSeconds": 5,
+  "capabilities": {
+    "notify": true,
+    "presence.ping": true,
+    "app.launch": {
+      "vscode": "code",
+      "browser": ["xdg-open", "https://127.0.0.1:3000/app"]
+    }
+  }
+}

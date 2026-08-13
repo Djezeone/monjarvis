@@ -24,6 +24,11 @@ export default defineConfig({
     url: "http://127.0.0.1:3100",
     reuseExistingServer: true,
     timeout: 60_000,
+    env: {
+      // Exercise the P4 fabric contract for real in devices-api.spec.ts.
+      JARVIS_DEVICE_SHARED_SECRET: "e2e-fabric-secret",
+      JARVIS_DATA_DIR: "./test-results/e2e-data",
+    },
   },
   projects: [
     { name: "desktop", use: { ...devices["Desktop Chrome"] } },

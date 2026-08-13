@@ -9,12 +9,26 @@ export async function POST(req: Request) {
   const input = String(body.input || "").trim();
   if (!input) return NextResponse.json({ error: "input required" }, { status: 400 });
 
+  // P4: identity follows the user, not the device — requests may carry the
+  // originating device/location so the Core can reason with that context
+  // (and later route the answer to the right satellite).
+  const device = typeof body.device === "string" ? body.device.trim() : "";
+  const location = typeof body.location === "string" ? body.location.trim() : "";
+  const contextLine =
+    device || location
+      ? `\n[Contexte appareil: ${[device && `device=${device}`, location && `location=${location}`]
+          .filter(Boolean)
+          .join(", ")}]`
+      : "";
+
   try {
     const run = await service.hermes.startRun({
       input,
       sessionId: body.sessionId,
       sessionKey: body.sessionKey,
-      instructions: body.instructions,
+      instructions: body.instructions
+        ? `${body.instructions}${contextLine}`
+        : contextLine || undefined,
     });
     return NextResponse.json(run);
   } catch (e) {

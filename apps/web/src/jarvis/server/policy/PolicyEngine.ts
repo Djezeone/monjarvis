@@ -27,6 +27,22 @@ export class PolicyEngine {
     return {allow:true,requireApproval:false,reason:"Non-security home action."};
   }
 
+  /**
+   * P4 Omnipresence: risk tier for a satellite device capability.
+   * The capability string is namespaced (e.g. "app.launch", "camera.capture").
+   */
+  decideDeviceCapability(capability:string):PolicyDecision{
+    const READ_ONLY=/^(presence|battery|clipboard\.read|screen\.state)\b/;
+    const CRITICAL=/^(terminal|filesystem\.write|filesystem\.delete|camera|microphone|screen\.capture|location|credentials|payment)\b/;
+    if(CRITICAL.test(capability)){
+      return {allow:true,requireApproval:true,reason:"Device capability touches sensors, files or execution — explicit approval required."};
+    }
+    if(READ_ONLY.test(capability)){
+      return {allow:true,requireApproval:false,reason:"Read-only device capability."};
+    }
+    return {allow:true,requireApproval:false,reason:"Reversible device action (ACT tier)."};
+  }
+
   decideWorkflow(name:string):PolicyDecision{
     if(CRITICAL_WORKFLOW_PATTERNS.some(r=>r.test(name))){
       return {allow:true,requireApproval:true,reason:"Workflow name matches critical-operation pattern."};
