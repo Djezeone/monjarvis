@@ -8,21 +8,32 @@ que **vous** avez allow-listé localement.
 
 Prérequis : Node.js ≥ 18. Aucune dépendance npm.
 
+1. Dans le cockpit (`/app` → Présence), cliquer **« Enrôler un appareil »** —
+   un code à usage unique s'affiche (valide 10 min).
+2. Sur l'appareil :
+
 ```bash
 cd services/device-agent
 cp config.example.json config.json
-# éditer : coreUrl (adresse mesh du Core), deviceSecret, capabilities
+# éditer : coreUrl (adresse mesh du Core), enrollmentCode (le code affiché),
+# deviceId/deviceName/kind, capabilities
 node agent.mjs
 ```
 
-Côté Core (`apps/web/.env.local`) : définir `JARVIS_DEVICE_SHARED_SECRET`
-avec la même valeur que `deviceSecret`.
+Au premier lancement, l'agent échange le code contre un **token propre à cet
+appareil**, sauvegardé dans `device-token.json` (chmod 600) — vous pouvez
+ensuite retirer `enrollmentCode` de la config. Révoquer l'appareil depuis le
+cockpit invalide ce token immédiatement (l'agent s'arrête avec un message de
+ré-enrôlement).
 
 ## Sécurité
 
 - Le Core ne doit **jamais** être exposé sur Internet : reliez les appareils
   par un mesh privé chiffré (Tailscale ou équivalent) et utilisez l'adresse
   mesh dans `coreUrl`.
+- Auth par **token par appareil** (ADR-002) : le Core ne stocke que le hash ;
+  un token volé sur un appareil ne permet pas d'agir pour un autre (403) et
+  se révoque individuellement.
 - L'agent refuse toute capability absente de **son** allowlist locale, quoi
   que demande le Core — le propriétaire de la machine a le dernier mot.
 - `app.launch` ne lance que les commandes explicitement mappées dans la

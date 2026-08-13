@@ -13,13 +13,6 @@ const policy = new PolicyEngine();
  * execution authority.
  */
 export async function POST(req: Request) {
-  if (!process.env.JARVIS_DEVICE_SHARED_SECRET) {
-    return NextResponse.json(
-      { error: "device fabric not configured (JARVIS_DEVICE_SHARED_SECRET unset)" },
-      { status: 503 }
-    );
-  }
-
   const body = await req.json();
   const deviceId = String(body.deviceId || "").trim();
   const capability = String(body.capability || "").trim();

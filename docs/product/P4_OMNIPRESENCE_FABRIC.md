@@ -73,9 +73,10 @@ capability CRITICAL future apportera son exécuteur + son passage de politique
 ### 4. Réseau privé — jamais de Hermes public
 Aucun port du Core exposé sur Internet. Mesh privé chiffré (Tailscale en
 pratique : identité + adresse stable par appareil, grants par service ;
-variante auto-hébergée à l'étude). Le registre v0 utilise un secret partagé
-(`JARVIS_DEVICE_SHARED_SECRET`) ; l'upgrade prévu est un token par appareil,
-révocable individuellement.
+variante auto-hébergée à l'étude). **Auth v1 ✅ (ADR-002)** : enrôlement à
+code unique depuis le cockpit → **token par appareil** (stocké haché,
+comparaison temps constant), identité liée à l'appareil (403 croisé),
+**révocation immédiate** depuis le panneau Présence.
 
 ### 5. L'identité suit l'utilisateur, pas l'appareil
 Séparer USER / SESSION / DEVICE / LOCATION / CONTEXT. Une requête peut porter
@@ -124,9 +125,11 @@ Session Handoff · Remote Voice · Notifications ✅(capability notify) ·
 Offline Fallback · Capability Routing ✅(policy + allowlist) · Encrypted Sync.
 
 ## Ordre de construction restant
-1. Token par appareil + révocation (remplace le secret partagé).
-2. UI d'approbation CRITICAL branchée sur le dispatch (réutilise
-   `ActionApproval`).
+1. ~~Token par appareil + révocation~~ ✅ (ADR-002).
+2. ~~UI d'approbation CRITICAL branchée sur le dispatch~~ ✅ — un dispatch
+   CRITICAL depuis le cockpit ouvre `ActionApproval` (FR-009 : cible,
+   réversibilité, données affectées) ; rien n'est mis en file avant
+   « Approve once », et le refus n'enfile rien.
 3. Session handoff : reprise d'une session Hermes depuis un autre device.
 4. Home node v1 : `voice-runtime` + `presence` sur un node dédié.
 5. Routage de sortie (Presence Bus) : choisir l'appareil de réponse.

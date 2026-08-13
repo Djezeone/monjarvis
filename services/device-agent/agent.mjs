@@ -3,13 +3,21 @@
  * JARVIS X2 — Device Agent (P4 Omnipresence Fabric).
  *
  * Small daemon installed on every satellite (phone via Termux, laptop,
- * desktop, home node). It registers with the Core, heartbeats its presence,
- * polls its command queue over the private mesh (Tailscale or LAN), executes
- * ONLY the capabilities allow-listed in its local config, and reports real
- * results back.
+ * desktop, home node). It enrolls with the Core once, heartbeats its
+ * presence, polls its command queue over the private mesh (Tailscale or
+ * LAN), executes ONLY the capabilities allow-listed in its local config, and
+ * reports real results back.
  *
  *   cp config.example.json config.json   # then edit
  *   node agent.mjs [path/to/config.json]
+ *
+ * Enrollment (per-device token — ADR-002):
+ * 1. In the cockpit (/app → Présence), click "Enrôler un appareil" to get a
+ *    one-time code (valid 10 min).
+ * 2. Put it in config.json as "enrollmentCode" and start the agent: it
+ *    exchanges the code for a per-device token, saved next to the config
+ *    (device-token.json, chmod 600). Remove enrollmentCode afterwards.
+ * 3. Revoking the device in the cockpit invalidates the token immediately.
  *
  * Security model:
  * - The Core is reached over the private mesh only — never expose it publicly.
@@ -19,11 +27,14 @@
  *   arbitrary command execution in this agent.
  */
 
-import { readFileSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync, chmodSync } from "node:fs";
 import { spawn } from "node:child_process";
 import { hostname, platform } from "node:os";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const configPath = process.argv[2] || new URL("./config.json", import.meta.url).pathname;
+const configPath =
+  process.argv[2] || join(dirname(fileURLToPath(import.meta.url)), "config.json");
 let config;
 try {
   config = JSON.parse(readFileSync(configPath, "utf8"));
@@ -34,7 +45,6 @@ try {
 }
 
 const CORE = (config.coreUrl || "http://127.0.0.1:3000").replace(/\/$/, "");
-const SECRET = config.deviceSecret || process.env.JARVIS_DEVICE_SHARED_SECRET || "";
 const DEVICE = {
   id: config.deviceId || hostname(),
   name: config.deviceName || hostname(),
@@ -43,21 +53,55 @@ const DEVICE = {
 };
 const HEARTBEAT_S = Math.max(10, Number(config.heartbeatSeconds) || 30);
 const POLL_S = Math.max(2, Number(config.pollSeconds) || 5);
+const tokenPath = config.tokenFile || join(dirname(configPath), "device-token.json");
 
-if (!SECRET) {
-  console.error("deviceSecret missing (config or JARVIS_DEVICE_SHARED_SECRET). Refusing to start.");
-  process.exit(1);
+let TOKEN = "";
+if (existsSync(tokenPath)) {
+  try {
+    TOKEN = JSON.parse(readFileSync(tokenPath, "utf8")).token || "";
+  } catch {
+    TOKEN = "";
+  }
 }
 
-const headers = {
-  "Content-Type": "application/json",
-  "X-Jarvis-Device-Secret": SECRET,
-};
-
 async function api(path, init = {}) {
-  const r = await fetch(`${CORE}${path}`, { ...init, headers: { ...headers, ...init.headers } });
-  if (!r.ok) throw new Error(`${init.method || "GET"} ${path} → ${r.status} ${await r.text().catch(() => "")}`.trim());
+  const r = await fetch(`${CORE}${path}`, {
+    ...init,
+    headers: {
+      "Content-Type": "application/json",
+      ...(TOKEN ? { "X-Jarvis-Device-Token": TOKEN } : {}),
+      ...init.headers,
+    },
+  });
+  if (!r.ok) {
+    const detail = await r.text().catch(() => "");
+    const err = new Error(`${init.method || "GET"} ${path} → ${r.status} ${detail}`.trim());
+    err.status = r.status;
+    throw err;
+  }
   return r.json();
+}
+
+async function enroll() {
+  const code = String(config.enrollmentCode || "").trim();
+  if (!code) {
+    console.error("No device token and no enrollmentCode in config.");
+    console.error("Cockpit → /app → Présence → « Enrôler un appareil », then put the code in config.json.");
+    process.exit(1);
+  }
+  const { device, token } = await api("/api/jarvis/devices/enroll/claim", {
+    method: "POST",
+    body: JSON.stringify({ code, ...DEVICE }),
+  });
+  TOKEN = token;
+  writeFileSync(tokenPath, JSON.stringify({ token, deviceId: device.id }, null, 2));
+  try {
+    chmodSync(tokenPath, 0o600);
+  } catch {
+    /* platform without POSIX modes */
+  }
+  console.log(`Enrolled as "${device.name}" (${device.id}). Token saved to ${tokenPath}.`);
+  console.log("You can now remove enrollmentCode from config.json.");
 }
 
 function run(cmd, args) {
@@ -108,6 +152,13 @@ async function execute(command) {
   return { ok: false, error: `capability "${capability}" has no executor in this agent version` };
 }
 
+function fatalOnRevocation(e) {
+  if (e.status === 401) {
+    console.error("Core rejected our token (revoked or invalid). Re-enroll with a fresh code.");
+    process.exit(1);
+  }
+}
+
 async function heartbeat() {
   try {
     await api(`/api/jarvis/devices/${encodeURIComponent(DEVICE.id)}/heartbeat`, {
@@ -115,6 +166,7 @@ async function heartbeat() {
       body: JSON.stringify({ status: { platform: platform(), foreground: true } }),
     });
   } catch (e) {
+    fatalOnRevocation(e);
     console.error(`[heartbeat] ${e.message}`);
   }
 }
@@ -132,15 +184,23 @@ async function poll() {
       console.log(`[command] ${command.capability} → ${outcome.ok ? "done" : `failed: ${outcome.error}`}`);
     }
   } catch (e) {
+    fatalOnRevocation(e);
     console.error(`[poll] ${e.message}`);
   }
 }
 
-const registered = await api("/api/jarvis/devices", {
-  method: "POST",
-  body: JSON.stringify(DEVICE),
-});
-console.log(`Registered "${registered.name}" (${registered.id}) with Core ${CORE}`);
+if (!TOKEN) {
+  await enroll();
+} else {
+  // Sync declared capabilities on start (authenticated re-registration).
+  await api("/api/jarvis/devices", { method: "POST", body: JSON.stringify(DEVICE) }).catch(
+    (e) => {
+      fatalOnRevocation(e);
+      console.error(`[register] ${e.message}`);
+    }
+  );
+  console.log(`Using stored token for "${DEVICE.name}" (${DEVICE.id}) — Core ${CORE}`);
+}
 console.log(`Capabilities: ${DEVICE.capabilities.join(", ") || "(none)"}`);
 
 setInterval(heartbeat, HEARTBEAT_S * 1000);
