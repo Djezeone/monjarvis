@@ -54,3 +54,25 @@ Le MASTER_BUILD_PROMPT impose : *« Do not build a visual demo that fakes backen
 5. Stop + approval gate (FR-009), puis un workflow n8n allowlisté, puis Home Assistant en lecture seule.
 6. Traiter la file de régénération : 31 assets P0 manquants à produire.
 7. Seulement ensuite : polish cinématique 3D (R3F) sur `/`, dans le respect de « cinématique à l'entrée, calme à l'usage ».
+
+---
+
+## 5. Addendum — 2026-08-13 (2e livraison de fichiers)
+
+Les 12 archives manquantes ont été fournies (binaires d'assets par catégorie + `00_JARVIS_X2_DOCS_SOURCES_P0_P3.zip`). Vérifications effectuées avant intégration :
+
+- **Intégrité parfaite** : 77 assets × 3 fichiers (PNG master, WebP, thumbnail) tous présents, tailles conformes au registre, **493/493 empreintes SHA-256 valides**, aucun binaire orphelin.
+- Le pack contient `README_FIRST.md`, la documentation complète (sécurité, technique, UX, opérations), `claude-code/` (BOOTSTRAP, ASSET_INTEGRATION_GUIDE) et les sources P0→P3 — tout ce qui manquait au §2.
+- `archives/` (4 mockups legacy en quarantaine + packs historiques) volontairement non importé, conformément aux règles de production.
+
+Intégration réalisée (ordre BOOTSTRAP : P0 → P1 → P2 → P3, build vérifié à chaque couche) :
+
+1. **Assets** : WebP + thumbnails dans `apps/web/public/assets/`, masters dans `assets/production/`, SVG/audio P0-P1 (icônes, textures, fallbacks, beds audio) dans `public/assets/`.
+2. **P0 Visual Foundation** : Core 3D (R3F + shaders GLSL), dock hands-free, constellation mémoire/agents, curseur magnétique, design tokens — sous `apps/web/src/jarvis/`.
+3. **P1 Cinematic** : `CinematicExperience` (intro skippable, ScrollDirector, mondes 3D lazy, fallback sans WebGL) monté sur `/`.
+4. **P2 Living Interface** : machine à états runtime (9/9 cas de test du pack passent), adapters voix (wake word WebSocket, whisper.cpp, Piper), centre de permissions, approbations CRITICAL, worklet PCM — lab sur `/lab/living`.
+5. **P3 Intelligence Core** : `JarvisIntelligenceService` server-only + adapters (Hermes, Graphiti, Home Assistant, n8n, Browser worker) + Policy Engine ; routes API `/api/jarvis/{run,run/[id],stop,approval,stream,health}` avec proxy SSE assainissant — lab sur `/lab/intelligence`.
+6. **Services locaux** : `services/voice-runtime` (P2), `services/local-stack` (Graphiti+Neo4j docker, browser worker), `services/hermes` (config Ollama + plugin jarvis-memory).
+7. Corrections de compatibilité minimales (React 19/TS strict) : `useRef` sans argument, cleanups d'effets retournant un booléen, typage des configs d'états et des headers — le design visuel n'a pas été modifié.
+
+Reste à faire (nécessite les services tournant en local) : démarrer Ollama/Hermes/Graphiti et prouver le parcours complet (run réel, rappel mémoire, stop, approbation), activer un workflow n8n allowlisté, lecture Home Assistant, tests E2E du TEST_PLAN.

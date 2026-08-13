@@ -1,58 +1,74 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import type { OrganHealth } from "@/app/api/jarvis/health/route";
+
+const STATUS_LABEL: Record<OrganHealth["status"], { text: string; cls: string }> = {
+  connected: { text: "connecté", cls: "ok" },
+  unreachable: { text: "configuré, injoignable", cls: "missing" },
+  configured_unverified: { text: "configuré (non vérifié)", cls: "missing" },
+  not_configured: { text: "non configuré", cls: "off" },
+};
+
 /**
- * Explicit organ availability (NFR-004): every backend organ can be down
- * without preventing /app from loading, and its absence is stated — never
- * faked (MASTER_BUILD_PROMPT "Do not fake").
- *
- * Each organ flips to "connected" only when its real adapter is wired in.
+ * Live organ availability from /api/jarvis/health — real server-side checks,
+ * nothing simulated (NFR-004: every organ can be down without breaking /app).
  */
-
-interface Organ {
-  name: string;
-  role: string;
-  connected: boolean;
-}
-
-const ORGANS: Organ[] = [
-  { name: "Hermes Core", role: "Orchestration des runs, stop, approbations", connected: false },
-  { name: "Ollama / LocalAI", role: "Inférence locale", connected: false },
-  { name: "Graphiti + Neo4j", role: "Mémoire temporelle", connected: false },
-  { name: "whisper.cpp", role: "STT local", connected: false },
-  { name: "Piper", role: "TTS local", connected: false },
-  { name: "n8n", role: "Workflows allowlistés", connected: false },
-  { name: "Home Assistant", role: "Monde physique (lecture seule)", connected: false },
-  { name: "Browser worker", role: "Browser use sandboxé (désactivé)", connected: false },
-];
-
 export function OrganStatus() {
+  const [organs, setOrgans] = useState<OrganHealth[] | null>(null);
+  const [failed, setFailed] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/jarvis/health", { cache: "no-store" })
+      .then((r) => r.json())
+      .then((d) => {
+        if (!cancelled) setOrgans(d.organs ?? []);
+      })
+      .catch(() => {
+        if (!cancelled) setFailed(true);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   return (
     <section className="panel">
       <h2>Organes</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Organe</th>
-            <th>Rôle</th>
-            <th>État</th>
-          </tr>
-        </thead>
-        <tbody>
-          {ORGANS.map((o) => (
-            <tr key={o.name}>
-              <td>{o.name}</td>
-              <td className="muted">{o.role}</td>
-              <td>
-                <span className={`badge ${o.connected ? "ok" : "off"}`}>
-                  {o.connected ? "connecté" : "non connecté"}
-                </span>
-              </td>
+      {failed && (
+        <p className="muted">Impossible d&apos;interroger /api/jarvis/health.</p>
+      )}
+      {!organs && !failed && <p className="muted">Vérification en cours…</p>}
+      {organs && (
+        <table>
+          <thead>
+            <tr>
+              <th>Organe</th>
+              <th>Rôle</th>
+              <th>État</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {organs.map((o) => (
+              <tr key={o.name}>
+                <td>{o.name}</td>
+                <td className="muted">{o.role}</td>
+                <td>
+                  <span className={`badge ${STATUS_LABEL[o.status].cls}`}>
+                    {STATUS_LABEL[o.status].text}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
       <p className="muted">
-        Aucun organe n&apos;est simulé : chaque ligne passera à
-        «&nbsp;connecté&nbsp;» quand l&apos;adapter réel sera branché
-        (ordre d&apos;exécution : docs/build/MASTER_BUILD_PROMPT.md).
+        États vérifiés côté serveur (endpoints /health réels ; présence de
+        configuration sinon). Démarrage des services :
+        <code>services/local-stack</code>, <code>services/voice-runtime</code>,
+        <code>docs/operations/LOCAL_FIRST_DEPLOYMENT.md</code>.
       </p>
     </section>
   );

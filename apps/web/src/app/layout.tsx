@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import "./globals.css";
+import "@/styles/jarvis-x2.css";
+import "@/styles/living-interface.css";
+import "@/jarvis/components/cinematic/cinematic.css";
+import "@/jarvis/components/intelligence/intelligence.css";
 
 export const metadata: Metadata = {
   title: "JARVIS X2",
