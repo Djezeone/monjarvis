@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+<defs>
+ <radialGradient id="a"><stop stop-color="#63E6A5" stop-opacity=".22"/><stop offset=".45" stop-color="#5DEBFF" stop-opacity=".08"/><stop offset="1" stop-color="#05070A"/></radialGradient>
+ <filter id="n"><feTurbulence baseFrequency=".5" numOctaves="4" seed="7"/><feColorMatrix values=".25 0 0 0 0 .25 0 0 0 0 .3 0 0 0 0 0 0 0 .12 0"/></filter>
+</defs>
+<rect width="1920" height="1080" fill="#05070A"/>
+<rect width="1920" height="1080" fill="url(#a)"/>
+<rect width="1920" height="1080" filter="url(#n)" opacity=".18"/>
+<path d="M1150 620 1380 420l230 200v220h-460z" fill="none" stroke="#5DEBFF" stroke-opacity=".23" stroke-width="3"/>
+<rect x="820" y="310" width="110" height="220" rx="20" fill="none" stroke="#7867FF" stroke-opacity=".26" stroke-width="3"/>
+<rect x="1480" y="250" width="250" height="160" rx="18" fill="none" stroke="#5DEBFF" stroke-opacity=".19" stroke-width="3"/>
+<circle cx="900" cy="760" r="34" fill="none" stroke="#63E6A5" stroke-opacity=".28" stroke-width="3"/>
+<path d="M930 430 1170 570M1450 570 1580 400M1380 750 930 760" stroke="#5DEBFF" stroke-opacity=".09"/>
+<text x="140" y="790" fill="#EDF6FF" font-size="92" font-family="Arial,Helvetica,sans-serif" font-weight="500" letter-spacing="-3">Physical reach.</text>
+<text x="145" y="850" fill="#8EA1B4" font-size="28" font-family="Arial,Helvetica,sans-serif" letter-spacing="3">DEVICES / ROOMS / SENSORS / SERVICES</text>
+</svg>

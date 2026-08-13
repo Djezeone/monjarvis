@@ -1,0 +1,42 @@
+{
+  "name": "JARVIS X2 P2 Living Interface",
+  "version": "0.1.0",
+  "generated": "2026-08-12",
+  "requires": [
+    "P0 Visual Foundation",
+    "P1 Cinematic"
+  ],
+  "primary_goal": "permission-aware hands-free local shell",
+  "default_endpoints": {
+    "runtime": "ws://127.0.0.1:8765/events",
+    "wake": "ws://127.0.0.1:8765/wake",
+    "stt": "http://127.0.0.1:8080/inference",
+    "tts": "http://127.0.0.1:5000/synthesize"
+  },
+  "capabilities": [
+    "wake-word bridge",
+    "microphone permission",
+    "local STT adapter",
+    "local TTS adapter",
+    "runtime event state machine",
+    "critical action approval",
+    "keyboard fallback",
+    "optional vision contract"
+  ],
+  "states": [
+    "idle",
+    "wake",
+    "listening",
+    "understanding",
+    "thinking",
+    "acting",
+    "speaking",
+    "warning"
+  ],
+  "known_limits": [
+    "simple max-duration turn recorder; replace with VAD",
+    "pretrained openWakeWord models are non-commercial",
+    "Piper distribution requires GPL review",
+    "gesture recognition is intentionally not implemented"
+  ]
+}

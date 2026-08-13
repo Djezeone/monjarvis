@@ -1,0 +1,485 @@
+JARVIS_X2_MASTER_ASSET_PACK
+├── archives
+│   ├── legacy-visual-reference
+│   │   ├── concept_a_clean_high_resolution_transparent_background_p.png
+│   │   ├── concept_a_clean_high_resolution_transparent_background_p.webp
+│   │   ├── concept_a_wide_cinematic_ui_concept_dashboard_scene_sci_f.png
+│   │   ├── concept_a_wide_cinematic_ui_concept_dashboard_scene_sci_f.webp
+│   │   ├── concept_a_wide_high_detail_futuristic_ui_web_landing_page.png
+│   │   ├── concept_a_wide_high_detail_futuristic_ui_web_landing_page.webp
+│   │   ├── concept_a_wide_high_resolution_concept_ui_desktopr_dashbo.png
+│   │   ├── concept_a_wide_high_resolution_concept_ui_desktopr_dashbo.webp
+│   │   ├── legacy-assets.json
+│   │   └── README.md
+│   └── original-packs
+│       ├── JARVIS_X2_P0_VISUAL_FOUNDATION_v0.1.0.zip
+│       ├── JARVIS_X2_P1_CINEMATIC_v0.1.0.zip
+│       ├── JARVIS_X2_P2_LIVING_INTERFACE_v0.1.0.zip
+│       ├── JARVIS_X2_P3_INTELLIGENCE_CORE_v0.1.0.zip
+│       ├── JARVIS_X2_SYSTEM_P0_P1_P2_P3_v0.1.0.zip
+│       ├── JARVIS_X2_SYSTEM_P0_P1_P2_v0.1.0.zip
+│       └── JARVIS_X2_VISUAL_SYSTEM_P0_P1_v0.1.0.zip
+├── assets
+│   ├── manifests
+│   │   ├── assets-manifest.json
+│   │   ├── assets-register.csv
+│   │   ├── assets.ts
+│   │   ├── quality-audit.csv
+│   │   ├── regeneration-queue.csv
+│   │   └── screen_asset_mapping.json
+│   ├── previews
+│   │   ├── asset_contact_sheet_01.jpg
+│   │   ├── asset_contact_sheet_02.jpg
+│   │   ├── asset_contact_sheet_03.jpg
+│   │   └── asset_contact_sheet_04.jpg
+│   ├── production
+│   │   ├── 00-concepts-reference
+│   │   ├── 01-core-system
+│   │   │   ├── core_d_energy_holographic_futuristic.png
+│   │   │   ├── core_emblem_orbital_quantum_lumineux.png
+│   │   │   ├── core_globe_holographic_neon_futuristic.png
+│   │   │   ├── core_holographic_d_energy_futuristic.png
+│   │   │   ├── core_nebula_d_energy_cosmic_neon.png
+│   │   │   ├── core_nexus_cosmic_holographic_neon.png
+│   │   │   ├── core_nexus_holographic_orbital_futuristic.png
+│   │   │   ├── core_orbe_energy_holographic_futuristic.png
+│   │   │   ├── core_orbe_hud_futuristic_neon_sur_transparence.png
+│   │   │   └── core_portal_holographic_neon_symmetric.png
+│   │   ├── 02-system-capabilities
+│   │   │   ├── capability_cur_energy_holographic_futuristic.png
+│   │   │   ├── capability_emblem_neon_d_automation_futuristic.png
+│   │   │   ├── capability_jarvis_x2_local_ai_futuristic.png
+│   │   │   ├── capability_portal_energy_futuristic_bleu_et_violet.png
+│   │   │   ├── capability_sphere_holographic_de_management_documents.png
+│   │   │   ├── capability_tableau_de_navigation_holographic_futuristic.png
+│   │   │   └── capability_tableau_weather_futuristic_de_location.png
+│   │   ├── 03-product-ui
+│   │   │   ├── ui_card_holographic_de_security_cyberpunk.png
+│   │   │   ├── ui_dashboard_d_automation_futuristic.png
+│   │   │   ├── ui_dashboard_futuristic_jarvis_x2.png
+│   │   │   ├── ui_dashboard_holographic_analytics.png
+│   │   │   ├── ui_dashboard_holographic_des_active_agents.png
+│   │   │   ├── ui_dashboard_holographic_des_documents.png
+│   │   │   ├── ui_dashboard_holographic_jarvis_x2.png
+│   │   │   ├── ui_dashboard_jarvis_x2_dev_studio.png
+│   │   │   ├── ui_interface_de_research_futuristic_jarvis_x2.png
+│   │   │   ├── ui_interface_holographic_de_secure_vault.png
+│   │   │   ├── ui_interface_holographic_focus_deep_work.png
+│   │   │   └── ui_interface_holographic_jarvis_x2.png
+│   │   ├── 04-voice-presence
+│   │   │   ├── voice_core_d_energy_audio_futuristic_symmetric.png
+│   │   │   ├── voice_emblem_futuristic_d_assistant_voice_neon.png
+│   │   │   ├── voice_emblem_holographic_de_microphonephone_neon.png
+│   │   │   ├── voice_icon_holographic_de_microphone_permission.png
+│   │   │   └── voice_orbe_d_alert_voicee_cybernetique.png
+│   │   ├── 05-memory-intelligence
+│   │   │   ├── memory_core_de_data_holographic_futuristic.png
+│   │   │   ├── memory_dashboard_holographic_memory_connectee.png
+│   │   │   ├── memory_emblem_holographic_de_control_ia.png
+│   │   │   ├── memory_emblem_holographic_du_core_memory_ia.png
+│   │   │   ├── memory_emblem_neon_d_analysis_spatial.png
+│   │   │   ├── memory_holographic_network_d_ai.png
+│   │   │   ├── memory_interface_holographic_knowledge_futuristic.png
+│   │   │   ├── memory_neural_network_holographic_neon.png
+│   │   │   └── memory_orbe_holographic_d_ai.png
+│   │   ├── 06-agents
+│   │   │   ├── agent_emblem_de_cybersecurity_holographic.png
+│   │   │   ├── agent_emblem_holographic_de_communication_ia.png
+│   │   │   ├── agent_emblem_holographic_de_creation_futuristic.png
+│   │   │   └── agent_emblem_holographic_de_protection_cybernetique.png
+│   │   ├── 07-physical-world
+│   │   │   ├── device_card_holographic_des_connected_devices.png
+│   │   │   ├── device_emblem_cyberpunk_du_laptop_holographic.png
+│   │   │   ├── device_emblem_holographic_de_camera_cybernetique.png
+│   │   │   ├── device_emblem_holographic_de_smart_home.png
+│   │   │   ├── device_emblem_holographic_du_desktop_cyberpunk.png
+│   │   │   ├── device_emblem_holographic_du_sensor_futuristic.png
+│   │   │   ├── device_emblem_satellite_holographic_futuristic.png
+│   │   │   ├── device_emblem_smartphone_orbital_neon_futuristic.png
+│   │   │   ├── device_nud_quantum_iot_en_orbit.png
+│   │   │   └── device_wearable_holographic_futuristic.png
+│   │   ├── 08-actions-states
+│   │   │   ├── state_card_holographic_de_notifications_neon.png
+│   │   │   ├── state_emblem_holographic_cyberpunk_en_pause.png
+│   │   │   ├── state_emblem_holographic_d_alert_futuristic.png
+│   │   │   ├── state_emblem_holographic_de_download_futuristic.png
+│   │   │   ├── state_emblem_holographic_de_upload_cyberpunk.png
+│   │   │   ├── state_emblem_holographic_de_verification_futuristic.png
+│   │   │   ├── state_emblem_holographic_du_power_neon.png
+│   │   │   ├── state_emblem_neon_de_sync_futuristic.png
+│   │   │   ├── state_interface_holographic_d_approval_futuristic.png
+│   │   │   └── state_panel_hud_futuristic_de_task_progress.png
+│   │   ├── 09-cinematic-environments
+│   │   │   ├── scene_command_bridge_spatial_holographic.png
+│   │   │   ├── scene_command_center_holographic_futuristic.png
+│   │   │   ├── scene_hangar_futuristic_de_drones_en_orbit.png
+│   │   │   ├── scene_metropolis_cyberpunk_flottante_neon.png
+│   │   │   ├── scene_nexus_energy_futuristic_en_orbit.png
+│   │   │   ├── scene_platform_energy_futuristic_en_levitation.png
+│   │   │   ├── scene_portal_cosmic_futuristic_aux_crystals_lumineux.png
+│   │   │   ├── scene_reactor_holographic_futuristic_en_levitation.png
+│   │   │   ├── scene_secure_data_vault_environment.png
+│   │   │   └── scene_vr_lounge_futuristic_holographic_luxueux.png
+│   │   └── 99-unclassified
+│   ├── thumbnails
+│   │   ├── 00-concepts-reference
+│   │   ├── 01-core-system
+│   │   │   ├── core_d_energy_holographic_futuristic.webp
+│   │   │   ├── core_emblem_orbital_quantum_lumineux.webp
+│   │   │   ├── core_globe_holographic_neon_futuristic.webp
+│   │   │   ├── core_holographic_d_energy_futuristic.webp
+│   │   │   ├── core_nebula_d_energy_cosmic_neon.webp
+│   │   │   ├── core_nexus_cosmic_holographic_neon.webp
+│   │   │   ├── core_nexus_holographic_orbital_futuristic.webp
+│   │   │   ├── core_orbe_energy_holographic_futuristic.webp
+│   │   │   ├── core_orbe_hud_futuristic_neon_sur_transparence.webp
+│   │   │   └── core_portal_holographic_neon_symmetric.webp
+│   │   ├── 02-system-capabilities
+│   │   │   ├── capability_cur_energy_holographic_futuristic.webp
+│   │   │   ├── capability_emblem_neon_d_automation_futuristic.webp
+│   │   │   ├── capability_jarvis_x2_local_ai_futuristic.webp
+│   │   │   ├── capability_portal_energy_futuristic_bleu_et_violet.webp
+│   │   │   ├── capability_sphere_holographic_de_management_documents.webp
+│   │   │   ├── capability_tableau_de_navigation_holographic_futuristic.webp
+│   │   │   └── capability_tableau_weather_futuristic_de_location.webp
+│   │   ├── 03-product-ui
+│   │   │   ├── ui_card_holographic_de_security_cyberpunk.webp
+│   │   │   ├── ui_dashboard_d_automation_futuristic.webp
+│   │   │   ├── ui_dashboard_futuristic_jarvis_x2.webp
+│   │   │   ├── ui_dashboard_holographic_analytics.webp
+│   │   │   ├── ui_dashboard_holographic_des_active_agents.webp
+│   │   │   ├── ui_dashboard_holographic_des_documents.webp
+│   │   │   ├── ui_dashboard_holographic_jarvis_x2.webp
+│   │   │   ├── ui_dashboard_jarvis_x2_dev_studio.webp
+│   │   │   ├── ui_interface_de_research_futuristic_jarvis_x2.webp
+│   │   │   ├── ui_interface_holographic_de_secure_vault.webp
+│   │   │   ├── ui_interface_holographic_focus_deep_work.webp
+│   │   │   └── ui_interface_holographic_jarvis_x2.webp
+│   │   ├── 04-voice-presence
+│   │   │   ├── voice_core_d_energy_audio_futuristic_symmetric.webp
+│   │   │   ├── voice_emblem_futuristic_d_assistant_voice_neon.webp
+│   │   │   ├── voice_emblem_holographic_de_microphonephone_neon.webp
+│   │   │   ├── voice_icon_holographic_de_microphone_permission.webp
+│   │   │   └── voice_orbe_d_alert_voicee_cybernetique.webp
+│   │   ├── 05-memory-intelligence
+│   │   │   ├── memory_core_de_data_holographic_futuristic.webp
+│   │   │   ├── memory_dashboard_holographic_memory_connectee.webp
+│   │   │   ├── memory_emblem_holographic_de_control_ia.webp
+│   │   │   ├── memory_emblem_holographic_du_core_memory_ia.webp
+│   │   │   ├── memory_emblem_neon_d_analysis_spatial.webp
+│   │   │   ├── memory_holographic_network_d_ai.webp
+│   │   │   ├── memory_interface_holographic_knowledge_futuristic.webp
+│   │   │   ├── memory_neural_network_holographic_neon.webp
+│   │   │   └── memory_orbe_holographic_d_ai.webp
+│   │   ├── 06-agents
+│   │   │   ├── agent_emblem_de_cybersecurity_holographic.webp
+│   │   │   ├── agent_emblem_holographic_de_communication_ia.webp
+│   │   │   ├── agent_emblem_holographic_de_creation_futuristic.webp
+│   │   │   └── agent_emblem_holographic_de_protection_cybernetique.webp
+│   │   ├── 07-physical-world
+│   │   │   ├── device_card_holographic_des_connected_devices.webp
+│   │   │   ├── device_emblem_cyberpunk_du_laptop_holographic.webp
+│   │   │   ├── device_emblem_holographic_de_camera_cybernetique.webp
+│   │   │   ├── device_emblem_holographic_de_smart_home.webp
+│   │   │   ├── device_emblem_holographic_du_desktop_cyberpunk.webp
+│   │   │   ├── device_emblem_holographic_du_sensor_futuristic.webp
+│   │   │   ├── device_emblem_satellite_holographic_futuristic.webp
+│   │   │   ├── device_emblem_smartphone_orbital_neon_futuristic.webp
+│   │   │   ├── device_nud_quantum_iot_en_orbit.webp
+│   │   │   └── device_wearable_holographic_futuristic.webp
+│   │   ├── 08-actions-states
+│   │   │   ├── state_card_holographic_de_notifications_neon.webp
+│   │   │   ├── state_emblem_holographic_cyberpunk_en_pause.webp
+│   │   │   ├── state_emblem_holographic_d_alert_futuristic.webp
+│   │   │   ├── state_emblem_holographic_de_download_futuristic.webp
+│   │   │   ├── state_emblem_holographic_de_upload_cyberpunk.webp
+│   │   │   ├── state_emblem_holographic_de_verification_futuristic.webp
+│   │   │   ├── state_emblem_holographic_du_power_neon.webp
+│   │   │   ├── state_emblem_neon_de_sync_futuristic.webp
+│   │   │   ├── state_interface_holographic_d_approval_futuristic.webp
+│   │   │   └── state_panel_hud_futuristic_de_task_progress.webp
+│   │   ├── 09-cinematic-environments
+│   │   │   ├── scene_command_bridge_spatial_holographic.webp
+│   │   │   ├── scene_command_center_holographic_futuristic.webp
+│   │   │   ├── scene_hangar_futuristic_de_drones_en_orbit.webp
+│   │   │   ├── scene_metropolis_cyberpunk_flottante_neon.webp
+│   │   │   ├── scene_nexus_energy_futuristic_en_orbit.webp
+│   │   │   ├── scene_platform_energy_futuristic_en_levitation.webp
+│   │   │   ├── scene_portal_cosmic_futuristic_aux_crystals_lumineux.webp
+│   │   │   ├── scene_reactor_holographic_futuristic_en_levitation.webp
+│   │   │   ├── scene_secure_data_vault_environment.webp
+│   │   │   └── scene_vr_lounge_futuristic_holographic_luxueux.webp
+│   │   └── 99-unclassified
+│   └── web
+│       ├── 00-concepts-reference
+│       ├── 01-core-system
+│       │   ├── core_d_energy_holographic_futuristic.webp
+│       │   ├── core_emblem_orbital_quantum_lumineux.webp
+│       │   ├── core_globe_holographic_neon_futuristic.webp
+│       │   ├── core_holographic_d_energy_futuristic.webp
+│       │   ├── core_nebula_d_energy_cosmic_neon.webp
+│       │   ├── core_nexus_cosmic_holographic_neon.webp
+│       │   ├── core_nexus_holographic_orbital_futuristic.webp
+│       │   ├── core_orbe_energy_holographic_futuristic.webp
+│       │   ├── core_orbe_hud_futuristic_neon_sur_transparence.webp
+│       │   └── core_portal_holographic_neon_symmetric.webp
+│       ├── 02-system-capabilities
+│       │   ├── capability_cur_energy_holographic_futuristic.webp
+│       │   ├── capability_emblem_neon_d_automation_futuristic.webp
+│       │   ├── capability_jarvis_x2_local_ai_futuristic.webp
+│       │   ├── capability_portal_energy_futuristic_bleu_et_violet.webp
+│       │   ├── capability_sphere_holographic_de_management_documents.webp
+│       │   ├── capability_tableau_de_navigation_holographic_futuristic.webp
+│       │   └── capability_tableau_weather_futuristic_de_location.webp
+│       ├── 03-product-ui
+│       │   ├── ui_card_holographic_de_security_cyberpunk.webp
+│       │   ├── ui_dashboard_d_automation_futuristic.webp
+│       │   ├── ui_dashboard_futuristic_jarvis_x2.webp
+│       │   ├── ui_dashboard_holographic_analytics.webp
+│       │   ├── ui_dashboard_holographic_des_active_agents.webp
+│       │   ├── ui_dashboard_holographic_des_documents.webp
+│       │   ├── ui_dashboard_holographic_jarvis_x2.webp
+│       │   ├── ui_dashboard_jarvis_x2_dev_studio.webp
+│       │   ├── ui_interface_de_research_futuristic_jarvis_x2.webp
+│       │   ├── ui_interface_holographic_de_secure_vault.webp
+│       │   ├── ui_interface_holographic_focus_deep_work.webp
+│       │   └── ui_interface_holographic_jarvis_x2.webp
+│       ├── 04-voice-presence
+│       │   ├── voice_core_d_energy_audio_futuristic_symmetric.webp
+│       │   ├── voice_emblem_futuristic_d_assistant_voice_neon.webp
+│       │   ├── voice_emblem_holographic_de_microphonephone_neon.webp
+│       │   ├── voice_icon_holographic_de_microphone_permission.webp
+│       │   └── voice_orbe_d_alert_voicee_cybernetique.webp
+│       ├── 05-memory-intelligence
+│       │   ├── memory_core_de_data_holographic_futuristic.webp
+│       │   ├── memory_dashboard_holographic_memory_connectee.webp
+│       │   ├── memory_emblem_holographic_de_control_ia.webp
+│       │   ├── memory_emblem_holographic_du_core_memory_ia.webp
+│       │   ├── memory_emblem_neon_d_analysis_spatial.webp
+│       │   ├── memory_holographic_network_d_ai.webp
+│       │   ├── memory_interface_holographic_knowledge_futuristic.webp
+│       │   ├── memory_neural_network_holographic_neon.webp
+│       │   └── memory_orbe_holographic_d_ai.webp
+│       ├── 06-agents
+│       │   ├── agent_emblem_de_cybersecurity_holographic.webp
+│       │   ├── agent_emblem_holographic_de_communication_ia.webp
+│       │   ├── agent_emblem_holographic_de_creation_futuristic.webp
+│       │   └── agent_emblem_holographic_de_protection_cybernetique.webp
+│       ├── 07-physical-world
+│       │   ├── device_card_holographic_des_connected_devices.webp
+│       │   ├── device_emblem_cyberpunk_du_laptop_holographic.webp
+│       │   ├── device_emblem_holographic_de_camera_cybernetique.webp
+│       │   ├── device_emblem_holographic_de_smart_home.webp
+│       │   ├── device_emblem_holographic_du_desktop_cyberpunk.webp
+│       │   ├── device_emblem_holographic_du_sensor_futuristic.webp
+│       │   ├── device_emblem_satellite_holographic_futuristic.webp
+│       │   ├── device_emblem_smartphone_orbital_neon_futuristic.webp
+│       │   ├── device_nud_quantum_iot_en_orbit.webp
+│       │   └── device_wearable_holographic_futuristic.webp
+│       ├── 08-actions-states
+│       │   ├── state_card_holographic_de_notifications_neon.webp
+│       │   ├── state_emblem_holographic_cyberpunk_en_pause.webp
+│       │   ├── state_emblem_holographic_d_alert_futuristic.webp
+│       │   ├── state_emblem_holographic_de_download_futuristic.webp
+│       │   ├── state_emblem_holographic_de_upload_cyberpunk.webp
+│       │   ├── state_emblem_holographic_de_verification_futuristic.webp
+│       │   ├── state_emblem_holographic_du_power_neon.webp
+│       │   ├── state_emblem_neon_de_sync_futuristic.webp
+│       │   ├── state_interface_holographic_d_approval_futuristic.webp
+│       │   └── state_panel_hud_futuristic_de_task_progress.webp
+│       ├── 09-cinematic-environments
+│       │   ├── scene_command_bridge_spatial_holographic.webp
+│       │   ├── scene_command_center_holographic_futuristic.webp
+│       │   ├── scene_hangar_futuristic_de_drones_en_orbit.webp
+│       │   ├── scene_metropolis_cyberpunk_flottante_neon.webp
+│       │   ├── scene_nexus_energy_futuristic_en_orbit.webp
+│       │   ├── scene_platform_energy_futuristic_en_levitation.webp
+│       │   ├── scene_portal_cosmic_futuristic_aux_crystals_lumineux.webp
+│       │   ├── scene_reactor_holographic_futuristic_en_levitation.webp
+│       │   ├── scene_secure_data_vault_environment.webp
+│       │   └── scene_vr_lounge_futuristic_holographic_luxueux.webp
+│       └── 99-unclassified
+├── claude-code
+│   ├── ASSET_INTEGRATION_GUIDE.md
+│   ├── BOOTSTRAP.md
+│   └── MASTER_BUILD_PROMPT.md
+├── documentation
+│   ├── operations
+│   │   ├── LOCAL_FIRST_DEPLOYMENT.md
+│   │   ├── OPERATIONS_RUNBOOK.md
+│   │   └── TEST_PLAN.md
+│   ├── product
+│   │   ├── PRD_JARVIS_X2.md
+│   │   ├── PRODUCT_VISION.md
+│   │   └── ROADMAP_P0_P6.md
+│   ├── research
+│   │   └── RESEARCH_SUMMARY.md
+│   ├── security
+│   │   ├── LICENSE_REVIEW.md
+│   │   ├── MEMORY_DATA_POLICY.md
+│   │   └── SECURITY_THREAT_MODEL.md
+│   ├── technical
+│   │   ├── AGENT_ORCHESTRATION_SPEC.md
+│   │   ├── API_CONTRACTS.md
+│   │   ├── AUTOMATION_INTEGRATION_SPEC.md
+│   │   └── TECHNICAL_ARCHITECTURE.md
+│   └── ux
+│       ├── DESIGN_SYSTEM.md
+│       ├── GAPS_AND_REGENERATION.md
+│       ├── HANDSFREE_UX_SPEC.md
+│       ├── INFORMATION_ARCHITECTURE.md
+│       └── VISUAL_ASSET_AUDIT.md
+├── project-data
+│   ├── PRD_SUMMARY.json
+│   └── REQUIREMENTS_TRACEABILITY.csv
+├── research
+│   ├── JARVIS_OPEN_SOURCE_BANK_v1_2026-08-11.xlsx
+│   └── JARVIS_OPEN_SOURCE_BANK_v1_dashboard_preview.png
+├── source-code
+│   ├── P0_VISUAL_FOUNDATION
+│   │   └── JARVIS_X2_P0_VISUAL_FOUNDATION
+│   │       ├── components
+│   │       │   ├── agents
+│   │       │   ├── cinematic
+│   │       │   ├── cursor
+│   │       │   ├── jarvis-core
+│   │       │   ├── memory
+│   │       │   ├── ui
+│   │       │   └── voice
+│   │       ├── config
+│   │       │   ├── assets.ts
+│   │       │   ├── design-tokens.ts
+│   │       │   └── states.ts
+│   │       ├── docs
+│   │       │   ├── CINEMATIC_ASSET_BRIEFS.md
+│   │       │   └── QA_CHECKLIST.md
+│   │       ├── public
+│   │       │   └── assets
+│   │       ├── shaders
+│   │       │   ├── core.frag.glsl
+│   │       │   ├── core.vert.glsl
+│   │       │   └── cursor-distortion.frag.glsl
+│   │       ├── styles
+│   │       │   └── jarvis-x2.css
+│   │       ├── asset-manifest.json
+│   │       ├── ASSET_INVENTORY.csv
+│   │       ├── CLAUDE_CODE_INTEGRATION.md
+│   │       ├── MASTER_PROMPT_CLAUDE_CODE.md
+│   │       ├── next.config.fragment.mjs
+│   │       ├── package.fragment.json
+│   │       ├── README.md
+│   │       ├── SHA256SUMS.txt
+│   │       └── types-glsl.d.ts
+│   ├── P1_CINEMATIC
+│   │   └── JARVIS_X2_P1_CINEMATIC
+│   │       ├── components
+│   │       │   ├── cinematic
+│   │       │   ├── transitions
+│   │       │   └── worlds
+│   │       ├── config
+│   │       │   ├── cinematic-timeline.ts
+│   │       │   └── cinematic-tokens.ts
+│   │       ├── docs
+│   │       │   ├── OPTIONAL_GENERATIVE_ASSET_PROMPTS.md
+│   │       │   └── STORYBOARD.json
+│   │       ├── public
+│   │       │   └── assets
+│   │       ├── shaders
+│   │       │   ├── fog.vert.glsl
+│   │       │   ├── memory-pulse.frag.glsl
+│   │       │   └── nebula.frag.glsl
+│   │       ├── ASSET_INVENTORY.csv
+│   │       ├── CLAUDE_CODE_P1_INTEGRATION.md
+│   │       ├── manifest.json
+│   │       ├── MASTER_PROMPT_CLAUDE_CODE_P1.md
+│   │       ├── package.fragment.json
+│   │       ├── README.md
+│   │       └── SHA256SUMS.txt
+│   ├── P2_LIVING_INTERFACE
+│   │   └── JARVIS_X2_P2_LIVING_INTERFACE
+│   │       ├── components
+│   │       │   ├── approvals
+│   │       │   ├── lab
+│   │       │   ├── living
+│   │       │   ├── permissions
+│   │       │   └── vision
+│   │       ├── docs
+│   │       │   ├── ARCHITECTURE.md
+│   │       │   ├── LOCAL_STACK.md
+│   │       │   ├── PRIVACY_AND_PERMISSIONS.md
+│   │       │   └── SOURCE_NOTES.md
+│   │       ├── local-runtime
+│   │       │   ├── __pycache__
+│   │       │   ├── .env.example
+│   │       │   ├── requirements.txt
+│   │       │   ├── server.py
+│   │       │   ├── setup_openwakeword_models.py
+│   │       │   ├── start_runtime.ps1
+│   │       │   └── start_runtime.sh
+│   │       ├── public
+│   │       │   └── worklets
+│   │       ├── runtime
+│   │       │   ├── adapters
+│   │       │   ├── audio
+│   │       │   ├── policy
+│   │       │   ├── store
+│   │       │   ├── contracts.ts
+│   │       │   ├── JarvisEventBus.ts
+│   │       │   └── JarvisStateMachine.ts
+│   │       ├── styles
+│   │       │   └── living-interface.css
+│   │       ├── tests
+│   │       │   └── state-machine-cases.json
+│   │       ├── ASSET_INVENTORY.csv
+│   │       ├── CLAUDE_CODE_P2_INTEGRATION.md
+│   │       ├── manifest.json
+│   │       ├── MASTER_PROMPT_CLAUDE_CODE_P2.md
+│   │       ├── README.md
+│   │       └── SHA256SUMS.txt
+│   └── P3_INTELLIGENCE_CORE
+│       └── JARVIS_X2_P3_INTELLIGENCE_CORE
+│           ├── components
+│           │   ├── agents
+│           │   ├── intelligence
+│           │   ├── jobs
+│           │   ├── lab
+│           │   └── memory
+│           ├── config
+│           │   └── intelligence.example.ts
+│           ├── docs
+│           │   ├── FREE_LOCAL_STACK.md
+│           │   └── SOURCE_NOTES.md
+│           ├── hermes
+│           │   ├── plugins
+│           │   ├── .env.example
+│           │   └── config.local-ollama.example.yaml
+│           ├── local-stack
+│           │   ├── .env.example
+│           │   ├── browser_worker.py
+│           │   ├── docker-compose.memory.yml
+│           │   ├── graphiti_service.py
+│           │   ├── requirements-browser-worker.txt
+│           │   ├── requirements-memory.txt
+│           │   ├── start_memory.ps1
+│           │   └── start_memory.sh
+│           ├── runtime
+│           │   ├── agents
+│           │   ├── intelligence
+│           │   ├── jobs
+│           │   ├── memory
+│           │   └── tools
+│           ├── server
+│           │   ├── adapters
+│           │   ├── policy
+│           │   ├── JarvisIntelligenceService.ts
+│           │   └── ROUTE_TEMPLATES.md
+│           ├── ASSET_INVENTORY.csv
+│           ├── CLAUDE_CODE_P3_INTEGRATION.md
+│           ├── manifest.json
+│           ├── MASTER_PROMPT_CLAUDE_CODE_P3.md
+│           ├── README.md
+│           └── SHA256SUMS.txt
+├── PACKAGE_INDEX.html
+├── PROJECT_TREE.txt
+├── README_FIRST.md
+└── SHA256SUMS.txt

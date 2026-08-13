@@ -1609,3 +1609,13 @@ export const ASSET_IDS = Object.keys(ASSET_REGISTRY) as AssetId[];
 export function getAsset(id: AssetId): AssetEntry {
   return ASSET_REGISTRY[id];
 }
+
+/** Runtime src for an asset — WebP preferred in UI (ASSET_INTEGRATION_GUIDE rule 1). */
+export function asset(id: AssetId): string {
+  return ASSET_REGISTRY[id].webp;
+}
+
+/** Master/fallback PNG src (rule 2). */
+export function assetMaster(id: AssetId): string {
+  return ASSET_REGISTRY[id].png;
+}

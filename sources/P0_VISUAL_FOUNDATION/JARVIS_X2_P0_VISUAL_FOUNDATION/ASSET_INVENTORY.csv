@@ -1,0 +1,90 @@
+path,type,bytes
+CLAUDE_CODE_INTEGRATION.md,Documentation,4617
+MASTER_PROMPT_CLAUDE_CODE.md,Documentation,3855
+README.md,Documentation,783
+asset-manifest.json,Configuration,1037
+components/agents/AgentConstellation.tsx,React component,532
+components/cinematic/CinematicLanding.tsx,React component,1665
+components/cursor/CursorField.tsx,React component,374
+components/cursor/Magnetic.tsx,React component,780
+components/cursor/usePointerVelocity.ts,React component,775
+components/jarvis-core/JarvisCore.tsx,React component,2681
+components/jarvis-core/JarvisCoreScene.tsx,React component,1051
+components/memory/MemoryConstellation.tsx,React component,1243
+components/ui/JarvisDashboard.tsx,React component,1587
+components/ui/JarvisP0DemoPage.tsx,React component,2184
+components/voice/HandsFreeDock.tsx,React component,1187
+components/voice/SpeechWaveform.tsx,React component,763
+config/assets.ts,Configuration,683
+config/design-tokens.ts,Configuration,730
+config/states.ts,Configuration,749
+docs/CINEMATIC_ASSET_BRIEFS.md,Documentation,1538
+next.config.fragment.mjs,Configuration,234
+package.fragment.json,Configuration,208
+public/assets/agents/analyst.svg,SVG asset,1015
+public/assets/agents/builder.svg,SVG asset,1015
+public/assets/agents/home.svg,SVG asset,1015
+public/assets/agents/operator.svg,SVG asset,1015
+public/assets/agents/research.svg,SVG asset,1015
+public/assets/agents/scheduler.svg,SVG asset,1015
+public/assets/audio/ui/accepted.wav,UI audio,21212
+public/assets/audio/ui/agent-spawn.wav,UI audio,54728
+public/assets/audio/ui/listening.wav,UI audio,24740
+public/assets/audio/ui/processing.wav,UI audio,48554
+public/assets/audio/ui/shutdown.wav,UI audio,48554
+public/assets/audio/ui/task-complete.wav,UI audio,44144
+public/assets/audio/ui/wake.wav,UI audio,37088
+public/assets/audio/ui/warning.wav,UI audio,42380
+public/assets/brand/jarvis-x2-lockup.svg,SVG asset,837
+public/assets/brand/jarvis-x2-mark.svg,SVG asset,963
+public/assets/devices/desktop.svg,SVG asset,623
+public/assets/devices/home-node.svg,SVG asset,610
+public/assets/devices/laptop.svg,SVG asset,623
+public/assets/devices/phone.svg,SVG asset,678
+public/assets/devices/satellite.svg,SVG asset,654
+public/assets/devices/tablet.svg,SVG asset,622
+public/assets/icons/action.svg,SVG asset,199
+public/assets/icons/agents.svg,SVG asset,271
+public/assets/icons/approval.svg,SVG asset,192
+public/assets/icons/automation.svg,SVG asset,306
+public/assets/icons/browser.svg,SVG asset,214
+public/assets/icons/calendar.svg,SVG asset,210
+public/assets/icons/camera.svg,SVG asset,237
+public/assets/icons/cloud.svg,SVG asset,234
+public/assets/icons/devices.svg,SVG asset,212
+public/assets/icons/files.svg,SVG asset,203
+public/assets/icons/home.svg,SVG asset,207
+public/assets/icons/listening.svg,SVG asset,213
+public/assets/icons/local.svg,SVG asset,208
+public/assets/icons/mail.svg,SVG asset,203
+public/assets/icons/memory.svg,SVG asset,287
+public/assets/icons/microphone.svg,SVG asset,258
+public/assets/icons/network.svg,SVG asset,270
+public/assets/icons/offline.svg,SVG asset,231
+public/assets/icons/privacy.svg,SVG asset,232
+public/assets/icons/reasoning.svg,SVG asset,214
+public/assets/icons/search.svg,SVG asset,223
+public/assets/icons/security.svg,SVG asset,226
+public/assets/icons/settings.svg,SVG asset,295
+public/assets/icons/speaking.svg,SVG asset,237
+public/assets/icons/success.svg,SVG asset,192
+public/assets/icons/task.svg,SVG asset,204
+public/assets/icons/terminal.svg,SVG asset,210
+public/assets/icons/thinking.svg,SVG asset,207
+public/assets/icons/timeline.svg,SVG asset,220
+public/assets/icons/vision.svg,SVG asset,260
+public/assets/icons/voice.svg,SVG asset,258
+public/assets/icons/warning.svg,SVG asset,207
+public/assets/particles/dot-field.svg,SVG asset,10194
+public/assets/particles/radial-burst.svg,SVG asset,1676
+public/assets/textures/energy-rings.svg,SVG asset,343
+public/assets/textures/glass-noise.svg,SVG asset,321
+public/assets/textures/grid.svg,SVG asset,316
+public/assets/textures/holo-lines.svg,SVG asset,259
+public/assets/textures/mineral.svg,SVG asset,335
+public/assets/textures/starfield.svg,SVG asset,4823
+shaders/core.frag.glsl,Shader,826
+shaders/core.vert.glsl,Shader,509
+shaders/cursor-distortion.frag.glsl,Shader,481
+styles/jarvis-x2.css,Configuration,7409
+types-glsl.d.ts,Configuration,77

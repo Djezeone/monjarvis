@@ -1,0 +1,47 @@
+[
+  {
+    "from": "idle",
+    "event": "wake.detected",
+    "expect": "wake"
+  },
+  {
+    "from": "wake",
+    "event": "voice.start",
+    "expect": "listening"
+  },
+  {
+    "from": "listening",
+    "event": "voice.final",
+    "expect": "understanding"
+  },
+  {
+    "from": "understanding",
+    "event": "reasoning.start",
+    "expect": "thinking"
+  },
+  {
+    "from": "thinking",
+    "event": "action.started",
+    "expect": "acting"
+  },
+  {
+    "from": "acting",
+    "event": "speech.start",
+    "expect": "speaking"
+  },
+  {
+    "from": "speaking",
+    "event": "speech.end",
+    "expect": "idle"
+  },
+  {
+    "from": "thinking",
+    "event": "warning",
+    "expect": "warning"
+  },
+  {
+    "from": "warning",
+    "event": "reset",
+    "expect": "idle"
+  }
+]

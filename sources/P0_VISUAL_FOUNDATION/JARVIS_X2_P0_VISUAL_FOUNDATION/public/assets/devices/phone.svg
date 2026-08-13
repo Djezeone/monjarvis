@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+<defs><radialGradient id="b"><stop stop-color="#5DEBFF" stop-opacity=".15"/><stop offset="1" stop-color="#05070A"/></radialGradient>
+<filter id="g"><feGaussianBlur stdDeviation="4"/></filter></defs>
+<rect width="512" height="512" rx="48" fill="url(#b)"/>
+<g stroke="#5DEBFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><rect x="170" y="60" width="172" height="392" rx="28"/><rect x="184" y="86" width="144" height="322" rx="16"/><circle cx="256" cy="430" r="8"/></g>
+<circle cx="420" cy="88" r="8" fill="#63E6A5"/><circle cx="420" cy="88" r="18" fill="#63E6A5" opacity=".12"/>
+</svg>
