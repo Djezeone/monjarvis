@@ -50,8 +50,8 @@ export function CinematicExperience(){
   const [intro,setIntro]=useState(true);
   useEffect(()=>{ if(reduced) setIntro(false); },[reduced]);
 
-  return <main className="jx2-cinematic-root">
+  return <section className="jx2-cinematic-root">
     {intro && <IntroSequence reducedMotion={!!reduced} onComplete={()=>setIntro(false)}/>}
     <ScrollDirector><ExperienceBody/></ScrollDirector>
-  </main>
+  </section>
 }

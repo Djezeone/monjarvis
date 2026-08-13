@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "generate:assets": "node scripts/generate-assets-registry.mjs",
-    "test:state": "node scripts/test-state-machine.mjs"
+    "test:state": "node scripts/test-state-machine.mjs",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
@@ -19,6 +20,7 @@
     "three": "^0.185.1"
   },
   "devDependencies": {
+    "@playwright/test": "^1.62.1",
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { JarvisRuntimeProvider } from "@/jarvis/runtime/JarvisRuntimeProvider";
 import "./globals.css";
 import "@/styles/jarvis-x2.css";
 import "@/styles/living-interface.css";
@@ -31,7 +32,9 @@ export default function RootLayout({
             <Link href="/lab/intelligence">Intelligence</Link>
           </div>
         </nav>
-        <main>{children}</main>
+        <main>
+          <JarvisRuntimeProvider>{children}</JarvisRuntimeProvider>
+        </main>
       </body>
     </html>
   );

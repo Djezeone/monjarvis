@@ -9,7 +9,7 @@ import { CursorField } from "../cursor/CursorField";
 
 export function JarvisDashboard(){
   const [state,setState]=useState<JarvisState>("idle");
-  return <main className="jx-dashboard">
+  return <section className="jx-dashboard">
     <CursorField/>
     <header className="jx-topbar">
       <img src="/assets/brand/jarvis-x2-lockup.svg" alt="Jarvis X2"/>
@@ -31,5 +31,5 @@ export function JarvisDashboard(){
       state={state}
       onToggle={()=>setState(s=>s==="idle"?"listening":"idle")}
     />
-  </main>
+  </section>
 }
