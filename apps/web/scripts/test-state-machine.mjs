@@ -9,9 +9,25 @@ import { dirname, join } from "node:path";
 import { execFileSync } from "node:child_process";
 
 const here = dirname(fileURLToPath(import.meta.url));
-const cases = JSON.parse(
-  readFileSync(join(here, "../src/jarvis/tests/state-machine-cases.json"), "utf8")
-);
+const cases = [
+  ...JSON.parse(
+    readFileSync(join(here, "../src/jarvis/tests/state-machine-cases.json"), "utf8")
+  ),
+  ...JSON.parse(
+    readFileSync(
+      join(here, "../src/jarvis/tests/state-machine-cases.extended.json"),
+      "utf8"
+    )
+  ),
+];
+
+const STATES = ["idle","wake","listening","understanding","thinking","acting","speaking","warning"];
+const covered = new Set(cases.map((c) => c.expect));
+const missing = STATES.filter((s) => !covered.has(s));
+if (missing.length) {
+  console.error("Coverage gap: no case ever expects state(s):", missing.join(", "));
+  process.exit(1);
+}
 
 // Strip types so Node can execute the reducer directly.
 const out = execFileSync(

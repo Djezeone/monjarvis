@@ -24,7 +24,9 @@ export function JarvisCoreScene({
         <pointLight position={[-4,-2,3]} intensity={1.2} color="#7867FF"/>
         <Suspense fallback={null}>
           <JarvisCore state={state} pointerInfluence={pointerInfluence}/>
-          <Environment preset="night"/>
+          {/* Same HDR as drei's "night" preset, served locally: the preset
+              fetches from a CDN, which breaks offline/local-first operation. */}
+          <Environment files="/assets/textures/dikhololo_night_1k.hdr"/>
         </Suspense>
       </Canvas>
     </div>

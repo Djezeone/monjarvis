@@ -1,0 +1,22 @@
+[
+  { "from": "idle", "event": "reset", "expect": "idle" },
+  { "from": "speaking", "event": "speech.end", "expect": "idle" },
+  { "from": "speaking", "event": "voice.start", "expect": "listening" },
+  { "from": "speaking", "event": "wake.detected", "expect": "speaking" },
+  { "from": "idle", "event": "action.started", "expect": "idle" },
+  { "from": "idle", "event": "speech.start", "expect": "idle" },
+  { "from": "thinking", "event": "action.requested", "payload": { "action": { "tier": "CRITICAL" } }, "expect": "warning" },
+  { "from": "thinking", "event": "action.requested", "payload": { "action": { "tier": "ACT" } }, "expect": "thinking" },
+  { "from": "acting", "event": "action.completed", "expect": "speaking" },
+  { "from": "acting", "event": "action.failed", "expect": "warning" },
+  { "from": "acting", "event": "warning", "payload": { "message": "test" }, "expect": "warning" },
+  { "from": "acting", "event": "reset", "expect": "idle" },
+  { "from": "understanding", "event": "reasoning.start", "expect": "thinking" },
+  { "from": "understanding", "event": "speech.start", "expect": "speaking" },
+  { "from": "warning", "event": "reset", "expect": "idle" },
+  { "from": "warning", "event": "voice.start", "expect": "listening" },
+  { "from": "wake", "event": "voice.start", "expect": "listening" },
+  { "from": "listening", "event": "voice.final", "payload": { "text": "bonjour" }, "expect": "understanding" },
+  { "from": "speaking", "event": "reset", "expect": "idle" },
+  { "from": "thinking", "event": "speech.start", "expect": "speaking" }
+]

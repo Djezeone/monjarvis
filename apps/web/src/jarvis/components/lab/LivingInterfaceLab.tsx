@@ -1,29 +1,19 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
 import { PermissionCenter } from "../permissions/PermissionCenter";
 import { LivingInterfaceOverlay } from "../living/LivingInterfaceOverlay";
 import { jarvisEventBus } from "../../runtime/JarvisEventBus";
 import { useJarvisStore } from "../../runtime/store/jarvisStore";
-import { LocalRuntimeWebSocketAdapter } from "../../runtime/adapters/LocalRuntimeWebSocketAdapter";
+import { useJarvisRuntime } from "../../runtime/JarvisRuntimeProvider";
 import type { ActionRequest } from "../../runtime/contracts";
 
 export function LivingInterfaceLab(){
   const s=useJarvisStore();
-  const runtime=useMemo(()=>new LocalRuntimeWebSocketAdapter(),[]);
-  const [connected,setConnected]=useState(false);
-
-  useEffect(()=>{
-    const off=runtime.onEvent(e=>jarvisEventBus.emit(e));
-    return ()=>{off()};
-  },[runtime]);
+  const { connected, connect, disconnect }=useJarvisRuntime();
 
   async function toggleRuntime(){
-    if(connected){await runtime.disconnect();setConnected(false);}
-    else{
-      try{await runtime.connect();setConnected(true);}
-      catch{jarvisEventBus.emit({type:"warning",message:"Start the local runtime on port 8765."});}
-    }
+    if(connected){await disconnect();}
+    else{await connect();}
   }
 
   function criticalDemo(){
@@ -40,7 +30,7 @@ export function LivingInterfaceLab(){
     jarvisEventBus.emit({type:"action.requested",action});
   }
 
-  return <main className="jx2-lab">
+  return <section className="jx2-lab">
     <header>
       <div><span>LIVING INTERFACE LAB</span><h1>Hands-free runtime</h1></div>
       <button onClick={toggleRuntime}>{connected?"Disconnect runtime":"Connect local runtime"}</button>
@@ -54,5 +44,5 @@ export function LivingInterfaceLab(){
     </section>
 
     <LivingInterfaceOverlay/>
-  </main>
+  </section>
 }

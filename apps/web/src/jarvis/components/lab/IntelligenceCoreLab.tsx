@@ -30,7 +30,7 @@ export function IntelligenceCoreLab(){
     },900);
   }
 
-  return <main className="jx3-lab">
+  return <section className="jx3-lab">
     <header>
       <div><span>INTELLIGENCE CORE LAB</span><h1>Reason. Remember. Act.</h1></div>
       <div className="jx3-mode"><i/> LOCAL-FIRST</div>
@@ -67,5 +67,5 @@ export function IntelligenceCoreLab(){
         </ul>
       </article>
     </section>
-  </main>
+  </section>
 }

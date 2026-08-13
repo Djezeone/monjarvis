@@ -11,7 +11,7 @@ export function CinematicLanding(){
   const opacity=useTransform(scrollYProgress,[0,.26,.44],[1,.92,0]);
   const [pointer,setPointer]=useState(0);
 
-  return <main className="jx-cinematic">
+  return <section className="jx-cinematic">
     <CursorField/>
     <section className="jx-hero" onPointerMove={()=>setPointer(.85)} onPointerLeave={()=>setPointer(0)}>
       <motion.div className="jx-core-wrap" style={{scale,opacity}}>
@@ -28,5 +28,5 @@ export function CinematicLanding(){
     <section className="jx-story"><span>01 / MEMORY</span><h2>It remembers context, not just messages.</h2></section>
     <section className="jx-story"><span>02 / PERCEPTION</span><h2>Voice, screen, browser, environment.</h2></section>
     <section className="jx-story"><span>03 / ACTION</span><h2>From intent to verified execution.</h2></section>
-  </main>
+  </section>
 }

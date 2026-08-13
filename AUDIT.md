@@ -76,3 +76,20 @@ Intégration réalisée (ordre BOOTSTRAP : P0 → P1 → P2 → P3, build vérif
 7. Corrections de compatibilité minimales (React 19/TS strict) : `useRef` sans argument, cleanups d'effets retournant un booléen, typage des configs d'états et des headers — le design visuel n'a pas été modifié.
 
 Reste à faire (nécessite les services tournant en local) : démarrer Ollama/Hermes/Graphiti et prouver le parcours complet (run réel, rappel mémoire, stop, approbation), activer un workflow n8n allowlisté, lecture Home Assistant, tests E2E du TEST_PLAN.
+
+---
+
+## 6. Addendum — 2026-08-13 (poursuite de l'ordre d'exécution, post-merge PR #1)
+
+Étapes du MASTER_BUILD_PROMPT traitées dans cette itération :
+
+- **Étape 7 (huit états validés)** : cas de test étendus (`state-machine-cases.extended.json`) — 29/29 passent, couverture garantie des 8 états + rejets d'événements hors-ordre + comportements `reset`/`warning`.
+- **Étape 9 (machine vocale P2 connectée)** : `JarvisRuntimeProvider` — adapter WebSocket **singleton** au niveau du shell (fix d'intégration exigé par le guide P2), connexion uniquement sur choix explicite de l'utilisateur, événements pipés vers `jarvisEventBus`, injection par contexte. `LivingInterfaceOverlay` et `LivingInterfaceLab` consomment le contexte (plus aucune connexion par composant). Overlay + contrôle de connexion montés dans `/app`.
+- **Étape 16 (tests mobile/clavier/reduced-motion/no-WebGL)** : suite Playwright (`npm run test:e2e`, 19/19) contre le build de production — viewport iPhone, navigation Tab (NFR-005), `prefers-reduced-motion`, WebGL bloqué → fallback FR-012, labs sans erreur d'exécution, `/app` chargeant sans aucun organe configuré (NFR-004).
+- **Étapes 11-12 (préparées)** : `scripts/verify-local-stack.mjs` — preuve réelle à exécuter sur la machine hôte : santé Hermes/Graphiti, écriture + rappel mémoire (avec retry d'ingestion), run réel → complétion, stop d'un run en cours, route d'approbation. Aucune simulation ; chaque échec est rapporté tel quel.
+
+Bugs réels détectés et corrigés par les tests :
+1. **Landmarks `<main>` imbriqués** (layout + composants pack) — violation d'accessibilité corrigée (`<section>` dans les composants).
+2. **Dépendance CDN cachée** : `<Environment preset="night"/>` téléchargeait `dikhololo_night_1k.hdr` depuis un CDN — remplacé par le même HDR servi localement (`public/assets/textures/`), conformément au principe local-first.
+
+Étapes restant tributaires de la machine hôte : 10-12 en conditions réelles (Hermes/Ollama/Graphiti up → `node scripts/verify-local-stack.mjs`), 13 (un workflow n8n allowlisté), 14 (Home Assistant lecture seule), puis P4.
