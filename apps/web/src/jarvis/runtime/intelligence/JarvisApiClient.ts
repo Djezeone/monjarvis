@@ -1,15 +1,23 @@
 import type { AgentRun } from "./contracts";
 
+export type StartOptions = {
+  sessionId?: string;
+  /** P4 handoff: reuse a sessionKey to continue the same conversation from any device. */
+  sessionKey?: string;
+  device?: string;
+  location?: string;
+};
+
 export class JarvisApiClient {
   constructor(private baseUrl="/api/jarvis"){}
 
-  async start(input:string,sessionId?:string){
+  async start(input:string,options:StartOptions={}){
     const r=await fetch(`${this.baseUrl}/run`,{
       method:"POST",headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({input,sessionId})
+      body:JSON.stringify({input,...options})
     });
     if(!r.ok) throw new Error(`JARVIS API ${r.status}`);
-    return r.json() as Promise<AgentRun>;
+    return r.json() as Promise<AgentRun & { sessionKey: string }>;
   }
 
   async status(runId:string){

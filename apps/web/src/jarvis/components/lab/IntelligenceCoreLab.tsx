@@ -12,13 +12,20 @@ export function IntelligenceCoreLab(){
   const [run,setRun]=useState<AgentRun|null>(null);
   const [output,setOutput]=useState("");
   const [delegations]=useState<DelegationEvent[]>([]);
+  // P4 handoff: an existing session can be resumed via /lab/intelligence?session=KEY
+  const [sessionKey,setSessionKey]=useState<string|undefined>(undefined);
   const poll=useRef<number | undefined>(undefined);
 
-  useEffect(()=>()=>{if(poll.current)clearInterval(poll.current)},[]);
+  useEffect(()=>{
+    const fromUrl=new URLSearchParams(window.location.search).get("session");
+    if(fromUrl)setSessionKey(fromUrl);
+    return()=>{if(poll.current)clearInterval(poll.current)};
+  },[]);
 
   async function start(){
     setOutput("");
-    const r=await api.start(prompt,"jarvis-x2-lab");
+    const r=await api.start(prompt,{sessionKey,device:"cockpit"});
+    setSessionKey(r.sessionKey);
     setRun(r);
     poll.current=window.setInterval(async()=>{
       const next=await api.status(r.runId);
@@ -39,6 +46,12 @@ export function IntelligenceCoreLab(){
     <section className="jx3-command">
       <textarea value={prompt} onChange={e=>setPrompt(e.target.value)} rows={3}/>
       <button onClick={start} disabled={!prompt.trim()}>Run intelligence</button>
+      <p data-session-indicator>
+        {sessionKey
+          ? <>Session <code>{sessionKey.slice(0,8)}…</code> — la conversation continue ici.{" "}
+              <button onClick={()=>setSessionKey(undefined)}>Nouvelle session</button></>
+          : "Nouvelle session — le premier run créera une clé reprenable depuis n'importe quel appareil."}
+      </p>
       {run && !["completed","failed","cancelled"].includes(run.status) && <button className="quiet" onClick={()=>api.stop(run.runId)}>Stop</button>}
     </section>
 
