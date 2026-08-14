@@ -7,6 +7,7 @@ import { SessionHandoff } from "@/components/session-handoff";
 import { OutputRouting } from "@/components/output-routing";
 import { PreferencesPanel } from "@/components/preferences-panel";
 import { RoutinesPanel } from "@/components/routines-panel";
+import { SuggestionsPanel } from "@/components/suggestions-panel";
 
 export default function CockpitPage() {
   return (
@@ -17,6 +18,7 @@ export default function CockpitPage() {
       <DevicePresence />
       <OutputRouting />
       <RoutinesPanel />
+      <SuggestionsPanel />
       <PreferencesPanel />
       <OrganStatus />
       <LivingInterfaceOverlay />

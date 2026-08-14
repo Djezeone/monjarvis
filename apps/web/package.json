@@ -9,7 +9,8 @@
     "generate:assets": "node scripts/generate-assets-registry.mjs",
     "test:state": "node scripts/test-state-machine.mjs",
     "test:e2e": "playwright test",
-    "test:routines": "node scripts/test-routines.mjs"
+    "test:routines": "node scripts/test-routines.mjs",
+    "test:suggestions": "node scripts/test-suggestions.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
