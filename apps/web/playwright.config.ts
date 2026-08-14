@@ -41,6 +41,13 @@ export default defineConfig({
         JARVIS_DATA_DIR: "./test-results/e2e-data",
         HERMES_API_URL: "http://127.0.0.1:3199",
         HERMES_API_KEY: "e2e-mock-key",
+        // Test-only VAPID pair (push.spec.ts) — never used outside e2e.
+        JARVIS_VAPID_PUBLIC_KEY:
+          "BGNDXenJKINPw0oDAGrM6GYJd6GCXpnmATzdVYZ_no9OUZN88kiPveD-eiIQ_r49f2lhx5hVY3Q7Fg_pWiZZKcA",
+        JARVIS_VAPID_PRIVATE_KEY: "CATt4GYzMYacPP_eaKMyhDVCdmZtiPBlcC63dDYWydE",
+        JARVIS_VAPID_SUBJECT: "mailto:e2e@test.local",
+        // Trust the test push service's self-signed cert (push.spec.ts).
+        NODE_EXTRA_CA_CERTS: "./e2e/fixtures/push-cert.pem",
       },
     },
     {

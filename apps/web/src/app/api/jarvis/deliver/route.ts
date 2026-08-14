@@ -17,7 +17,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "message required" }, { status: 400 });
   }
 
-  const outcome = deliverMessage({
+  const outcome = await deliverMessage({
     message,
     modality,
     sessionKey: typeof body.sessionKey === "string" ? body.sessionKey : undefined,

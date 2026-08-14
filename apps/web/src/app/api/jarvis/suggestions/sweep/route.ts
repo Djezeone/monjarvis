@@ -5,5 +5,5 @@ export const dynamic = "force-dynamic";
 
 /** Manual sweep — same code the scheduler tick runs every minute. */
 export async function POST() {
-  return NextResponse.json(sweepSuggestions());
+  return NextResponse.json(await sweepSuggestions());
 }

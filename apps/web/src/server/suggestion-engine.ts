@@ -83,12 +83,12 @@ export function dismissSuggestion(id: string): Suggestion | null {
  * One sweep: observe real state, register new suggestions (deduplicated),
  * deliver pending ones under the hourly cap. Returns an honest report.
  */
-export function sweepSuggestions(now = new Date()): {
+export async function sweepSuggestions(now = new Date()): Promise<{
   generated: number;
   delivered: number;
   capped: number;
   proactivity: string;
-} {
+}> {
   const prefs = getPreferences();
   if (prefs.proactivity === "off") {
     return { generated: 0, delivered: 0, capped: 0, proactivity: "off" };
@@ -131,7 +131,7 @@ export function sweepSuggestions(now = new Date()): {
       capped++;
       continue;
     }
-    const outcome = deliverMessage({
+    const outcome = await deliverMessage({
       message: `Suggestion JARVIS — ${suggestion.message}`,
       modality: "notification",
     });

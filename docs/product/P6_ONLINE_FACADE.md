@@ -1,6 +1,6 @@
 # P6 — Online Façade (Vercel Presence Layer)
 
-**Statut : en construction — briques 1 à 4 livrées.**
+**Statut : LIVRÉ — les cinq briques P6 sont en place.**
 
 ## Principe
 
@@ -87,9 +87,23 @@ Invariants hérités du MASTER_BUILD_PROMPT :
    depuis Chrome/Android (S24) une fois servi en HTTPS. Preuves e2e :
    manifest servi et complet, icônes réellement présentes, SW actif,
    coupure réseau réelle → page de repli, retour réseau → cockpit.
-5. **Push web + guide de déploiement** — notifications push via la façade,
-   `vercel.json` (cron maintenance seulement), guide VPS/local
-   (`scripts/verify-local-stack.mjs` comme preuve côté Core).
+5. ~~**Push web + guide de déploiement**~~ ✅ — abonnements push stockés
+   côté Core (`push-subscriptions.json` → Identity Pack), envoi VAPID
+   réel via `web-push` (clés générées par `npm run vapid`). Intégration
+   Presence Bus : chaque **notification** livrée à un satellite est
+   **aussi poussée** aux navigateurs abonnés (le téléphone entend
+   JARVIS même app fermée), et quand **aucun satellite capable** n'est
+   en ligne, le push devient le **repli de routage honnête** — la
+   livraison n'est un succès que si le service push a accepté au moins
+   un envoi (`deviceName: « notifications push »`). Le service worker
+   affiche les payloads `{title, body}` et le clic ramène au cockpit.
+   Panneau cockpit : activer/désactiver cet appareil, test réel,
+   comptage des abonnés ; clés absentes → dit exactement ça. Les
+   abonnements morts (404/410) sont élagués. Preuves e2e : un service
+   push local (HTTPS, cert de test) reçoit l'envoi **réellement chiffré
+   (aes128gcm) et signé (VAPID)** pour un abonnement P-256 authentique,
+   et une livraison Presence Bus le touche aussi. Aucun cron Vercel
+   nécessaire (aucun `vercel.json` requis — le ticker vit au Core).
 
 ## Déployer la façade sur Vercel
 
@@ -108,3 +122,19 @@ Function ne devient jamais le cerveau par accident. Marche à suivre :
 3. Chaque push sur `main` déploie la production ; les branches donnent
    des previews. Le Core, lui, ne se déploie jamais sur Vercel — VPS ou
    machine locale, avec `JARVIS_ROLE=core` explicite si besoin.
+
+## Déployer le Core (VPS aujourd'hui, chez toi demain)
+
+1. Sur la machine Core : `npm ci && npm run build && npm run start`
+   (ou pm2/systemd), avec dans `.env.local` : `HERMES_API_URL`,
+   `HERMES_API_KEY`, `JARVIS_DATA_DIR`, `JARVIS_AUTH_SECRET` (le même
+   que la façade = SSO), et les clés push (`npm run vapid`) :
+   `JARVIS_VAPID_PUBLIC_KEY`, `JARVIS_VAPID_PRIVATE_KEY`,
+   `JARVIS_VAPID_SUBJECT`. Preuve de la stack : `node
+   ../../scripts/verify-local-stack.mjs`.
+2. Rendre le Core joignable par la façade **sans l'exposer au monde** :
+   Tailscale Funnel/relay, tunnel Cloudflare, ou firewall n'autorisant
+   que les IP sortantes de la façade. `JARVIS_CORE_URL` = cette adresse.
+3. Migration VPS → maison : Identity Pack (`export` puis `import` sur la
+   nouvelle machine), changer `JARVIS_CORE_URL` sur Vercel. L'adresse
+   publique de JARVIS ne change pas.

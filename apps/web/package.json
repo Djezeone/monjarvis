@@ -14,7 +14,8 @@
     "test:learned": "node scripts/test-learned.mjs",
     "test:skills": "node scripts/test-skills.mjs",
     "test:auth": "node scripts/test-facade-auth.mjs",
-    "test:queue": "node scripts/test-pending-queue.mjs"
+    "test:queue": "node scripts/test-pending-queue.mjs",
+    "vapid": "node scripts/generate-vapid.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
@@ -23,7 +24,8 @@
     "next": "^15.4.6",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "three": "^0.185.1"
+    "three": "^0.185.1",
+    "web-push": "^3.6.7"
   },
   "devDependencies": {
     "@playwright/test": "^1.62.1",
@@ -31,6 +33,7 @@
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@types/three": "^0.185.0",
+    "@types/web-push": "^3.6.4",
     "typescript": "^5.5.0"
   }
 }
