@@ -57,6 +57,23 @@ export default defineConfig({
         JARVIS_AUTH_SECRET: "secret-de-test-e2e",
       },
     },
+    {
+      // Third instance: FAÇADE role (P6-2) — auth on, no state, no ticker,
+      // every /api/jarvis/* proxied to the open Core on :3100.
+      command: "npm run start -- --port 3102",
+      url: "http://127.0.0.1:3102/login",
+      reuseExistingServer: true,
+      timeout: 60_000,
+      env: {
+        JARVIS_ROLE: "facade",
+        JARVIS_CORE_URL: "http://127.0.0.1:3100",
+        JARVIS_AUTH_SECRET: "secret-de-test-e2e",
+        // Deliberately its own (empty) data dir: if a route ever ran
+        // locally instead of being proxied, the state comparison with the
+        // Core in facade.spec.ts would catch it.
+        JARVIS_DATA_DIR: "./test-results/e2e-facade-data",
+      },
+    },
   ],
   projects: [
     { name: "desktop", use: { ...devices["Desktop Chrome"] } },
