@@ -231,6 +231,110 @@ async function heartbeat() {
 }
 
 /**
+ * Offline Level 0 (P4 brick 6): when the Core is unreachable, the satellite
+ * degrades honestly instead of going mute —
+ *   1. a small local model answers if configured (config.offline.ollamaUrl),
+ *   2. a few deterministic local intents work without any model (time, note),
+ *   3. anything else is queued as an offline note and REPLAYED to the Core
+ *      once it is reachable again. The user is always told which mode
+ *      answered; nothing pretends to be the Core.
+ */
+const offlineQueuePath = join(dirname(tokenPath), "offline-queue.json");
+
+function loadOfflineQueue() {
+  try {
+    return JSON.parse(readFileSync(offlineQueuePath, "utf8"));
+  } catch {
+    return [];
+  }
+}
+
+function saveOfflineQueue(queue) {
+  writeFileSync(offlineQueuePath, JSON.stringify(queue, null, 2));
+}
+
+async function speakIfAble(text) {
+  if (config.capabilities?.speak === undefined) return { ok: false, error: "speak not allow-listed" };
+  return speak(text, config.capabilities.speak === true ? {} : config.capabilities.speak);
+}
+
+async function localModelAnswer(input) {
+  const ollamaUrl = String(config.offline?.ollamaUrl || "").replace(/\/$/, "");
+  const model = String(config.offline?.model || "");
+  if (!ollamaUrl || !model) return null;
+  try {
+    const r = await fetch(`${ollamaUrl}/api/generate`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model,
+        prompt: `Réponds brièvement en français (mode hors-ligne, pas d'accès aux outils ni à la mémoire): ${input}`,
+        stream: false,
+      }),
+    });
+    if (!r.ok) return null;
+    const d = await r.json();
+    return typeof d.response === "string" && d.response.trim() ? d.response.trim() : null;
+  } catch {
+    return null;
+  }
+}
+
+async function handleOffline(input) {
+  console.log(`[offline] Core injoignable — traitement local: "${input}"`);
+
+  if (/quelle heure|what time/i.test(input)) {
+    const now = new Date();
+    const answer = `Il est ${now.getHours()} heures ${String(now.getMinutes()).padStart(2, "0")}. Le Core est injoignable — mode local.`;
+    await speakIfAble(answer);
+    console.log(`[offline] intent local "heure" → répondu`);
+    return;
+  }
+
+  const local = await localModelAnswer(input);
+  if (local !== null) {
+    await speakIfAble(`Réponse locale, mode dégradé : ${local}`);
+    console.log(`[offline] modèle local → répondu`);
+    return;
+  }
+
+  const queue = loadOfflineQueue();
+  queue.push({ input, at: new Date().toISOString() });
+  saveOfflineQueue(queue);
+  await speakIfAble("Le Core est injoignable. J'ai noté votre demande et je la transmettrai dès son retour.");
+  console.log(`[offline] demande notée (${queue.length} en attente)`);
+}
+
+/** Replay queued offline notes once the Core answers again. */
+async function replayOfflineQueue(nodeSessionKey) {
+  const queue = loadOfflineQueue();
+  if (queue.length === 0) return nodeSessionKey;
+  console.log(`[offline] Core de retour — rejeu de ${queue.length} note(s)`);
+  const remaining = [...queue];
+  for (const item of queue) {
+    try {
+      const run = await api("/api/jarvis/run", {
+        method: "POST",
+        body: JSON.stringify({
+          input: `[Note enregistrée hors-ligne le ${item.at}] ${item.input}`,
+          device: DEVICE.id,
+          location: config.location || "home",
+          sessionKey: nodeSessionKey || undefined,
+        }),
+      });
+      if (run.sessionKey) nodeSessionKey = run.sessionKey;
+      remaining.shift();
+      saveOfflineQueue(remaining);
+      console.log(`[offline] note rejouée → run ${run.runId}`);
+    } catch (e) {
+      console.error(`[offline] rejeu interrompu: ${e.message}`);
+      break;
+    }
+  }
+  return nodeSessionKey;
+}
+
+/**
  * Home-node voice bridge: subscribe to the local runtime event bus; a
  * voice.final transcript becomes a Core run (this node's persistent session,
  * so the room keeps one continuous conversation) and the answer is spoken
@@ -264,6 +368,9 @@ function startVoiceBridge() {
       const input = String(event.text).trim();
       console.log(`[bridge] transcript → Core: "${input}"`);
       try {
+        // Back online with pending offline notes? Deliver them first so the
+        // Core gets the room's full story in order.
+        nodeSessionKey = await replayOfflineQueue(nodeSessionKey);
         const run = await api("/api/jarvis/run", {
           method: "POST",
           body: JSON.stringify({
@@ -295,7 +402,13 @@ function startVoiceBridge() {
           console.error(`[bridge] run ${run.runId} → ${detail.status}`);
         }
       } catch (e) {
-        console.error(`[bridge] ${e.message}`);
+        // Network-level failure (Core down/unreachable) → Offline Level 0.
+        // HTTP errors from a reachable Core stay ordinary errors.
+        if (e.status === undefined || e.status >= 502) {
+          await handleOffline(input);
+        } else {
+          console.error(`[bridge] ${e.message}`);
+        }
       }
     };
   };

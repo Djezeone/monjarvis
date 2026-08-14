@@ -108,8 +108,8 @@ quitte jamais la pièce avant le wake, et seul le tour post-wake part vers le
 whisper local.
 
 ### 9. Mode Core inaccessible — trois niveaux
-- **LEVEL 0 — OFFLINE DEVICE** : petit modèle local, notes, commandes
-  simples, cache mémoire, voix locale.
+- **LEVEL 0 — OFFLINE DEVICE** ✅ (v1, voir brique 6) : petit modèle local,
+  notes, commandes simples, voix locale, rejeu au retour du Core.
 - **LEVEL 1 — CORE CONNECTED** : Hermes, Graphiti, agents, tools, mémoire
   complète.
 - **LEVEL 2 — CLOUD BOOST** (optionnel) : gros modèle cloud, deep research,
@@ -153,5 +153,11 @@ Offline Fallback · Capability Routing ✅(policy + allowlist) · Encrypted Sync
    explicite → appareil au premier plan → enceinte du foyer → récence ;
    refus explicite (503) si aucun appareil capable en ligne. Panneau de
    test dans le cockpit ; la décision et sa raison sont retournées.
-6. Offline Level 0 : petit modèle local + cache sur satellite.
+6. ~~Offline Level 0~~ ✅ — Core injoignable ≠ satellite muet : petit modèle
+   local optionnel (Ollama sur le satellite, réponses annoncées « mode
+   dégradé »), intents locaux déterministes (heure, note), file de notes
+   hors-ligne (`offline-queue.json`) **rejouée vers le Core à son retour**
+   dans la session de la pièce, avec horodatage. Prouvé en direct :
+   coupure → intent local répondu + note enregistrée → retour → note
+   rejouée puis conversation reprise.
 7. Identity Pack : scripts d'export/import chiffrés.

@@ -10,6 +10,10 @@
   "voiceBridge": {
     "events": "ws://127.0.0.1:8765/events"
   },
+  "offline": {
+    "ollamaUrl": "",
+    "model": ""
+  },
   "capabilities": {
     "presence.ping": true,
     "notify": true,
