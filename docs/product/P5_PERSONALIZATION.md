@@ -1,6 +1,6 @@
 # P5 — PERSONALIZATION / SELF-EVOLUTION
 
-**Statut : en construction — brique 1 livrée.**
+**Statut : en construction — briques 1 à 3 livrées.**
 
 Note de numérotation : la roadmap d'origine (`ROADMAP_P0_P6.md`) plaçait la
 personnalisation en P4 et la multi-présence en P5. L'architecture Core +
@@ -45,9 +45,17 @@ skills.
    créer, exécuter, pause, supprimer, dernier résultat visible.
    (Hermes Jobs restera le scheduler préféré pour les jobs de
    raisonnement longs — ce registre couvre le besoin local-first.)
-3. **Suggestions proactives** — déclenchées par les routines/événements,
-   plafonnées selon `proactivity`, toujours livrées via le Presence Bus,
-   jamais pendant les heures calmes en voix.
+3. ~~**Suggestions proactives**~~ ✅ — règles pures observant des signaux
+   réels (satellite silencieux depuis N minutes, commande échouée dans la
+   fenêtre), balayage branché sur le ticker 60 s du scheduler, plafond
+   par heure glissante selon `proactivity` (off = 0, low = 1, normal = 4),
+   dédup par (kind, sujet) tant que non ignorée, livraison en
+   **notification uniquement** via `deliverMessage` (donc Presence Bus,
+   heures calmes, appareil préféré — jamais de voix non sollicitée).
+   Panneau cockpit : suggestions actives, où elles ont été livrées,
+   bouton Ignorer. 7/7 cas de règles unitaires, e2e sur le cycle complet
+   (off → zéro, échec réel → notification dans la file de l'appareil,
+   plafond low, dismiss).
 4. **Préférences apprises** — observations (« vous demandez souvent X le
    matin ») stockées avec provenance, présentées à l'utilisateur pour
    promotion explicite en préférence — l'inférence propose, l'humain

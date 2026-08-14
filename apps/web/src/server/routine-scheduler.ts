@@ -66,12 +66,26 @@ export async function executeRoutine(routine: Routine): Promise<string> {
   );
 }
 
-/** Server-boot ticker (instrumentation.ts): checks due routines every minute. */
+/**
+ * Server-boot ticker (instrumentation.ts): due routines + suggestion sweep,
+ * every minute.
+ */
 export function startRoutineScheduler(): void {
   if (started) return;
   started = true;
   console.log("[routines] scheduler démarré (tick 60 s)");
   setInterval(async () => {
+    try {
+      const { sweepSuggestions } = await import("@/server/suggestion-engine");
+      const report = sweepSuggestions();
+      if (report.generated || report.delivered) {
+        console.log(
+          `[suggestions] ${report.generated} nouvelle(s), ${report.delivered} livrée(s), ${report.capped} plafonnée(s)`
+        );
+      }
+    } catch (e) {
+      console.error(`[suggestions] sweep en erreur: ${e instanceof Error ? e.message : e}`);
+    }
     for (const routine of dueRoutines()) {
       console.log(`[routines] échéance: ${routine.name}`);
       try {
