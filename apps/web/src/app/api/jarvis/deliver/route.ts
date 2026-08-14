@@ -1,68 +1,33 @@
 import { NextResponse } from "next/server";
-import { PolicyEngine } from "@/jarvis/server/policy/PolicyEngine";
-import { enqueueCommand } from "@/server/device-registry";
-import {
-  chooseOutputDevice,
-  type DeliveryModality,
-} from "@/server/presence-router";
-import { getPreferences, isQuietNow } from "@/server/preference-store";
+import { deliverMessage } from "@/server/deliver";
+import type { DeliveryModality } from "@/server/presence-router";
 
 export const dynamic = "force-dynamic";
 
-const policy = new PolicyEngine();
-
 /**
- * P4 output routing: deliver a message to the RIGHT satellite. The Presence
- * Bus picks the device (session continuity → explicit preference →
- * foreground → home speaker → recency) and the command goes through the
- * same policy-checked queue as any dispatch. No capable device online →
- * explicit 503, never a silent drop.
+ * P4 output routing: deliver a message to the RIGHT satellite. Shared logic
+ * lives in src/server/deliver.ts (also used by P5 routines).
  */
 export async function POST(req: Request) {
   const body = await req.json();
   const message = String(body.message || "").trim();
-  let modality: DeliveryModality =
+  const modality: DeliveryModality =
     body.modality === "notification" ? "notification" : "voice";
   if (!message) {
     return NextResponse.json({ error: "message required" }, { status: 400 });
   }
 
-  // P5: quiet hours downgrade voice to a silent notification.
-  const prefs = getPreferences();
-  let quietNote = "";
-  if (modality === "voice" && isQuietNow(prefs)) {
-    modality = "notification";
-    quietNote = " — heures calmes: voix remplacée par une notification";
-  }
-
-  const routing = chooseOutputDevice({
+  const outcome = deliverMessage({
+    message,
     modality,
     sessionKey: typeof body.sessionKey === "string" ? body.sessionKey : undefined,
     preferredDevice:
       typeof body.preferredDevice === "string" && body.preferredDevice
         ? body.preferredDevice
-        : prefs.preferredDevice || undefined,
+        : undefined,
   });
-  if ("error" in routing) {
-    return NextResponse.json({ error: routing.error }, { status: 503 });
-  }
-
-  const decision = policy.decideDeviceCapability(routing.capability);
-  const args =
-    modality === "voice"
-      ? { text: message }
-      : { title: "JARVIS", message };
-  const outcome = enqueueCommand({
-    deviceId: routing.deviceId,
-    capability: routing.capability,
-    args,
-    policy: { tier: "ACT", reason: decision.reason },
-  });
-  if ("status" in outcome) {
+  if ("error" in outcome) {
     return NextResponse.json({ error: outcome.error }, { status: outcome.status });
   }
-  return NextResponse.json({
-    routing: { ...routing, reason: `${routing.reason}${quietNote}` },
-    command: outcome,
-  });
+  return NextResponse.json(outcome);
 }
