@@ -1,7 +1,11 @@
 import { NextResponse } from "next/server";
 import { getJarvisService } from "@/server/jarvis";
+import { authorizeRunRequest } from "@/server/run-auth";
 
-export async function GET(_: Request, { params }: { params: Promise<{ id: string }> }) {
+export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
+  const auth = await authorizeRunRequest(req);
+  if (!auth.ok) return NextResponse.json({ error: auth.error }, { status: auth.status });
+
   const { service, error } = getJarvisService();
   if (!service) return NextResponse.json({ error }, { status: 503 });
 
