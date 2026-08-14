@@ -74,6 +74,20 @@ export default defineConfig({
         JARVIS_DATA_DIR: "./test-results/e2e-facade-data",
       },
     },
+    {
+      // Fourth instance: façade whose brain is DELIBERATELY dead (:3979
+      // answers nothing) — the honest-degradation spec (offline-facade).
+      command: "npm run start -- --port 3103",
+      url: "http://127.0.0.1:3103/login",
+      reuseExistingServer: true,
+      timeout: 60_000,
+      env: {
+        JARVIS_ROLE: "facade",
+        JARVIS_CORE_URL: "http://127.0.0.1:3979",
+        JARVIS_AUTH_SECRET: "secret-de-test-e2e",
+        JARVIS_DATA_DIR: "./test-results/e2e-offline-data",
+      },
+    },
   ],
   projects: [
     { name: "desktop", use: { ...devices["Desktop Chrome"] } },

@@ -1,6 +1,6 @@
 # P6 — Online Façade (Vercel Presence Layer)
 
-**Statut : en construction — briques 1 et 2 livrées.**
+**Statut : en construction — briques 1 à 3 livrées.**
 
 ## Principe
 
@@ -63,9 +63,19 @@ Invariants hérités du MASTER_BUILD_PROMPT :
    session exigée puis préférence écrite via la façade relue
    directement au Core ; run complet traversant la façade, session
    enregistrée par le registre du Core.
-3. **Dégradation « Core offline » honnête** — bannière d'état, actions en
-   attente rejouées au retour (pattern offline Level 0 remonté à la
-   façade).
+3. ~~**Dégradation « Core offline » honnête**~~ ✅ — bannière d'état dans
+   le cockpit (poll de `facade/status` toutes les 10 s) : cerveau
+   injoignable → « JARVIS Core hors ligne », cerveau non configuré →
+   dit exactement ça. La façade étant sans état par construction, la
+   file d'attente vit **sur l'appareil de l'utilisateur** (localStorage,
+   helpers purs `pending-queue.ts` : trim, plafond 20, stockage corrompu
+   toléré — 8/8 cas). Au retour du Core, chaque instruction est rejouée
+   **en vrai run**, dans l'ordre, retirée de la file et rapportée
+   (« rejouée (run …) ») ; si le Core rechute en plein rejeu, le reste
+   attend la prochaine reprise. Preuves e2e : façade au cerveau
+   volontairement mort (:3103) — bannière, mise en file, survie au
+   reload ; façade saine (:3102) — instruction semée puis rejouée, run
+   enregistré par le registre du Core, file vidée.
 4. **PWA** — manifest, service worker, installable sur mobile (S24).
 5. **Push web + guide de déploiement** — notifications push via la façade,
    `vercel.json` (cron maintenance seulement), guide VPS/local
