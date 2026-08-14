@@ -33,10 +33,18 @@ skills.
      notifications (raison explicite dans la décision de routage) ;
    - **appareil de sortie préféré** : défaut du Presence Bus quand
      l'appelant n'exprime pas de préférence.
-2. **Routines** — tâches planifiées côté Core (Hermes Jobs de préférence,
-   registre local sinon) dont les résultats partent par `/api/jarvis/deliver`
-   — la brique 5 de P4 leur donne un « où » naturel. Respecte proactivité
-   + heures calmes.
+2. ~~**Routines**~~ ✅ — registre local (fichier data dir → Identity Pack)
+   + scheduler au boot du serveur (`instrumentation.ts`, tick 60 s) +
+   déclenchement manuel. Chaque exécution est un **vrai run Core**
+   (même chemin que `/api/jarvis/run` : session, contexte, préférences)
+   dont le résultat part par le **Presence Bus** (même chemin que
+   `/deliver` : heures calmes, appareil préféré). `proactivity=off`
+   met tout en pause, issue enregistrée honnêtement sur la routine.
+   Planifications v1 : quotidienne HH:MM et intervalle N minutes
+   (logique d'échéance pure, 8/8 cas unitaires). Panneau cockpit :
+   créer, exécuter, pause, supprimer, dernier résultat visible.
+   (Hermes Jobs restera le scheduler préféré pour les jobs de
+   raisonnement longs — ce registre couvre le besoin local-first.)
 3. **Suggestions proactives** — déclenchées par les routines/événements,
    plafonnées selon `proactivity`, toujours livrées via le Presence Bus,
    jamais pendant les heures calmes en voix.
