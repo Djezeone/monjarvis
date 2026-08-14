@@ -1,6 +1,6 @@
 # P6 — Online Façade (Vercel Presence Layer)
 
-**Statut : en construction — briques 1 à 3 livrées.**
+**Statut : en construction — briques 1 à 4 livrées.**
 
 ## Principe
 
@@ -76,7 +76,17 @@ Invariants hérités du MASTER_BUILD_PROMPT :
    volontairement mort (:3103) — bannière, mise en file, survie au
    reload ; façade saine (:3102) — instruction semée puis rejouée, run
    enregistré par le registre du Core, file vidée.
-4. **PWA** — manifest, service worker, installable sur mobile (S24).
+4. ~~**PWA**~~ ✅ — `manifest.webmanifest` complet (start_url `/app`,
+   standalone, icônes 192/512 + maskable **rasterisées depuis la marque
+   canonique du pack** `jarvis-x2-mark.svg`), service worker honnête :
+   navigations en network-first avec page `/offline` en repli, assets
+   immuables du pack en cache-first, et **jamais** de cache sur
+   `/api/jarvis/*` (aucun état périmé — le « Core offline » reste
+   l'affaire de la bannière brique 3 ; `/offline` couvre « appareil
+   sans réseau »). Enregistrement non-fatal dans le layout. Installable
+   depuis Chrome/Android (S24) une fois servi en HTTPS. Preuves e2e :
+   manifest servi et complet, icônes réellement présentes, SW actif,
+   coupure réseau réelle → page de repli, retour réseau → cockpit.
 5. **Push web + guide de déploiement** — notifications push via la façade,
    `vercel.json` (cron maintenance seulement), guide VPS/local
    (`scripts/verify-local-stack.mjs` comme preuve côté Core).
