@@ -1,7 +1,11 @@
 import { NextResponse } from "next/server";
 import { startCoreRun } from "@/server/run-core";
+import { authorizeRunRequest } from "@/server/run-auth";
 
 export async function POST(req: Request) {
+  const auth = await authorizeRunRequest(req);
+  if (!auth.ok) return NextResponse.json({ error: auth.error }, { status: auth.status });
+
   const body = await req.json();
   const input = String(body.input || "").trim();
   if (!input) return NextResponse.json({ error: "input required" }, { status: 400 });

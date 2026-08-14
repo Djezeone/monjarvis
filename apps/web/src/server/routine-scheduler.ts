@@ -97,6 +97,17 @@ export function startRoutineScheduler(): void {
     } catch (e) {
       console.error(`[apprentissage] sweep en erreur: ${e instanceof Error ? e.message : e}`);
     }
+    try {
+      const { sweepSkills } = await import("@/server/skill-store");
+      const skills = sweepSkills();
+      if (skills.generated) {
+        console.log(
+          `[skills] ${skills.generated} procédure(s) répétée(s) détectée(s) — en attente d'approbation`
+        );
+      }
+    } catch (e) {
+      console.error(`[skills] sweep en erreur: ${e instanceof Error ? e.message : e}`);
+    }
     for (const routine of dueRoutines()) {
       console.log(`[routines] échéance: ${routine.name}`);
       try {

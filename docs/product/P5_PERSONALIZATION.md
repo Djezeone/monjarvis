@@ -1,6 +1,6 @@
 # P5 — PERSONALIZATION / SELF-EVOLUTION
 
-**Statut : en construction — briques 1 à 4 livrées.**
+**Statut : LIVRÉ — les cinq briques P5 sont en place.**
 
 Note de numérotation : la roadmap d'origine (`ROADMAP_P0_P6.md`) plaçait la
 personnalisation en P4 et la multi-présence en P5. L'architecture Core +
@@ -70,8 +70,21 @@ skills.
    preuves visibles et boutons Adopter/Rejeter. 13/13 cas unitaires,
    e2e sur le cycle complet (proposition sans application, promotion,
    rejet définitif).
-5. **Skill learning** — capitalisation de procédures répétées en skills
-   Hermes réutilisables, derrière approbation.
+5. ~~**Skill learning**~~ ✅ — règle pure de détection des procédures
+   démontrées : la même demande (normalisée casse/espaces) ≥ 3 fois dans
+   ≥ 2 sessions sur 14 jours (les runs de routines et de skills sont
+   exclus — seul ce que l'utilisateur a réellement demandé compte) →
+   skill candidat nommé, avec provenance chiffrée, dans `skills.json`
+   (data dir → Identity Pack). **FR-009 : un skill proposé est inerte** —
+   l'invocation renvoie 409 tant qu'il n'est pas explicitement approuvé ;
+   approuvé, il se lance comme un vrai run Core (même chemin partagé,
+   issue honnête enregistrée) ; rejeté, la procédure n'est plus jamais
+   re-proposée. Sweep sur le ticker 60 s + endpoint, panneau cockpit
+   (Approuver/Rejeter/Lancer, dernier résultat visible). 10/10 cas
+   unitaires, e2e sur le cycle complet (proposition → 409 avant
+   approbation → run réel après → rejet définitif).
+   (La promotion en skill Hermes côté serveur hôte reste possible à la
+   main — ce registre couvre le besoin local-first.)
 
 L'identité persistante, elle, est déjà couverte : sessions (P4-3), mémoire
 Graphiti (P3), Identity Pack (P4-7).

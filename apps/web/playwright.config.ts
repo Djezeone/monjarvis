@@ -43,6 +43,20 @@ export default defineConfig({
         HERMES_API_KEY: "e2e-mock-key",
       },
     },
+    {
+      // Same build, second instance WITH façade auth enabled (auth.spec.ts):
+      // the main suite keeps its open local-first server untouched.
+      command: "npm run start -- --port 3101",
+      url: "http://127.0.0.1:3101/login",
+      reuseExistingServer: true,
+      timeout: 60_000,
+      env: {
+        JARVIS_DATA_DIR: "./test-results/e2e-auth-data",
+        HERMES_API_URL: "http://127.0.0.1:3199",
+        HERMES_API_KEY: "e2e-mock-key",
+        JARVIS_AUTH_SECRET: "secret-de-test-e2e",
+      },
+    },
   ],
   projects: [
     { name: "desktop", use: { ...devices["Desktop Chrome"] } },
