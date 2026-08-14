@@ -87,11 +87,12 @@ récente + mémoire projet + contexte utilisateur + contexte appareil.
 inter-appareils — continuer sur téléphone une conversation commencée sur PC
 fonctionne (sessions Hermes ; l'enrichissement group_ids Graphiti suivra).
 
-### 6. Presence Bus
-v0 : la présence est dérivée des heartbeats réels du Device Registry (online
-= vu depuis < 90 s ; facts libres : foreground, headphones…). Le bus de
-routage de réponse (« répondre sur l'enceinte du salon, puis basculer sur le
-téléphone ») est l'étape suivante ; il choisira la sortie d'après ces facts.
+### 6. Presence Bus ✅
+La présence est dérivée des heartbeats réels du Device Registry (online =
+vu depuis < 90 s ; facts : speaker, voiceBridge, + facts déclarés par le
+propriétaire comme foreground/headphones — jamais inventés par l'agent).
+**Livré** : le routage de réponse (« répondre sur l'enceinte du salon, puis
+basculer sur l'appareil actif ») via `/api/jarvis/deliver` — voir brique 5.
 
 ### 7. Mobile : pas d'écoute permanente
 Android restreint le micro en arrière-plan (foreground service,
@@ -146,6 +147,11 @@ Offline Fallback · Capability Routing ✅(policy + allowlist) · Encrypted Sync
    `speak` (Piper ou espeak-ng + `playCommand`), facts de présence
    `speaker`/`voiceBridge` dans les heartbeats. Boucle ambiante prouvée en
    direct : transcript → run Core → réponse synthétisée et prononcée.
-5. Routage de sortie (Presence Bus) : choisir l'appareil de réponse.
+5. ~~Routage de sortie (Presence Bus)~~ ✅ — `POST /api/jarvis/deliver`
+   (voix | notification) : le Core choisit l'appareil d'après les facts de
+   présence réels, dans l'ordre continuité de session → préférence
+   explicite → appareil au premier plan → enceinte du foyer → récence ;
+   refus explicite (503) si aucun appareil capable en ligne. Panneau de
+   test dans le cockpit ; la décision et sa raison sont retournées.
 6. Offline Level 0 : petit modèle local + cache sur satellite.
 7. Identity Pack : scripts d'export/import chiffrés.

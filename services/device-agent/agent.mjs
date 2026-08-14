@@ -212,10 +212,15 @@ async function heartbeat() {
       body: JSON.stringify({
         status: {
           platform: platform(),
-          foreground: true,
-          // Presence facts for output routing (P4 brick 5).
+          // Presence facts for output routing (P4 brick 5). Only facts we
+          // actually know: capabilities-derived ones plus owner-declared
+          // facts from config.presenceFacts (e.g. {"foreground": true} on a
+          // desktop where the owner wants answers to land by default).
           speaker: DEVICE.capabilities.includes("speak"),
           voiceBridge: Boolean(config.voiceBridge),
+          ...(config.presenceFacts && typeof config.presenceFacts === "object"
+            ? config.presenceFacts
+            : {}),
         },
       }),
     });
