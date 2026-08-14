@@ -115,6 +115,20 @@ test("une capability CRITICAL est refusée sans approbation explicite (428)", as
   expect((await r.json()).requiresApproval).toBe(true);
 });
 
+test("une capability ACT (notify/speak) part sans approbation", async ({ request }) => {
+  const r = await request.post("/api/jarvis/devices/dispatch", {
+    data: {
+      deviceId: DEVICE.id,
+      capability: "notify",
+      args: { title: "JARVIS", message: "test" },
+    },
+  });
+  expect(r.ok()).toBeTruthy();
+  const command = await r.json();
+  expect(command.policy.tier).toBe("ACT");
+  expect(command.state).toBe("pending");
+});
+
 test("une capability non déclarée par l'appareil est refusée (400)", async ({
   request,
 }) => {

@@ -62,6 +62,22 @@ async def events_socket(ws: WebSocket):
             except json.JSONDecodeError:
                 continue
 
+            # P4 home node: relay bus events between clients so a headless
+            # capture loop (node_voice.py) can publish voice.final and the
+            # device agent bridge, subscribed on the same bus, receives it.
+            if msg.get("type") in ("voice.final", "voice.start", "voice.partial", "speech.start", "speech.end"):
+                stale = []
+                for client in event_clients:
+                    if client is ws:
+                        continue
+                    try:
+                        await client.send_json(msg)
+                    except Exception:
+                        stale.append(client)
+                for client in stale:
+                    event_clients.discard(client)
+                continue
+
             # This P2 bridge is intentionally NOT the AI brain.
             # It only demonstrates the event contract.
             if msg.get("type") == "user.text":
