@@ -8,7 +8,7 @@
  *   - static assets (/assets/*, icons, manifest): cache first, since they
  *     are immutable pack files.
  */
-const CACHE = "jarvis-x2-v1";
+const CACHE = "jarvis-x2-v2";
 const PRECACHE = [
   "/offline",
   "/manifest.webmanifest",
@@ -32,6 +32,34 @@ self.addEventListener("activate", (event) => {
       .keys()
       .then((keys) => Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k))))
       .then(() => self.clients.claim())
+  );
+});
+
+// P6 brick 5 — web push: JARVIS reaches this device even with the app
+// closed. Payloads are JSON {title, body} sent by the Core's Presence Bus.
+self.addEventListener("push", (event) => {
+  let payload = { title: "JARVIS", body: "" };
+  try {
+    payload = { ...payload, ...event.data.json() };
+  } catch {
+    payload.body = event.data ? event.data.text() : "";
+  }
+  event.waitUntil(
+    self.registration.showNotification(payload.title, {
+      body: payload.body,
+      icon: "/icon-192.png",
+      badge: "/icon-192.png",
+    })
+  );
+});
+
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+  event.waitUntil(
+    self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((clients) => {
+      const open = clients.find((c) => "focus" in c);
+      return open ? open.focus() : self.clients.openWindow("/app");
+    })
   );
 });
 

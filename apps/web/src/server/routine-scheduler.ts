@@ -53,7 +53,7 @@ export async function executeRoutine(routine: Routine): Promise<string> {
     return finish(`run ${startOutcome.run.runId} → ${detail.status}, rien à livrer`);
   }
 
-  const delivery = deliverMessage({
+  const delivery = await deliverMessage({
     message: detail.output,
     modality: routine.modality,
     sessionKey: startOutcome.sessionKey,
@@ -77,7 +77,7 @@ export function startRoutineScheduler(): void {
   setInterval(async () => {
     try {
       const { sweepSuggestions } = await import("@/server/suggestion-engine");
-      const report = sweepSuggestions();
+      const report = await sweepSuggestions();
       if (report.generated || report.delivered) {
         console.log(
           `[suggestions] ${report.generated} nouvelle(s), ${report.delivered} livrée(s), ${report.capped} plafonnée(s)`

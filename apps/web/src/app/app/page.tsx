@@ -11,6 +11,7 @@ import { RoutinesPanel } from "@/components/routines-panel";
 import { SuggestionsPanel } from "@/components/suggestions-panel";
 import { LearnedPanel } from "@/components/learned-panel";
 import { SkillsPanel } from "@/components/skills-panel";
+import { PushPanel } from "@/components/push-panel";
 
 export default function CockpitPage() {
   return (
@@ -25,6 +26,7 @@ export default function CockpitPage() {
       <SuggestionsPanel />
       <LearnedPanel />
       <SkillsPanel />
+      <PushPanel />
       <PreferencesPanel />
       <OrganStatus />
       <LivingInterfaceOverlay />
