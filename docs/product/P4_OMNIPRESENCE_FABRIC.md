@@ -1,6 +1,6 @@
 # P4 — OMNIPRESENCE FABRIC
 
-**Statut : spécification adoptée — fondation implémentée (v0).**
+**Statut : LIVRÉ — les 7 briques de l'ordre de construction sont implémentées et prouvées.**
 P0→P3 ont donné : interface → présence → voix → intelligence. P4 donne à la
 même identité JARVIS la capacité de suivre l'utilisateur d'un appareil à
 l'autre. P4 précède P5 (personnalisation) : avant d'apprendre davantage sur
@@ -116,17 +116,19 @@ whisper local.
   vision lourde.
 Plus de Wi-Fi maison ne doit jamais signifier plus de JARVIS.
 
-### 10. Portabilité du Core — JARVIS Identity Pack
-Le Core est un dossier migrable (compose + volumes) :
-`config / models / memory / skills / secrets / backups`. Migration = export
-chiffré (mémoire, skills, config, device registry, policies, routines) →
-import → redémarrage. Le hardware change, JARVIS reste JARVIS.
+### 10. Portabilité du Core — JARVIS Identity Pack ✅
+Migration = export chiffré → import → redémarrage (voir brique 7).
+`scripts/identity-pack.mjs` couvre l'état applicatif du Core ; les volumes
+lourds (Neo4j/modèles) se migrent par leurs mécanismes natifs
+(`docker compose` + dump), à inclure au pack via `--include` une fois
+exportés. Le hardware change, JARVIS reste JARVIS.
 
-## Périmètre P4 complet
-Device Registry ✅ · Device Agent ✅(v0) · Presence Bus (v0 heartbeats ✅,
-routage à venir) · Secure Mesh (opérationnel via Tailscale, hors code) ·
-Session Handoff · Remote Voice · Notifications ✅(capability notify) ·
-Offline Fallback · Capability Routing ✅(policy + allowlist) · Encrypted Sync.
+## Périmètre P4 — état final
+Device Registry ✅ · Device Agent ✅ · Presence Bus ✅ (heartbeats + routage
+de sortie) · Secure Mesh ✅ (opérationnel via Tailscale, hors code) ·
+Session Handoff ✅ · Remote Voice ✅ (home node : wake→STT→Core→speak) ·
+Notifications ✅ · Offline Fallback ✅ (Level 0) · Capability Routing ✅
+(policy + double allowlist) · Encrypted Sync ✅ (Identity Pack).
 
 ## Ordre de construction restant
 1. ~~Token par appareil + révocation~~ ✅ (ADR-002).
@@ -160,4 +162,10 @@ Offline Fallback · Capability Routing ✅(policy + allowlist) · Encrypted Sync
    dans la session de la pièce, avec horodatage. Prouvé en direct :
    coupure → intent local répondu + note enregistrée → retour → note
    rejouée puis conversation reprise.
-7. Identity Pack : scripts d'export/import chiffrés.
+7. ~~Identity Pack~~ ✅ — `scripts/identity-pack.mjs` : export de
+   l'identité du Core (registres appareils + sessions, `.env.local`,
+   chemins additionnels via `--include`) en un fichier chiffré
+   scrypt + AES-256-GCM ; `list`/`import` avec garde anti-traversée,
+   refus sans `--force`, backups `.bak`. Prouvé : altération d'un octet
+   détectée (GCM), mauvaise passphrase refusée, import fidèle
+   (SHA-256 identiques). Le hardware change, JARVIS reste JARVIS.
