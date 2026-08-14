@@ -8,6 +8,7 @@ import { OutputRouting } from "@/components/output-routing";
 import { PreferencesPanel } from "@/components/preferences-panel";
 import { RoutinesPanel } from "@/components/routines-panel";
 import { SuggestionsPanel } from "@/components/suggestions-panel";
+import { LearnedPanel } from "@/components/learned-panel";
 
 export default function CockpitPage() {
   return (
@@ -19,6 +20,7 @@ export default function CockpitPage() {
       <OutputRouting />
       <RoutinesPanel />
       <SuggestionsPanel />
+      <LearnedPanel />
       <PreferencesPanel />
       <OrganStatus />
       <LivingInterfaceOverlay />

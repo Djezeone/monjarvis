@@ -1,6 +1,6 @@
 # P5 — PERSONALIZATION / SELF-EVOLUTION
 
-**Statut : en construction — briques 1 à 3 livrées.**
+**Statut : en construction — briques 1 à 4 livrées.**
 
 Note de numérotation : la roadmap d'origine (`ROADMAP_P0_P6.md`) plaçait la
 personnalisation en P4 et la multi-présence en P5. L'architecture Core +
@@ -56,10 +56,20 @@ skills.
    bouton Ignorer. 7/7 cas de règles unitaires, e2e sur le cycle complet
    (off → zéro, échec réel → notification dans la file de l'appareil,
    plafond low, dismiss).
-4. **Préférences apprises** — observations (« vous demandez souvent X le
-   matin ») stockées avec provenance, présentées à l'utilisateur pour
-   promotion explicite en préférence — l'inférence propose, l'humain
-   dispose.
+4. ~~**Préférences apprises**~~ ✅ — règles pures sur l'historique réel des
+   runs (registre de sessions) : appareil dominant des runs récents
+   (fenêtre 7 j, ≥ 5 runs, ≥ 60 % — routines et « inconnu » exclus) →
+   proposition d'appareil de sortie par défaut ; bloc d'heures sans
+   aucune activité (≥ 5 jours observés, ≥ 6 h contiguës, minuit géré) →
+   proposition d'heures calmes. Chaque candidat est stocké avec sa
+   **provenance** chiffrée (« 15 runs sur 20 (75 %) depuis… ») dans
+   `learned-preferences.json` (data dir → Identity Pack). Le sweep
+   (ticker 60 s + endpoint) ne modifie **jamais** les préférences :
+   promotion explicite → patch appliqué au store ; rejet → la même
+   proposition n'est plus jamais re-proposée. Panneau cockpit avec
+   preuves visibles et boutons Adopter/Rejeter. 13/13 cas unitaires,
+   e2e sur le cycle complet (proposition sans application, promotion,
+   rejet définitif).
 5. **Skill learning** — capitalisation de procédures répétées en skills
    Hermes réutilisables, derrière approbation.
 

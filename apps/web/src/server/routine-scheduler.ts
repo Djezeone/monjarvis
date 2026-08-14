@@ -86,6 +86,17 @@ export function startRoutineScheduler(): void {
     } catch (e) {
       console.error(`[suggestions] sweep en erreur: ${e instanceof Error ? e.message : e}`);
     }
+    try {
+      const { sweepLearned } = await import("@/server/learned-store");
+      const learned = sweepLearned();
+      if (learned.generated) {
+        console.log(
+          `[apprentissage] ${learned.generated} proposition(s) de préférence — en attente de décision humaine`
+        );
+      }
+    } catch (e) {
+      console.error(`[apprentissage] sweep en erreur: ${e instanceof Error ? e.message : e}`);
+    }
     for (const routine of dueRoutines()) {
       console.log(`[routines] échéance: ${routine.name}`);
       try {
