@@ -93,3 +93,21 @@ Bugs réels détectés et corrigés par les tests :
 2. **Dépendance CDN cachée** : `<Environment preset="night"/>` téléchargeait `dikhololo_night_1k.hdr` depuis un CDN — remplacé par le même HDR servi localement (`public/assets/textures/`), conformément au principe local-first.
 
 Étapes restant tributaires de la machine hôte : 10-12 en conditions réelles (Hermes/Ollama/Graphiti up → `node scripts/verify-local-stack.mjs`), 13 (un workflow n8n allowlisté), 14 (Home Assistant lecture seule), puis P4.
+
+---
+
+## 7. Addendum — 2026-08-14 : P4 OMNIPRESENCE FABRIC livré
+
+L'architecture Core + Satellites proposée (voir spec `docs/product/P4_OMNIPRESENCE_FABRIC.md`, ADR-001/002) est intégralement implémentée, une brique par PR, chacune testée et prouvée en direct :
+
+| Brique | Livraison | Preuve |
+| --- | --- | --- |
+| 1. Tokens par appareil | Enrôlement à code unique, hash SHA-256, isolation 403, révocation immédiate (ADR-002) | Agent réel : enrôlement → token 0600 → révocation coupe l'agent |
+| 2. Porte d'approbation CRITICAL | Dispatch 428 → `ActionApproval` (FR-009) → `approvedBy` tracé au registre | Parcours UI E2E complet (deny n'enfile rien) |
+| 3. Session handoff | `sessionKey` sur chaque run, registre de sessions, « Reprendre ici » | Tour 2 depuis `phone-s24` porte le contexte du tour 1 (double Hermes) |
+| 4. Home node v1 | Boucle voix headless (wake→tour→whisper→bus), pont → run Core, `speak` (Piper/espeak) | Boucle ambiante complète jusqu'au WAV synthétisé |
+| 5. Routage de sortie | `/api/jarvis/deliver` : continuité > préférence > premier plan > enceinte > récence ; 503 honnête | 5 tests E2E, commande dans la file de l'appareil routé |
+| 6. Offline Level 0 | Intents locaux, modèle local optionnel, notes rejouées au retour du Core | Coupure réelle : heure répondue localement, note rejouée au retour |
+| 7. Identity Pack | Export/import chiffré scrypt+AES-256-GCM des registres du Core | Octet altéré → refus GCM ; import fidèle (SHA-256 identiques) |
+
+Suite de tests : **38/38** (desktop + mobile, reduced-motion, sans WebGL, contrat du fabric, approbations, handoff, routage). Prochaine phase : **P5 — Personalization / Self-Evolution**, maintenant que JARVIS peut être partout avec l'utilisateur.
