@@ -43,6 +43,20 @@ python ../voice-runtime/setup_openwakeword_models.py
 - Sécurité inchangée : token par appareil (ADR-002), allowlist locale,
   CRITICAL impossible sans approbation côté Core.
 
+## Offline Level 0 — « plus de Wi-Fi ≠ plus de JARVIS »
+
+Quand le Core est injoignable (ou son cerveau éteint), le node dégrade
+honnêtement au lieu de se taire :
+
+1. **Petit modèle local** si configuré (`offline.ollamaUrl` + `offline.model`,
+   ex. Ollama avec un modèle 1-3B sur le node) — la réponse est annoncée
+   comme « réponse locale, mode dégradé » ;
+2. **Intents locaux déterministes** sans modèle : l'heure, et la prise de
+   note ;
+3. Tout le reste est **noté** (`offline-queue.json`) avec un message honnête,
+   puis **rejoué vers le Core dès son retour** — les notes arrivent dans la
+   session de la pièce, préfixées de leur horodatage hors-ligne.
+
 ## Limites v1 (assumées)
 
 - Fin de tour par seuil RMS simple — remplacer par une vraie VAD avant de
