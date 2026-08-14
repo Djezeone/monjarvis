@@ -11,7 +11,8 @@
     "test:e2e": "playwright test",
     "test:routines": "node scripts/test-routines.mjs",
     "test:suggestions": "node scripts/test-suggestions.mjs",
-    "test:learned": "node scripts/test-learned.mjs"
+    "test:learned": "node scripts/test-learned.mjs",
+    "test:skills": "node scripts/test-skills.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",

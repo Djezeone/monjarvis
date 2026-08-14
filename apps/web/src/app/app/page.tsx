@@ -9,6 +9,7 @@ import { PreferencesPanel } from "@/components/preferences-panel";
 import { RoutinesPanel } from "@/components/routines-panel";
 import { SuggestionsPanel } from "@/components/suggestions-panel";
 import { LearnedPanel } from "@/components/learned-panel";
+import { SkillsPanel } from "@/components/skills-panel";
 
 export default function CockpitPage() {
   return (
@@ -21,6 +22,7 @@ export default function CockpitPage() {
       <RoutinesPanel />
       <SuggestionsPanel />
       <LearnedPanel />
+      <SkillsPanel />
       <PreferencesPanel />
       <OrganStatus />
       <LivingInterfaceOverlay />
