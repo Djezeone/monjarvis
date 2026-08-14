@@ -8,6 +8,9 @@ export default defineConfig({
   testDir: "./e2e",
   timeout: 60_000,
   retries: 0,
+  // The suite exercises shared server-side state (registries, preferences):
+  // one worker keeps spec files from racing each other.
+  workers: 1,
   reporter: [["list"]],
   use: {
     baseURL: "http://127.0.0.1:3100",

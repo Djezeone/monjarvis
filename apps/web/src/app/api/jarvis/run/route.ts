@@ -2,6 +2,7 @@ import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
 import { getJarvisService } from "@/server/jarvis";
 import { recordSessionActivity } from "@/server/session-registry";
+import { getPreferences, preferenceInstructions } from "@/server/preference-store";
 
 export async function POST(req: Request) {
   const { service, error } = getJarvisService();
@@ -22,6 +23,8 @@ export async function POST(req: Request) {
           .filter(Boolean)
           .join(", ")}]`
       : "";
+  // P5: explicit user preferences shape every answer (language, tone).
+  const prefsLine = `\n${preferenceInstructions(getPreferences())}`;
 
   // P4 session handoff: every run belongs to a session. Reusing the returned
   // sessionKey from any device continues the same conversation.
@@ -35,9 +38,7 @@ export async function POST(req: Request) {
       input,
       sessionId: body.sessionId,
       sessionKey,
-      instructions: body.instructions
-        ? `${body.instructions}${contextLine}`
-        : contextLine || undefined,
+      instructions: `${body.instructions || ""}${contextLine}${prefsLine}`.trim(),
     });
     recordSessionActivity({
       sessionKey,

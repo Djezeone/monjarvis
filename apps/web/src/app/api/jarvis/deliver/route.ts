@@ -5,6 +5,7 @@ import {
   chooseOutputDevice,
   type DeliveryModality,
 } from "@/server/presence-router";
+import { getPreferences, isQuietNow } from "@/server/preference-store";
 
 export const dynamic = "force-dynamic";
 
@@ -20,17 +21,27 @@ const policy = new PolicyEngine();
 export async function POST(req: Request) {
   const body = await req.json();
   const message = String(body.message || "").trim();
-  const modality: DeliveryModality =
+  let modality: DeliveryModality =
     body.modality === "notification" ? "notification" : "voice";
   if (!message) {
     return NextResponse.json({ error: "message required" }, { status: 400 });
+  }
+
+  // P5: quiet hours downgrade voice to a silent notification.
+  const prefs = getPreferences();
+  let quietNote = "";
+  if (modality === "voice" && isQuietNow(prefs)) {
+    modality = "notification";
+    quietNote = " — heures calmes: voix remplacée par une notification";
   }
 
   const routing = chooseOutputDevice({
     modality,
     sessionKey: typeof body.sessionKey === "string" ? body.sessionKey : undefined,
     preferredDevice:
-      typeof body.preferredDevice === "string" ? body.preferredDevice : undefined,
+      typeof body.preferredDevice === "string" && body.preferredDevice
+        ? body.preferredDevice
+        : prefs.preferredDevice || undefined,
   });
   if ("error" in routing) {
     return NextResponse.json({ error: routing.error }, { status: 503 });
@@ -50,5 +61,8 @@ export async function POST(req: Request) {
   if ("status" in outcome) {
     return NextResponse.json({ error: outcome.error }, { status: outcome.status });
   }
-  return NextResponse.json({ routing, command: outcome });
+  return NextResponse.json({
+    routing: { ...routing, reason: `${routing.reason}${quietNote}` },
+    command: outcome,
+  });
 }

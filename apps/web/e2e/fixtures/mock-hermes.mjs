@@ -51,8 +51,9 @@ const server = createServer(async (req, res) => {
       run_id: runId,
       session_id: sessionKey || undefined,
       status: "completed",
-      // Echo the session depth so tests can prove continuity across devices.
-      output: `mock-hermes: turn ${history.length} of session "${sessionKey}" — inputs: ${history.join(" | ")}`,
+      // Echo session depth + instructions so tests can prove continuity
+      // across devices and preference injection into runs.
+      output: `mock-hermes: turn ${history.length} of session "${sessionKey}" — inputs: ${history.join(" | ")} — instructions: ${String(body.instructions || "")}`,
     });
     return json(res, 200, { run_id: runId, status: "completed" });
   }
