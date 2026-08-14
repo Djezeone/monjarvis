@@ -13,7 +13,12 @@
  */
 
 export function deploymentRole(): "facade" | "core" {
-  return process.env.JARVIS_ROLE === "facade" ? "facade" : "core";
+  if (process.env.JARVIS_ROLE === "facade") return "facade";
+  if (process.env.JARVIS_ROLE === "core") return "core";
+  // Unset on Vercel → façade. A Function environment must NEVER default to
+  // being the brain (ephemeral state, no ticker, no Hermes credentials).
+  if (process.env.VERCEL === "1") return "facade";
+  return "core";
 }
 
 /** Where the brain lives, façade-side. Empty when unset. */

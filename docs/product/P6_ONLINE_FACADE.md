@@ -70,3 +70,21 @@ Invariants hérités du MASTER_BUILD_PROMPT :
 5. **Push web + guide de déploiement** — notifications push via la façade,
    `vercel.json` (cron maintenance seulement), guide VPS/local
    (`scripts/verify-local-stack.mjs` comme preuve côté Core).
+
+## Déployer la façade sur Vercel
+
+Sur Vercel, le rôle par défaut est **facade** (`VERCEL=1` détecté) : une
+Function ne devient jamais le cerveau par accident. Marche à suivre :
+
+1. Vercel → **Add New… → Project** → importer `Djezeone/monjarvis`,
+   **Root Directory `apps/web`** (framework Next.js auto-détecté).
+2. Variables d'environnement du projet :
+   - `JARVIS_AUTH_SECRET` — obligatoire avant toute exposition (sinon,
+     activer Vercel Authentication / Deployment Protection en attendant) ;
+   - `JARVIS_CORE_URL` — l'URL du Core (VPS aujourd'hui, relay demain).
+     Absente, l'API répond 503 « la façade n'a pas de cerveau configuré »
+     et l'UI reste consultable ;
+   - le **même** `JARVIS_AUTH_SECRET` sur le Core = SSO.
+3. Chaque push sur `main` déploie la production ; les branches donnent
+   des previews. Le Core, lui, ne se déploie jamais sur Vercel — VPS ou
+   machine locale, avec `JARVIS_ROLE=core` explicite si besoin.
