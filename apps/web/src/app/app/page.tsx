@@ -2,6 +2,7 @@ import { JarvisDashboard } from "@/jarvis/components/ui/JarvisDashboard";
 import { LivingInterfaceOverlay } from "@/jarvis/components/living/LivingInterfaceOverlay";
 import { OrganStatus } from "@/components/organ-status";
 import { CoreStatus } from "@/components/core-status";
+import { ImpactPanel } from "@/components/impact-panel";
 import { RuntimeConnect } from "@/components/runtime-connect";
 import { DevicePresence } from "@/components/device-presence";
 import { SessionHandoff } from "@/components/session-handoff";
@@ -18,6 +19,7 @@ export default function CockpitPage() {
     <div>
       <CoreStatus />
       <JarvisDashboard />
+      <ImpactPanel />
       <RuntimeConnect />
       <SessionHandoff />
       <DevicePresence />
