@@ -7,6 +7,7 @@ import { listSkills } from "@/server/skill-store";
 import { listRoutines } from "@/server/routine-registry";
 import { listExecutions, listWorkflows } from "@/server/n8n-registry";
 import { listEntities, listHomeExecutions } from "@/server/home-registry";
+import { listBrowserExecutions, listDomains } from "@/server/browser-registry";
 import {
   commandImpact,
   decisionImpact,
@@ -95,6 +96,14 @@ export function impactReport(days = 30, now = new Date()) {
         executed: calls.filter((e) => e.ok).length,
         failed: calls.filter((e) => !e.ok).length,
         approved: calls.filter((e) => e.ok && e.approvedBy).length,
+      };
+    })(),
+    browser: (() => {
+      const tasks = inWindow(listBrowserExecutions(), now, days);
+      return {
+        domains: listDomains().length,
+        executed: tasks.filter((t) => t.ok).length,
+        failed: tasks.filter((t) => !t.ok).length,
       };
     })(),
     notMeasured: NOT_MEASURED,

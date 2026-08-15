@@ -47,6 +47,13 @@ export default defineConfig({
       timeout: 15_000,
     },
     {
+      // Browser worker test double (e2e/fixtures/mock-browser-worker.mjs).
+      command: "node e2e/fixtures/mock-browser-worker.mjs",
+      url: "http://127.0.0.1:3196/_received",
+      reuseExistingServer: true,
+      timeout: 15_000,
+    },
+    {
       command: "npm run start -- --port 3100",
       url: "http://127.0.0.1:3100",
       reuseExistingServer: true,
@@ -70,6 +77,12 @@ export default defineConfig({
         // Home Assistant connector wired to its double (home.spec.ts).
         HASS_URL: "http://127.0.0.1:3197",
         HASS_TOKEN: "e2e-hass-token",
+        // Browser worker: explicitly switched ON for the suite, since its
+        // whole point is that it stays off unless asked (browser.spec.ts).
+        JARVIS_BROWSER_ENABLED: "1",
+        JARVIS_BROWSER_WORKER_URL: "http://127.0.0.1:3196",
+        JARVIS_BROWSER_WORKER_TOKEN: "e2e-browser-token",
+        JARVIS_BROWSER_MAX_STEPS: "5",
       },
     },
     {
