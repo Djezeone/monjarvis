@@ -19,7 +19,8 @@
     "test:impact": "node scripts/test-impact.mjs",
     "test:proactivity": "node scripts/test-proactivity.mjs",
     "test:n8n": "node scripts/test-n8n.mjs",
-    "test:home": "node scripts/test-home.mjs"
+    "test:home": "node scripts/test-home.mjs",
+    "test:browser": "node scripts/test-browser.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",

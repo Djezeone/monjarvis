@@ -15,6 +15,7 @@ import { PushPanel } from "@/components/push-panel";
 import { ImpactPanel } from "@/components/impact-panel";
 import { N8nPanel } from "@/components/n8n-panel";
 import { HomePanel } from "@/components/home-panel";
+import { BrowserPanel } from "@/components/browser-panel";
 import { OrganStatus } from "@/components/organ-status";
 import { TodayStrip } from "@/components/today-strip";
 import { TalkPanel } from "@/components/talk-panel";
@@ -142,6 +143,7 @@ export function CockpitWorlds() {
             <RoutinesPanel />
             <SuggestionsPanel />
             <N8nPanel />
+            <BrowserPanel />
             <ImpactPanel />
           </>
         )}

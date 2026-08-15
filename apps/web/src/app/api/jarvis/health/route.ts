@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getJarvisService } from "@/server/jarvis";
 import { n8nHealth } from "@/server/n8n-registry";
 import { homeHealth } from "@/server/home-registry";
+import { browserConfig } from "@/server/browser-registry";
 
 export const dynamic = "force-dynamic";
 
@@ -61,10 +62,17 @@ export async function GET() {
           ? "configured_unverified"
           : "not_configured",
   });
+  // P8 brick 3: the worker has NO documented health contract — unlike n8n
+  // and Home Assistant. Report configuration, never a fabricated verdict,
+  // and distinguish "configured but switched off" from "absent".
+  const browser = browserConfig();
   organs.push({
     name: "Browser worker",
-    role: "Browser use sandboxé (désactivé par défaut)",
-    status: process.env.JARVIS_BROWSER_WORKER_TOKEN ? "configured_unverified" : "not_configured",
+    role: browser.enabled
+      ? "Browser use sandboxé — domaines allowlistés"
+      : "Browser use sandboxé (éteint par défaut)",
+    status:
+      browser.configured && browser.enabled ? "configured_unverified" : "not_configured",
   });
 
   return NextResponse.json({ organs, checkedAt: new Date().toISOString() });

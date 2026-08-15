@@ -1,6 +1,6 @@
 # P8 — Connecteurs de service
 
-**Statut : en construction — briques 1 (n8n) et 2 (Home Assistant) livrées.**
+**Statut : LIVRÉ — n8n, Home Assistant et browser worker sont prêts à brancher.**
 
 Les services extérieurs (n8n, Home Assistant, navigateur sandboxé) ne
 tournent pas encore. Cette couche prépare chaque connecteur pour que la
@@ -106,7 +106,54 @@ reçoit rien**, une entité déclarée se lit et s'actionne pour de vrai
 approbation — et **rien n'était parti pendant le refus** —, un échec HTTP
 500 est rapporté comme échec.
 
-## Reste
+## Brique 3 — Browser worker ✅
 
-3. **Browser worker** — désactivé par défaut ; à préparer derrière le même
-   contrat d'approbation.
+La capacité la plus dangereuse : un navigateur porte vos sessions
+connectées, et un agent qui clique dedans peut faire tout ce que vous
+pouvez faire. Trois garde-fous, pas un seul.
+
+1. **Éteint par défaut** — avoir une URL et un jeton ne suffit pas :
+   `JARVIS_BROWSER_ENABLED=1` est requis. Même si la configuration fuit
+   dans l'environnement, le connecteur reste muet.
+2. **Allowlist de domaines** — une tâche doit **déclarer où elle va**, et
+   chaque domaine doit avoir été déclaré. Les sous-domaines d'un domaine
+   autorisé passent ; les suffixes trompeurs (`notexemple.fr` face à
+   `exemple.fr`) sont rejetés. Normalisation à la déclaration : schéma,
+   chemin et port n'entrent jamais dans l'allowlist.
+3. **Toujours une approbation** — et **volontairement aucun niveau
+   « lecture seule »** : JARVIS ne peut pas savoir d'avance ce qu'une
+   tâche en texte libre cliquera, donc prétendre qu'une tâche est
+   réversible serait un mensonge. Le tier unique est exposé comme une
+   fonction pour qu'aucun appelant ne puisse le rétrograder discrètement.
+
+S'y ajoute une **autonomie bornée** : le nombre de pas est plafonné côté
+serveur (`JARVIS_BROWSER_MAX_STEPS`, 12 par défaut) — une demande à 99 pas
+part à 12.
+
+**Santé** : contrairement à n8n (`/healthz`) et Home Assistant (`/api/`),
+le worker n'a **aucun contrat de santé documenté**. Plutôt que d'inventer
+un endpoint et de rendre un verdict fabriqué, ce connecteur ne rapporte
+que sa **configuration** — en distinguant « configuré mais éteint » de
+« absent ».
+
+### Mise en service
+
+```
+JARVIS_BROWSER_ENABLED=1
+JARVIS_BROWSER_WORKER_URL=http://127.0.0.1:8772
+JARVIS_BROWSER_WORKER_TOKEN=<jeton>
+```
+Puis cockpit → monde **Action** → *Navigateur agentique* → déclarer les
+domaines.
+
+### Preuves
+
+`npm run test:browser` : 17/17 cas purs (normalisation, sous-domaines,
+suffixes trompeurs, plafonds, activation, tier unique). E2e contre un
+**double worker** : une tâche sur un domaine non déclaré **n'atteint jamais
+le worker**, une tâche sans approbation **non plus**, une tâche approuvée
+part réellement avec ses domaines et ses pas **plafonnés à 5 au lieu de 99
+demandés** (assertions sur ce que le worker a reçu), et un échec est
+rapporté comme échec.
+
+**P8 est complet** : les trois connecteurs attendent leurs services.
