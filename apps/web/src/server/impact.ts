@@ -5,6 +5,7 @@ import { listSuggestions } from "@/server/suggestion-engine";
 import { listLearned } from "@/server/learned-store";
 import { listSkills } from "@/server/skill-store";
 import { listRoutines } from "@/server/routine-registry";
+import { listExecutions, listWorkflows } from "@/server/n8n-registry";
 import {
   commandImpact,
   decisionImpact,
@@ -78,6 +79,14 @@ export function impactReport(days = 30, now = new Date()) {
       enabled: routines.filter((r) => r.enabled).length,
       everRun: routines.filter((r) => r.lastRunAt).length,
     },
+    automations: (() => {
+      const runs = inWindow(listExecutions(), now, days);
+      return {
+        declared: listWorkflows().length,
+        executed: runs.filter((e) => e.ok).length,
+        failed: runs.filter((e) => !e.ok).length,
+      };
+    })(),
     notMeasured: NOT_MEASURED,
   };
 }

@@ -1,6 +1,6 @@
 # P7 — Alignement CBOS™ (Cinematic Business OS, UNTAKA.corp)
 
-**Statut : en construction — briques 1 à 3 livrées.**
+**Statut : LIVRÉ — les quatre briques P7 sont en place.**
 
 JARVIS X2 relu à travers le protocole CBOS™ : *Experience outside,
 Intelligence inside*. Les quatre couches CBOS existent déjà dans le
@@ -56,14 +56,14 @@ Réalité au moment de ce document :
 | Clarté de la promesse | 9/10 | |
 | Puissance visuelle | 9/10 | pack 77 assets intégré, 493/493 SHA-256 |
 | Cohérence narrative | 9/10 | |
-| Qualité UX | 7/10 | cockpit encore empilé en panneaux → brique 2 |
+| Qualité UX | 9/10 | six mondes, cockpit calme au repos, Talk en façade (briques 2 et 4) |
 | Conversion | 5/10 | pas d'offre publique — hors périmètre actuel |
 | Système opérationnel | 15/15 | P4 + P5 complets |
 | Automatisation | 9/10 | routines, sweeps, agent satellite ; n8n réel en attente |
 | IA utile | 9/10 | |
 | Déploiement réel | 5/10 | code prêt (P6 complet) ; **hébergement à faire** |
 | Documentation | 5/5 | specs P4, P5, P6, ADR, AUDIT |
-| **Total** | **82/100** | |
+| **Total** | **84/100** | après les quatre briques P7 |
 
 Ce qui sépare 82 de ~95 n'est plus du code : **Cloud Alpha déployée,
 Hermes réel, Graphiti réel, premier workflow n8n réel** dépendent d'un
@@ -113,5 +113,23 @@ sont écrits et testés contre des doubles ; ils attendent des services.
    échouée est USEFUL. Preuves e2e : au niveau low une suggestion utile est
    journalisée avec sa raison et non livrée ; le plafond finit par reporter
    des livraisons.
-4. **Traversée landing → OS** — la caméra traverse le Core et débouche sur
-   l'interface réelle, sans page produit intermédiaire.
+4. ~~**Traversée landing → OS**~~ ✅ — la fin de la landing ne mène plus à
+   une page produit : le Core avale le viewport puis le navigateur atterrit
+   dans `/app`. **Honnêteté du médium** : la porte reste une vraie ancre
+   `<a href="/app">`, toujours présente et atteignable au clavier ;
+   l'animation n'est qu'une décoration par-dessus, désactivée en
+   `prefers-reduced-motion` et inopérante sans JS — le lien, lui, entre
+   quand même. Les clics modifiés (nouvel onglet) passent intacts.
+   Et l'arrivée répond enfin à la question du parcours CBOS : le monde
+   **Core** ouvre sur **« Que faisons-nous ? »** (`talk-panel.tsx`), qui
+   manquait complètement au cockpit — un vrai run par le point d'entrée
+   partagé (session liée et reprenable depuis n'importe quel appareil,
+   préférences injectées, activité enregistrée), en réutilisant le
+   `JarvisApiClient` existant plutôt qu'en dupliquant un chemin. Sans
+   Core configuré, il le dit au lieu de faire semblant. Preuves e2e :
+   traversée jusqu'à `/app`, variante reduced-motion qui entre sans
+   animation, et une question du cockpit dont la réponse revient
+   réellement du Core.
+
+**P7 est complet.** Reste, hors logiciel : l'hébergement de la façade et
+la machine Core (voir `P6_ONLINE_FACADE.md`).

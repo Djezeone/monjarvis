@@ -13,8 +13,10 @@ import { LearnedPanel } from "@/components/learned-panel";
 import { SkillsPanel } from "@/components/skills-panel";
 import { PushPanel } from "@/components/push-panel";
 import { ImpactPanel } from "@/components/impact-panel";
+import { N8nPanel } from "@/components/n8n-panel";
 import { OrganStatus } from "@/components/organ-status";
 import { TodayStrip } from "@/components/today-strip";
+import { TalkPanel } from "@/components/talk-panel";
 
 /**
  * P7 brick 2 — the cockpit as WORLDS, not a stack of panels.
@@ -122,6 +124,7 @@ export function CockpitWorlds() {
 
         {world === "core" && (
           <>
+            <TalkPanel />
             <JarvisDashboard />
             <RuntimeConnect />
           </>
@@ -137,6 +140,7 @@ export function CockpitWorlds() {
           <>
             <RoutinesPanel />
             <SuggestionsPanel />
+            <N8nPanel />
             <ImpactPanel />
           </>
         )}
