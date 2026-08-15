@@ -20,6 +20,7 @@ interface Impact {
   };
   routines: { total: number; enabled: number; everRun: number };
   automations: { declared: number; executed: number; failed: number };
+  home: { declared: number; executed: number; failed: number; approved: number };
   notMeasured: string[];
 }
 
@@ -127,6 +128,14 @@ export function ImpactPanel() {
                 <td className="muted">
                   sur {impact.automations.declared} déclaré(s),{" "}
                   {impact.automations.failed} échec(s)
+                </td>
+              </tr>
+              <tr>
+                <td>Actions sur la maison</td>
+                <td>{impact.home.executed}</td>
+                <td className="muted">
+                  sur {impact.home.declared} entité(s) déclarée(s),{" "}
+                  {impact.home.approved} après votre accord, {impact.home.failed} échec(s)
                 </td>
               </tr>
               <tr>

@@ -1,6 +1,6 @@
 # P8 — Connecteurs de service
 
-**Statut : en construction — brique 1 (n8n) livrée.**
+**Statut : en construction — briques 1 (n8n) et 2 (Home Assistant) livrées.**
 
 Les services extérieurs (n8n, Home Assistant, navigateur sandboxé) ne
 tournent pas encore. Cette couche prépare chaque connecteur pour que la
@@ -64,9 +64,49 @@ d'idempotence (assertions sur le fil, pas sur notre code), un workflow
 critique refuse de tourner sans approbation puis accepte avec, et un échec
 côté n8n (HTTP 500) est rapporté comme échec — jamais comme un succès.
 
+## Brique 2 — Home Assistant ✅
+
+Le monde physique est l'endroit où une erreur coûte le plus cher : une
+porte déverrouillée n'est pas un tweet effacé. L'allowlist y est donc plus
+stricte que celle de n8n.
+
+- **Allowlist d'entités** (`home-registry.ts`) : JARVIS voit toute la
+  maison par l'API, mais ne **lit** et n'**agit** que sur les entités
+  déclarées — hors allowlist, 403, et rien ne part vers Home Assistant.
+- **Déclarer n'est pas consentir** : même déclarés, les **domaines gardés**
+  (`lock`, `alarm_control_panel`, `cover`, `climate`) et les services
+  difficilement réversibles (`unlock`, `disarm`, `open`, `delete`,
+  `set_temperature`) répondent **428 tant qu'aucune approbation explicite**
+  n'est jointe. Le cockpit demande alors confirmation avant de rejouer
+  l'appel avec l'accord.
+- **Exécutions tracées** : succès, échecs avec le message réel, et
+  **qui a approuvé**. L'écran Impact distingue les actions maison faites
+  avec votre accord de celles qui n'en avaient pas besoin.
+- **Sonde réelle** : `/api/` avec le jeton — un seul verdict, porté par le
+  connecteur (le doublon de sonde dans la route santé a disparu).
+- **Validation stricte** : `entity_id` en `domaine.objet` minuscule,
+  services en snake_case — les injections de chemin et les majuscules sont
+  refusées à la déclaration.
+
+### Mise en service
+
+```
+HASS_URL=http://127.0.0.1:8123
+HASS_TOKEN=<jeton d'accès longue durée>
+```
+Puis cockpit → monde **Monde** → *Maison* → déclarer `light.salon`, etc.
+
+### Preuves
+
+`npm run test:home` : 15/15 cas purs (entités et services valides/refusés,
+domaines gardés, services irréversibles, état de configuration). E2e contre
+un **double Home Assistant** : sonde réelle, **hors allowlist le double ne
+reçoit rien**, une entité déclarée se lit et s'actionne pour de vrai
+(assertions sur ce que HA a reçu), une serrure refuse puis accepte avec
+approbation — et **rien n'était parti pendant le refus** —, un échec HTTP
+500 est rapporté comme échec.
+
 ## Reste
 
-2. **Home Assistant** — même traitement : allowlist d'entités et de
-   services, tiers déjà définis (`decideHomeService`), sonde `/api/`.
 3. **Browser worker** — désactivé par défaut ; à préparer derrière le même
    contrat d'approbation.
