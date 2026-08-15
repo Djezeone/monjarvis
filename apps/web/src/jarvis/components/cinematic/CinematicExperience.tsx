@@ -7,6 +7,7 @@ import { ScrollDirector, useCinematicDirector } from "./ScrollDirector";
 import { MemoryWorld3D } from "../worlds/MemoryWorld3D";
 import { PhysicalWorld3D } from "../worlds/PhysicalWorld3D";
 import { SectionTransition } from "../transitions/SectionTransition";
+import { CoreTraversal } from "./CoreTraversal";
 
 function ExperienceBody(){
   const {heroOpacity,coreScale,memoryMix,physicalMix}=useCinematicDirector();
@@ -39,8 +40,7 @@ function ExperienceBody(){
     </section>
 
     <section className="jx2-cine-end">
-      <h2>Welcome to JARVIS X2.</h2>
-      <a href="/app">Enter the system</a>
+      <CoreTraversal/>
     </section>
   </>;
 }

@@ -15,6 +15,7 @@ import { PushPanel } from "@/components/push-panel";
 import { ImpactPanel } from "@/components/impact-panel";
 import { OrganStatus } from "@/components/organ-status";
 import { TodayStrip } from "@/components/today-strip";
+import { TalkPanel } from "@/components/talk-panel";
 
 /**
  * P7 brick 2 — the cockpit as WORLDS, not a stack of panels.
@@ -122,6 +123,7 @@ export function CockpitWorlds() {
 
         {world === "core" && (
           <>
+            <TalkPanel />
             <JarvisDashboard />
             <RuntimeConnect />
           </>

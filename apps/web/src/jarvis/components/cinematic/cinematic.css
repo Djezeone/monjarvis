@@ -99,3 +99,25 @@
   .jx2-cine-orb{position:absolute}
   .jx2-cine-chapter{min-height:100svh}
 }
+
+/* P7 brick 4 — the traversal: the Core swallows the viewport, then the
+   browser lands in /app. Decoration only; the anchor below it is the
+   real door and works without any of this. */
+.jx2-traversal{
+  position:fixed;inset:0;z-index:60;display:grid;place-items:center;
+  background:#05070A;animation:jx2-traversal-fade .9s ease forwards;pointer-events:none
+}
+.jx2-traversal-core{
+  width:14vmin;height:14vmin;border-radius:50%;
+  background:radial-gradient(circle at 50% 50%,#5DEBFF 0%,#7867FF 55%,transparent 72%);
+  animation:jx2-traversal-core .9s cubic-bezier(.6,0,.2,1) forwards
+}
+@keyframes jx2-traversal-core{
+  0%{transform:scale(.35);opacity:.35}
+  60%{opacity:1}
+  100%{transform:scale(22);opacity:1}
+}
+@keyframes jx2-traversal-fade{ 0%{background:rgba(5,7,10,0)} 100%{background:#05070A} }
+@media(prefers-reduced-motion:reduce){
+  .jx2-traversal{display:none}
+}
