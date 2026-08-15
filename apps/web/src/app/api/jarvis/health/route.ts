@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getJarvisService } from "@/server/jarvis";
+import { n8nHealth } from "@/server/n8n-registry";
 
 export const dynamic = "force-dynamic";
 
@@ -50,10 +51,18 @@ export async function GET() {
 
   // No health contract exists for these two adapters: report configuration
   // presence only, never a fabricated reachability verdict.
+  // P8: n8n DOES expose /healthz — probe it for real when the base URL is
+  // known, and fall back to configuration presence only when it is not.
+  const n8n = await n8nHealth();
   organs.push({
     name: "n8n",
     role: "Workflows allowlistés",
-    status: process.env.N8N_JARVIS_SECRET ? "configured_unverified" : "not_configured",
+    status:
+      n8n.status !== "not_configured"
+        ? n8n.status
+        : process.env.N8N_JARVIS_SECRET
+          ? "configured_unverified"
+          : "not_configured",
   });
   organs.push({
     name: "Browser worker",

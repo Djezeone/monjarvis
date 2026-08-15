@@ -19,6 +19,7 @@ interface Impact {
     skills: { proposed: number; accepted: number; refused: number; executed: number };
   };
   routines: { total: number; enabled: number; everRun: number };
+  automations: { declared: number; executed: number; failed: number };
   notMeasured: string[];
 }
 
@@ -118,6 +119,14 @@ export function ImpactPanel() {
                 <td className="muted">
                   actives sur {impact.routines.total}, {impact.routines.everRun} déjà
                   exécutée(s)
+                </td>
+              </tr>
+              <tr>
+                <td>Workflows n8n exécutés</td>
+                <td>{impact.automations.executed}</td>
+                <td className="muted">
+                  sur {impact.automations.declared} déclaré(s),{" "}
+                  {impact.automations.failed} échec(s)
                 </td>
               </tr>
               <tr>

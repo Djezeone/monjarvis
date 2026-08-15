@@ -17,7 +17,8 @@
     "test:queue": "node scripts/test-pending-queue.mjs",
     "vapid": "node scripts/generate-vapid.mjs",
     "test:impact": "node scripts/test-impact.mjs",
-    "test:proactivity": "node scripts/test-proactivity.mjs"
+    "test:proactivity": "node scripts/test-proactivity.mjs",
+    "test:n8n": "node scripts/test-n8n.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",

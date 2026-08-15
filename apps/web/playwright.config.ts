@@ -32,6 +32,14 @@ export default defineConfig({
       timeout: 15_000,
     },
     {
+      // n8n test double so the workflow connector is exercised against the
+      // real HTTP contract (e2e/fixtures/mock-n8n.mjs).
+      command: "node e2e/fixtures/mock-n8n.mjs",
+      url: "http://127.0.0.1:3198/healthz",
+      reuseExistingServer: true,
+      timeout: 15_000,
+    },
+    {
       command: "npm run start -- --port 3100",
       url: "http://127.0.0.1:3100",
       reuseExistingServer: true,
@@ -48,6 +56,10 @@ export default defineConfig({
         JARVIS_VAPID_SUBJECT: "mailto:e2e@test.local",
         // Trust the test push service's self-signed cert (push.spec.ts).
         NODE_EXTRA_CA_CERTS: "./e2e/fixtures/push-cert.pem",
+        // n8n connector wired to the double (n8n.spec.ts).
+        N8N_BASE_URL: "http://127.0.0.1:3198",
+        N8N_WEBHOOK_BASE_URL: "http://127.0.0.1:3198/webhook",
+        N8N_JARVIS_SECRET: "e2e-n8n-secret",
       },
     },
     {
