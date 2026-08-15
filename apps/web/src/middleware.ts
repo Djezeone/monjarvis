@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { authSecret, SESSION_COOKIE, verifySessionToken } from "@/server/facade-auth";
 import { coreUrl, deploymentRole } from "@/server/deployment";
+import { isStateChanging, originAllowed, trustedOrigins } from "@/server/origin-guard";
 
 /**
  * P6 brick 1 — façade gate. With JARVIS_AUTH_SECRET set, /app and
@@ -56,6 +57,22 @@ const DEVICE_TOKEN_PATHS = [
 ];
 
 export async function middleware(req: NextRequest) {
+  // P9: the origin guard runs FIRST and in every mode — including
+  // local-first, where there is no cookie to withhold from a foreign site.
+  if (
+    isStateChanging(req.method) &&
+    !originAllowed({
+      origin: req.headers.get("origin"),
+      host: req.headers.get("host"),
+      trusted: trustedOrigins(process.env.JARVIS_TRUSTED_ORIGINS),
+    })
+  ) {
+    return NextResponse.json(
+      { error: "origine non autorisée — requête refusée" },
+      { status: 403 }
+    );
+  }
+
   const secret = authSecret();
   if (!secret) return forwardOrNext(req);
 
