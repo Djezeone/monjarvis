@@ -60,7 +60,7 @@ test("les chiffres d'impact suivent des actions réellement effectuées", async 
 });
 
 test("le cockpit affiche l'impact et nomme ce qu'il ne mesure pas", async ({ page }) => {
-  await page.goto("/app");
+  await page.goto("/app#action");
   const panel = page.getByTestId("impact-panel");
   await expect(panel).toBeVisible();
   await expect(panel.getByTestId("impact-executed")).not.toBeEmpty();

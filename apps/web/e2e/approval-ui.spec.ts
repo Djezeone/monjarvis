@@ -24,7 +24,7 @@ test("dispatch CRITICAL → porte d'approbation → approbation → mise en file
   });
   expect(claim.ok()).toBeTruthy();
 
-  await page.goto("/app");
+  await page.goto("/app#monde");
   const row = page.locator("tr", { hasText: DEVICE.name });
   await expect(row).toBeVisible();
   await expect(row.getByText("en ligne")).toBeVisible();

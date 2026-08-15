@@ -1,6 +1,6 @@
 # P7 — Alignement CBOS™ (Cinematic Business OS, UNTAKA.corp)
 
-**Statut : en construction — brique 1 livrée.**
+**Statut : en construction — briques 1 et 2 livrées.**
 
 JARVIS X2 relu à travers le protocole CBOS™ : *Experience outside,
 Intelligence inside*. Les quatre couches CBOS existent déjà dans le
@@ -72,10 +72,23 @@ sont écrits et testés contre des doubles ; ils attendent des services.
 
 ## Reste à faire (logiciel)
 
-2. **Cockpit en mondes** — remplacer l'empilement de panneaux par les
-   mondes CBOS : Core (Talk / Today / Context), Memory, Agents, Action,
-   World, System. Le quotidien doit être *calme et rapide*, à l'inverse de
-   l'entrée cinématique.
+2. ~~**Cockpit en mondes**~~ ✅ — six mondes (Core, Mémoire, Agents,
+   Action, Monde, Système) au lieu d'un empilement de quatorze panneaux.
+   La règle CBOS est appliquée à la lettre : **entrée cinématique,
+   quotidien calme**. Au repos, seul le monde Core est *monté* (les
+   autres ne sont pas cachés — ils n'existent pas dans le DOM), avec pour
+   unique lecture permanente le bandeau **Aujourd'hui** : quatre chiffres
+   réels tirés de l'Impact sur 24 h. Chaque monde est adressable par
+   ancre (`/app#action`), retenu d'une visite à l'autre, et une ancre
+   inconnue retombe proprement sur le monde mémorisé. Les deux alertes
+   qui ne doivent jamais se cacher derrière un onglet restent hors des
+   mondes : la bannière **Core hors ligne** et l'overlay vivant.
+   **Absences nommées** : là où CBOS annonce un sous-monde que JARVIS n'a
+   pas encore (People/Projects/Timeline portés par Graphiti, sous-agents
+   Hermes délégués), le monde le dit explicitement au lieu d'exposer une
+   étagère vide. Preuves e2e : calme au repos vérifié par l'absence des
+   panneaux des autres mondes, ouverture de chaque monde, lien profond +
+   persistance + ancre inconnue, et les deux absences nommées.
 3. **Hiérarchie de proactivité** — affiner `off/low/normal` en
    SILENT → INFO → USEFUL → IMPORTANT → CRITICAL, chaque niveau choisissant
    son canal (journal, notification, interruption, demande d'action).

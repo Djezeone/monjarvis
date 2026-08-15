@@ -9,8 +9,10 @@ function collectPageErrors(page: Page): string[] {
 test("le cockpit /app charge même sans aucun organe configuré (NFR-004)", async ({ page }) => {
   const errors = collectPageErrors(page);
   await page.goto("/app");
-  await expect(page.getByRole("heading", { name: "Organes" })).toBeVisible();
+  // Core is the world at rest; organs live in Système (P7 brick 2).
   await expect(page.getByRole("heading", { name: "Runtime vocal local" })).toBeVisible();
+  await page.getByRole("button", { name: "Système" }).click();
+  await expect(page.getByRole("heading", { name: "Organes" })).toBeVisible();
   // Organ health resolves to explicit "non configuré" statuses, never a crash.
   await expect(page.locator("table tbody tr").first()).toBeVisible({ timeout: 15_000 });
   expect(errors, `Erreurs page: ${errors.join(" | ")}`).toHaveLength(0);
