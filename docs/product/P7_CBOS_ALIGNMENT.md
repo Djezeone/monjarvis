@@ -1,6 +1,6 @@
 # P7 — Alignement CBOS™ (Cinematic Business OS, UNTAKA.corp)
 
-**Statut : en construction — briques 1 et 2 livrées.**
+**Statut : en construction — briques 1 à 3 livrées.**
 
 JARVIS X2 relu à travers le protocole CBOS™ : *Experience outside,
 Intelligence inside*. Les quatre couches CBOS existent déjà dans le
@@ -89,8 +89,29 @@ sont écrits et testés contre des doubles ; ils attendent des services.
    étagère vide. Preuves e2e : calme au repos vérifié par l'absence des
    panneaux des autres mondes, ouverture de chaque monde, lien profond +
    persistance + ancre inconnue, et les deux absences nommées.
-3. **Hiérarchie de proactivité** — affiner `off/low/normal` en
-   SILENT → INFO → USEFUL → IMPORTANT → CRITICAL, chaque niveau choisissant
-   son canal (journal, notification, interruption, demande d'action).
+3. ~~**Hiérarchie de proactivité**~~ ✅ — cinq degrés, chacun avec un canal
+   **réel** (`proactivity.ts`, module pur, 14/14 cas) :
+
+   | Niveau | Canal | Ce que ça fait |
+   | --- | --- | --- |
+   | SILENT | journal | mémorisé, jamais montré spontanément |
+   | INFO | journal | visible au cockpit quand vous regardez |
+   | USEFUL | notification | Presence Bus + push web |
+   | IMPORTANT | interruption | **annoncé à voix haute** (donc soumis aux heures calmes, qui le redescendent en notification) |
+   | CRITICAL | approbation | jamais livré : il demande une décision — ce garde-fou **existe déjà** comme tier FR-009 sur les commandes d'appareil, il n'est pas dupliqué |
+
+   La préférence `proactivity` devient un **seuil** et non plus seulement
+   un plafond : `off` ne laisse rien passer, `low` ne laisse passer que
+   IMPORTANT, `normal` laisse passer USEFUL et au-dessus. **Sous le seuil
+   rien n'est perdu** — c'est journalisé, visible au cockpit, avec la
+   raison écrite (« journalisée — niveau useful sous le seuil important »).
+   Les plafonds horaires (FR-010) s'appliquent par-dessus, donc une rafale
+   d'événements importants ne peut pas devenir du spam ; le surplus est
+   reporté, jamais jeté. Les règles portent le niveau : perdre **l'appareil
+   de sortie par défaut** est IMPORTANT (la voix de JARVIS n'atterrirait
+   nulle part), un autre satellite hors ligne reste INFO, une commande
+   échouée est USEFUL. Preuves e2e : au niveau low une suggestion utile est
+   journalisée avec sa raison et non livrée ; le plafond finit par reporter
+   des livraisons.
 4. **Traversée landing → OS** — la caméra traverse le Core et débouche sur
    l'interface réelle, sans page produit intermédiaire.

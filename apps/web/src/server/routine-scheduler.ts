@@ -80,7 +80,7 @@ export function startRoutineScheduler(): void {
       const report = await sweepSuggestions();
       if (report.generated || report.delivered) {
         console.log(
-          `[suggestions] ${report.generated} nouvelle(s), ${report.delivered} livrée(s), ${report.capped} plafonnée(s)`
+          `[suggestions] ${report.generated} nouvelle(s), ${report.delivered} livrée(s), ${report.journaled} journalisée(s), ${report.capped} plafonnée(s)`
         );
       }
     } catch (e) {

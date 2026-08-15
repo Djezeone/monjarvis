@@ -6,11 +6,18 @@ import { listDevices, listCommands } from "@/server/device-registry";
 import { getPreferences } from "@/server/preference-store";
 import { deliverMessage } from "@/server/deliver";
 import {
-  deliveryCapPerHour,
   failedCommandCandidates,
   offlineDeviceCandidates,
   type SuggestionCandidate,
 } from "@/server/suggestion-rules";
+import {
+  channelForLevel,
+  deliveryCapPerHour,
+  explain,
+  modalityForChannel,
+  shouldDeliver,
+  type ProactivityLevel,
+} from "@/server/proactivity";
 
 /**
  * P5 brick 3 — proactive suggestions: JARVIS raises what deserves attention
@@ -28,6 +35,10 @@ export interface Suggestion {
   kind: SuggestionCandidate["kind"];
   subject: string;
   message: string;
+  /** P7 brick 3: the degree that decided the channel. */
+  level: ProactivityLevel;
+  /** Why it was journaled, notified or announced — stated, never implicit. */
+  decision: string;
   createdAt: string;
   deliveredAt: string | null;
   deliveredTo: string | null;
@@ -86,18 +97,24 @@ export function dismissSuggestion(id: string): Suggestion | null {
 export async function sweepSuggestions(now = new Date()): Promise<{
   generated: number;
   delivered: number;
+  journaled: number;
   capped: number;
   proactivity: string;
 }> {
   const prefs = getPreferences();
   if (prefs.proactivity === "off") {
-    return { generated: 0, delivered: 0, capped: 0, proactivity: "off" };
+    return { generated: 0, delivered: 0, journaled: 0, capped: 0, proactivity: "off" };
   }
 
   const state = load();
 
   const candidates: SuggestionCandidate[] = [
-    ...offlineDeviceCandidates(listDevices(), now, OFFLINE_THRESHOLD_MIN),
+    ...offlineDeviceCandidates(
+      listDevices(),
+      now,
+      OFFLINE_THRESHOLD_MIN,
+      prefs.preferredDevice
+    ),
     ...failedCommandCandidates(listCommands(), now, FAILED_WINDOW_MIN),
   ];
 
@@ -110,6 +127,7 @@ export async function sweepSuggestions(now = new Date()): Promise<{
     state.suggestions.push({
       id: randomUUID(),
       ...candidate,
+      decision: explain(candidate.level, prefs.proactivity),
       createdAt: now.toISOString(),
       deliveredAt: null,
       deliveredTo: null,
@@ -124,25 +142,40 @@ export async function sweepSuggestions(now = new Date()): Promise<{
   let budget = Math.max(0, cap - state.deliveryLog.length);
 
   let delivered = 0;
+  let journaled = 0;
   let capped = 0;
   for (const suggestion of state.suggestions) {
     if (suggestion.deliveredAt || suggestion.dismissedAt) continue;
+
+    // Below the user's threshold: kept, visible in the cockpit, never
+    // pushed. Nothing is lost — it simply does not interrupt.
+    if (!shouldDeliver(suggestion.level, prefs.proactivity)) {
+      suggestion.decision = explain(suggestion.level, prefs.proactivity);
+      journaled++;
+      continue;
+    }
     if (budget <= 0) {
+      suggestion.decision = "plafond horaire atteint — livraison reportée";
       capped++;
       continue;
     }
+
+    const channel = channelForLevel(suggestion.level);
+    const modality = modalityForChannel(channel);
+    if (!modality) continue; // approval-level items never auto-deliver
     const outcome = await deliverMessage({
       message: `Suggestion JARVIS — ${suggestion.message}`,
-      modality: "notification",
+      modality,
     });
-    if ("error" in outcome) continue; // no capable device: stays pending, retried next sweep
+    if ("error" in outcome) continue; // no capable device: retried next sweep
     suggestion.deliveredAt = now.toISOString();
     suggestion.deliveredTo = outcome.routing.deviceName;
+    suggestion.decision = explain(suggestion.level, prefs.proactivity);
     state.deliveryLog.push(now.toISOString());
     budget--;
     delivered++;
   }
 
   save(state);
-  return { generated, delivered, capped, proactivity: prefs.proactivity };
+  return { generated, delivered, journaled, capped, proactivity: prefs.proactivity };
 }

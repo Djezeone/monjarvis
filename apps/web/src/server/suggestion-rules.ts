@@ -4,11 +4,15 @@
  * system state; nothing speculative.
  */
 
+import type { ProactivityLevel } from "@/server/proactivity";
+
 export interface SuggestionCandidate {
   /** Stable identity: one suggestion per (kind, subject) until resolved. */
   kind: "device-offline" | "command-failed";
   subject: string;
   message: string;
+  /** P7 brick 3: how loudly this deserves to reach the user. */
+  level: ProactivityLevel;
 }
 
 export interface DeviceView {
@@ -28,11 +32,16 @@ export interface CommandView {
   updatedAt: string;
 }
 
-/** A device that used to be seen but has been silent longer than the threshold. */
+/**
+ * A device that used to be seen but has been silent longer than the
+ * threshold. Losing the PREFERRED output device is important — JARVIS's
+ * own voice would land nowhere — while any other satellite is journal-level.
+ */
 export function offlineDeviceCandidates(
   devices: DeviceView[],
   now: Date,
-  thresholdMinutes: number
+  thresholdMinutes: number,
+  preferredDeviceId = ""
 ): SuggestionCandidate[] {
   return devices
     .filter(
@@ -45,7 +54,13 @@ export function offlineDeviceCandidates(
     .map((d) => ({
       kind: "device-offline" as const,
       subject: d.id,
-      message: `Le satellite « ${d.name} » est hors ligne depuis ${new Date(d.lastSeenAt as string).toLocaleTimeString()}.`,
+      message: `Le satellite « ${d.name} » est hors ligne depuis ${new Date(d.lastSeenAt as string).toLocaleTimeString()}.${
+        d.id === preferredDeviceId && preferredDeviceId ? " C'est votre appareil de sortie par défaut." : ""
+      }`,
+      level:
+        preferredDeviceId && d.id === preferredDeviceId
+          ? ("important" as const)
+          : ("info" as const),
     }));
 }
 
@@ -65,11 +80,7 @@ export function failedCommandCandidates(
       kind: "command-failed" as const,
       subject: c.id,
       message: `La commande ${c.capability} sur « ${c.deviceId} » a échoué${c.error ? ` : ${c.error}` : "."}`,
+      // An action you asked for did not happen: worth a notification.
+      level: "useful" as const,
     }));
-}
-
-/** FR-010 anti-spam: deliveries allowed per rolling hour, by proactivity. */
-export function deliveryCapPerHour(proactivity: "off" | "low" | "normal"): number {
-  if (proactivity === "off") return 0;
-  return proactivity === "low" ? 1 : 4;
 }

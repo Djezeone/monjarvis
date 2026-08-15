@@ -14,8 +14,8 @@ const out = execFileSync(
     import {
       offlineDeviceCandidates,
       failedCommandCandidates,
-      deliveryCapPerHour,
     } from ${JSON.stringify(join(here, "../src/server/suggestion-rules.ts"))};
+    import { deliveryCapPerHour } from ${JSON.stringify(join(here, "../src/server/proactivity.ts"))};
 
     const now = new Date("2026-08-14T12:00:00");
     let failed = 0;
@@ -52,7 +52,17 @@ const out = execFileSync(
     check("cap low", deliveryCapPerHour("low"), 1);
     check("cap normal", deliveryCapPerHour("normal"), 4);
 
-    console.log((7 - failed) + "/7 cas de règles passent");
+    // P7 brick 3: each candidate carries the degree that picks its channel.
+    check("un satellite quelconque hors ligne reste au niveau info",
+      offlineDeviceCandidates(devices, now, 10)[0].level, "info");
+    check("perdre l'appareil de sortie par défaut est important",
+      offlineDeviceCandidates(devices, now, 10, "b")[0].level, "important");
+    check("le message le dit explicitement",
+      offlineDeviceCandidates(devices, now, 10, "b")[0].message.includes("sortie par défaut"), true);
+    check("une commande échouée est utile à signaler",
+      failedCommandCandidates(commands, now, 60)[0].level, "useful");
+
+    console.log((11 - failed) + "/11 cas de règles passent");
     process.exit(failed ? 1 : 0);
   `],
   { encoding: "utf8" }
