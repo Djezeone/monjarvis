@@ -57,7 +57,7 @@ test("le registre expose la trace inter-appareils de la session", async ({ reque
 });
 
 test("le cockpit liste la session et propose « Reprendre ici »", async ({ page }) => {
-  await page.goto("/app");
+  await page.goto("/app#memoire");
   const row = page.locator("tr", { hasText: "Prépare-moi l'architecture P5." });
   await expect(row).toBeVisible();
   await expect(row.getByText("phone-s24")).toBeVisible();

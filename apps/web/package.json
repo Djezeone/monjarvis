@@ -15,7 +15,8 @@
     "test:skills": "node scripts/test-skills.mjs",
     "test:auth": "node scripts/test-facade-auth.mjs",
     "test:queue": "node scripts/test-pending-queue.mjs",
-    "vapid": "node scripts/generate-vapid.mjs"
+    "vapid": "node scripts/generate-vapid.mjs",
+    "test:impact": "node scripts/test-impact.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
