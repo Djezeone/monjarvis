@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getJarvisService } from "@/server/jarvis";
 import { n8nHealth } from "@/server/n8n-registry";
+import { homeHealth } from "@/server/home-registry";
 
 export const dynamic = "force-dynamic";
 
@@ -38,16 +39,12 @@ export async function GET() {
     });
   }
 
-  if (process.env.HASS_TOKEN) {
-    const homeOk = service ? await service.home.health().catch(() => false) : false;
-    organs.push({
-      name: "Home Assistant",
-      role: "Monde physique (lecture seule)",
-      status: homeOk ? "connected" : "unreachable",
-    });
-  } else {
-    organs.push({ name: "Home Assistant", role: "Monde physique (lecture seule)", status: "not_configured" });
-  }
+  // P8 brick 2: one probe, one verdict — the connector owns it now.
+  organs.push({
+    name: "Home Assistant",
+    role: "Monde physique — entités allowlistées",
+    status: (await homeHealth()).status,
+  });
 
   // No health contract exists for these two adapters: report configuration
   // presence only, never a fabricated reachability verdict.

@@ -40,6 +40,13 @@ export default defineConfig({
       timeout: 15_000,
     },
     {
+      // Home Assistant test double (e2e/fixtures/mock-hass.mjs).
+      command: "node e2e/fixtures/mock-hass.mjs",
+      url: "http://127.0.0.1:3197/_received",
+      reuseExistingServer: true,
+      timeout: 15_000,
+    },
+    {
       command: "npm run start -- --port 3100",
       url: "http://127.0.0.1:3100",
       reuseExistingServer: true,
@@ -60,6 +67,9 @@ export default defineConfig({
         N8N_BASE_URL: "http://127.0.0.1:3198",
         N8N_WEBHOOK_BASE_URL: "http://127.0.0.1:3198/webhook",
         N8N_JARVIS_SECRET: "e2e-n8n-secret",
+        // Home Assistant connector wired to its double (home.spec.ts).
+        HASS_URL: "http://127.0.0.1:3197",
+        HASS_TOKEN: "e2e-hass-token",
       },
     },
     {

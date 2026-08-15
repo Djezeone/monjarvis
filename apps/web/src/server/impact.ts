@@ -6,6 +6,7 @@ import { listLearned } from "@/server/learned-store";
 import { listSkills } from "@/server/skill-store";
 import { listRoutines } from "@/server/routine-registry";
 import { listExecutions, listWorkflows } from "@/server/n8n-registry";
+import { listEntities, listHomeExecutions } from "@/server/home-registry";
 import {
   commandImpact,
   decisionImpact,
@@ -85,6 +86,15 @@ export function impactReport(days = 30, now = new Date()) {
         declared: listWorkflows().length,
         executed: runs.filter((e) => e.ok).length,
         failed: runs.filter((e) => !e.ok).length,
+      };
+    })(),
+    home: (() => {
+      const calls = inWindow(listHomeExecutions(), now, days);
+      return {
+        declared: listEntities().length,
+        executed: calls.filter((e) => e.ok).length,
+        failed: calls.filter((e) => !e.ok).length,
+        approved: calls.filter((e) => e.ok && e.approvedBy).length,
       };
     })(),
     notMeasured: NOT_MEASURED,
