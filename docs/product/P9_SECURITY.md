@@ -1,6 +1,6 @@
 # P9 — Durcissement sécurité
 
-**Statut : en construction — brique 1 livrée.**
+**Statut : en construction — briques 1 et 2 livrées.**
 
 Revue adverse des chemins d'autorité de JARVIS X2 : qui peut faire agir le
 Core, et par quelle porte. Ce document consigne ce qui a été trouvé, ce qui
@@ -81,6 +81,47 @@ JARVIS_TRUSTED_ORIGINS=https://jarvis-x2.vercel.app
 Sans cette ligne, la façade reçoit 403 sur toute écriture — un échec
 bruyant et explicite, jamais silencieux.
 
+## Brique 2 — Durcissement du login de façade ✅
+
+Une fois la façade sur une URL publique, `/api/jarvis/auth/login` est **la
+seule porte** vers tout ce que JARVIS sait faire, et elle est gardée par un
+secret choisi par un humain. Tentatives illimitées contre un secret humain :
+c'est le maillon le plus faible de toute la chaîne. Trois réponses, par
+ordre de force.
+
+### 1. Entropie — le seul vrai correctif
+
+`JARVIS_AUTH_SECRET` doit faire **24 caractères minimum** et ne pas
+commencer par un mot devinable (`changeme`, `password`, `secret`, `jarvis`,
+`admin`) ni répéter un caractère. En dessous, la façade **échoue fermée** :
+elle refuse **tout le monde**, y compris avec le bon secret, et la page de
+login **dit pourquoi**. Une porte faible qui laisse passer vaut moins
+qu'une porte fermée qui explique.
+
+### 2. Coût — la défense qui tient en serverless
+
+Chaque tentative dérive une clé (PBKDF2-HMAC-SHA256, 200 000 itérations) :
+l'attaquant paie ~100 ms de CPU par essai. Contrairement à un compteur,
+cette défense fonctionne partout, y compris sur des instances éphémères et
+multiples.
+
+### 3. Friction — le limiteur, en dernier
+
+10 échecs par quart d'heure et par appelant, réponse **429 avec
+`Retry-After`**. Sur un Core résident c'est un vrai verrouillage ; sur du
+serverless il est **par instance** — raison pour laquelle il vient en
+troisième et jamais seul. Un succès remet le compteur à zéro ; le
+verrouillage n'est pas sélectif (même le bon secret attend son tour).
+
+### Preuves
+
+`npm run test:login` : 15/15 cas (plancher, motifs devinables, dérivation
+lente sensible à un caractère, fenêtre du limiteur, isolation par appelant,
+remise à zéro). E2e sur **deux serveurs dédiés** : `:3104` porte un secret
+volontairement faible et **refuse même le bon secret** (503, page de login
+explicite, cockpit toujours à 401) ; `:3101` encaisse une rafale de 12
+tentatives et bascule en 429 avec `Retry-After`.
+
 ## Vérifié comme sain (aucune action)
 
 - **Codes d'enrôlement** : 128 bits d'aléa (`randomBytes(16)`), à usage
@@ -98,3 +139,10 @@ bruyant et explicite, jamais silencieux.
 - **Secrets** : `HERMES_API_KEY`, `HASS_TOKEN`, `N8N_JARVIS_SECRET`, clés
   VAPID privées et jetons worker restent côté serveur ; aucun n'est exposé
   par une route ou un composant client.
+- **Agent satellite** (`services/device-agent/agent.mjs`) : exécute via
+  `spawn(cmd, args)` **sans shell** — pas d'interpolation, donc pas
+  d'injection de commande possible ; `app.launch` ne lance que les
+  commandes explicitement déclarées dans sa config locale, et la commande
+  de lecture audio ne substitue que `{file}` par un chemin que l'agent a
+  lui-même écrit. Un Core compromis ne peut pas faire exécuter n'importe
+  quoi au satellite.

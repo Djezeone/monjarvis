@@ -11,11 +11,15 @@ export default function LoginPage() {
   const [secret, setSecret] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [enabled, setEnabled] = useState<boolean | null>(null);
+  const [secretIssue, setSecretIssue] = useState("");
 
   useEffect(() => {
     fetch("/api/jarvis/auth/status", { cache: "no-store" })
       .then((r) => r.json())
-      .then((d) => setEnabled(Boolean(d.enabled)))
+      .then((d) => {
+        setEnabled(Boolean(d.enabled));
+        setSecretIssue(d.secretStrong === false ? String(d.secretIssue || "") : "");
+      })
       .catch(() => setEnabled(true));
   }, []);
 
@@ -29,9 +33,12 @@ export default function LoginPage() {
     });
     if (r.ok) {
       window.location.href = "/app";
-    } else {
-      setError("Secret invalide.");
+      return;
     }
+    const detail = await r.json().catch(() => ({}));
+    // 503 (secret trop faible) et 429 (trop de tentatives) méritent leur
+    // vraie raison : « secret invalide » enverrait chercher au mauvais endroit.
+    setError(r.status === 401 ? "Secret invalide." : String(detail.error || "Connexion refusée."));
   }
 
   return (
@@ -44,6 +51,11 @@ export default function LoginPage() {
       ) : (
         <form onSubmit={submit}>
           <p className="muted">Cette façade est privée. Entrez votre secret.</p>
+          {secretIssue && (
+            <p role="alert" data-testid="secret-issue">
+              {secretIssue}
+            </p>
+          )}
           <p>
             <input
               type="password"

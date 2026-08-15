@@ -99,7 +99,7 @@ export default defineConfig({
         JARVIS_DATA_DIR: "./test-results/e2e-auth-data",
         HERMES_API_URL: "http://127.0.0.1:3199",
         HERMES_API_KEY: "e2e-mock-key",
-        JARVIS_AUTH_SECRET: "secret-de-test-e2e",
+        JARVIS_AUTH_SECRET: "e2e-Ph4se-Jarvis-X2-Secret-2026",
       },
     },
     {
@@ -112,7 +112,7 @@ export default defineConfig({
       env: {
         JARVIS_ROLE: "facade",
         JARVIS_CORE_URL: "http://127.0.0.1:3100",
-        JARVIS_AUTH_SECRET: "secret-de-test-e2e",
+        JARVIS_AUTH_SECRET: "e2e-Ph4se-Jarvis-X2-Secret-2026",
         // Deliberately its own (empty) data dir: if a route ever ran
         // locally instead of being proxied, the state comparison with the
         // Core in facade.spec.ts would catch it.
@@ -129,8 +129,21 @@ export default defineConfig({
       env: {
         JARVIS_ROLE: "facade",
         JARVIS_CORE_URL: "http://127.0.0.1:3979",
-        JARVIS_AUTH_SECRET: "secret-de-test-e2e",
+        JARVIS_AUTH_SECRET: "e2e-Ph4se-Jarvis-X2-Secret-2026",
         JARVIS_DATA_DIR: "./test-results/e2e-offline-data",
+      },
+    },
+    {
+      // Fifth instance: a DELIBERATELY weak secret (P9 brick 2). The whole
+      // point is that this façade refuses everyone rather than pretending
+      // to be protected — login-hardening.spec.ts proves it.
+      command: "npm run start -- --port 3104",
+      url: "http://127.0.0.1:3104/login",
+      reuseExistingServer: true,
+      timeout: 60_000,
+      env: {
+        JARVIS_AUTH_SECRET: "jarvis123",
+        JARVIS_DATA_DIR: "./test-results/e2e-weak-data",
       },
     },
   ],
