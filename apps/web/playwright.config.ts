@@ -83,6 +83,9 @@ export default defineConfig({
         JARVIS_BROWSER_WORKER_URL: "http://127.0.0.1:3196",
         JARVIS_BROWSER_WORKER_TOKEN: "e2e-browser-token",
         JARVIS_BROWSER_MAX_STEPS: "5",
+        // P9: the Core explicitly names the façades allowed to drive it —
+        // exactly what a real deployment does with its Vercel origin.
+        JARVIS_TRUSTED_ORIGINS: "http://127.0.0.1:3102,http://127.0.0.1:3103",
       },
     },
     {

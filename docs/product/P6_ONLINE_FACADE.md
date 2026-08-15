@@ -130,8 +130,10 @@ Function ne devient jamais le cerveau par accident. Marche à suivre :
    `HERMES_API_KEY`, `JARVIS_DATA_DIR`, `JARVIS_AUTH_SECRET` (le même
    que la façade = SSO), et les clés push (`npm run vapid`) :
    `JARVIS_VAPID_PUBLIC_KEY`, `JARVIS_VAPID_PRIVATE_KEY`,
-   `JARVIS_VAPID_SUBJECT`. Preuve de la stack : `node
-   ../../scripts/verify-local-stack.mjs`.
+   `JARVIS_VAPID_SUBJECT`. **Et l'origine de la façade** (P9) :
+   `JARVIS_TRUSTED_ORIGINS=https://jarvis-x2.vercel.app` — sans elle, le
+   Core refuse en 403 toute écriture venant de la façade. Preuve de la
+   stack : `node ../../scripts/verify-local-stack.mjs`.
 2. Rendre le Core joignable par la façade **sans l'exposer au monde** :
    Tailscale Funnel/relay, tunnel Cloudflare, ou firewall n'autorisant
    que les IP sortantes de la façade. `JARVIS_CORE_URL` = cette adresse.
