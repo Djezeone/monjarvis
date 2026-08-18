@@ -1,0 +1,61 @@
+# JARVIS X2 — dépendances conteneurisées du Core.
+#
+# Ce qui est ICI : les services qui s'installent proprement en conteneur.
+# Ce qui n'y est PAS, volontairement :
+#   - Hermes    → s'installe en natif (`hermes gateway`), voir README ;
+#   - Graphiti  → service uvicorn local (services/local-stack/graphiti_service.py) ;
+#   - le Core   → `next start` sous systemd, voir systemd/jarvis-core.service.
+# Inventer une image pour ces trois-là reviendrait à documenter un déploiement
+# qui n'existe pas.
+#
+#   docker compose -f deploy/core/docker-compose.yml up -d
+#
+# TOUS les ports sont liés à 127.0.0.1 : rien n'est exposé au réseau. L'accès
+# distant passe par la façade et le relay, jamais par une ouverture de port.
+
+services:
+  neo4j:
+    image: neo4j:5.26
+    container_name: jarvis-x2-neo4j
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:7474:7474"
+      - "127.0.0.1:7687:7687"
+    environment:
+      # Changez ce mot de passe et reportez-le dans la config Graphiti.
+      NEO4J_AUTH: neo4j/${NEO4J_PASSWORD:-jarvis-local-password}
+      NEO4J_server_memory_heap_max__size: ${NEO4J_HEAP:-1G}
+    volumes:
+      - jarvis_neo4j_data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:7474 >/dev/null || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: jarvis-x2-n8n
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:5678:5678"
+    environment:
+      N8N_HOST: 127.0.0.1
+      N8N_PORT: 5678
+      N8N_PROTOCOL: http
+      # n8n derrière un réseau privé : son propre login protège l'éditeur.
+      N8N_BASIC_AUTH_ACTIVE: "true"
+      N8N_BASIC_AUTH_USER: ${N8N_USER:-jarvis}
+      N8N_BASIC_AUTH_PASSWORD: ${N8N_PASSWORD:?définissez N8N_PASSWORD}
+      GENERIC_TIMEZONE: ${TZ:-Europe/Paris}
+    volumes:
+      - jarvis_n8n_data:/home/node/.n8n
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:5678/healthz >/dev/null || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  jarvis_neo4j_data:
+  jarvis_n8n_data:

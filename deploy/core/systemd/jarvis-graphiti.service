@@ -1,0 +1,23 @@
+[Unit]
+Description=JARVIS X2 — mémoire Graphiti (uvicorn)
+Documentation=https://github.com/Djezeone/monjarvis/blob/main/docs/layers/P3/FREE_LOCAL_STACK.md
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=jarvis
+Group=jarvis
+WorkingDirectory=/opt/jarvis/monjarvis/services/local-stack
+Environment=SEMAPHORE_LIMIT=2
+# Décommentez si l'extraction structurée échoue avec votre modèle local :
+# Environment=GRAPHITI_STRUCTURED_OUTPUT_MODE=json_object
+ExecStart=/opt/jarvis/monjarvis/services/local-stack/.venv/bin/python -m uvicorn graphiti_service:app --host 127.0.0.1 --port 8771
+Restart=on-failure
+RestartSec=5
+
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

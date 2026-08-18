@@ -22,7 +22,8 @@
     "test:home": "node scripts/test-home.mjs",
     "test:browser": "node scripts/test-browser.mjs",
     "test:origin": "node scripts/test-origin-guard.mjs",
-    "test:login": "node scripts/test-login-guard.mjs"
+    "test:login": "node scripts/test-login-guard.mjs",
+    "preflight": "node ../../scripts/preflight.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",

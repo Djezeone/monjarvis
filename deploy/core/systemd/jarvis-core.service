@@ -1,0 +1,26 @@
+[Unit]
+Description=JARVIS X2 Core (Next.js) — cerveau, registres, ticker 60 s
+Documentation=https://github.com/Djezeone/monjarvis/blob/main/deploy/core/README.md
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=jarvis
+Group=jarvis
+WorkingDirectory=/opt/jarvis/monjarvis/apps/web
+EnvironmentFile=/opt/jarvis/monjarvis/apps/web/.env.local
+# Le Core écoute en local : c'est la façade (ou le relay) qui l'expose.
+ExecStart=/usr/bin/npm run start -- --port 3000 --hostname 127.0.0.1
+Restart=on-failure
+RestartSec=5
+
+# Durcissement : le Core n'a besoin d'écrire que dans son data dir.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/jarvis/data /opt/jarvis/monjarvis/apps/web/.next
+
+[Install]
+WantedBy=multi-user.target
