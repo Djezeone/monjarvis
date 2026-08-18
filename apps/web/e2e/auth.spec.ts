@@ -6,7 +6,7 @@ import { test, expect } from "@playwright/test";
  * the whole rest of the suite passing IS the proof that auth is opt-in.
  */
 const AUTH_BASE = "http://127.0.0.1:3101";
-const SECRET = "secret-de-test-e2e";
+const SECRET = "e2e-Ph4se-Jarvis-X2-Secret-2026";
 
 test.use({ baseURL: AUTH_BASE });
 
@@ -17,7 +17,13 @@ test("sans session, l'API et le cockpit sont fermés", async ({ request, page })
   expect(api.status()).toBe(401);
 
   const status = await (await request.get("/api/jarvis/auth/status")).json();
-  expect(status).toEqual({ enabled: true, authenticated: false });
+  expect(status).toMatchObject({
+    enabled: true,
+    authenticated: false,
+    // P9 brick 2: this server's secret must be strong, or it would refuse
+    // everyone and the rest of this spec would be meaningless.
+    secretStrong: true,
+  });
 
   await page.goto("/app");
   await expect(page).toHaveURL(/\/login/);

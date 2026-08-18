@@ -8,7 +8,7 @@ import { test, expect } from "@playwright/test";
  */
 const FACADE = "http://127.0.0.1:3102";
 const CORE = "http://127.0.0.1:3100";
-const SECRET = "secret-de-test-e2e";
+const SECRET = "e2e-Ph4se-Jarvis-X2-Secret-2026";
 
 test.use({ baseURL: FACADE });
 

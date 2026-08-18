@@ -113,8 +113,10 @@ Function ne devient jamais le cerveau par accident. Marche à suivre :
 1. Vercel → **Add New… → Project** → importer `Djezeone/monjarvis`,
    **Root Directory `apps/web`** (framework Next.js auto-détecté).
 2. Variables d'environnement du projet :
-   - `JARVIS_AUTH_SECRET` — obligatoire avant toute exposition (sinon,
-     activer Vercel Authentication / Deployment Protection en attendant) ;
+   - `JARVIS_AUTH_SECRET` — obligatoire avant toute exposition, **24
+     caractères minimum** (P9 : en dessous, la façade refuse tout le monde,
+     y compris avec le bon secret). Sans secret du tout, activer Vercel
+     Authentication / Deployment Protection en attendant ;
    - `JARVIS_CORE_URL` — l'URL du Core (VPS aujourd'hui, relay demain).
      Absente, l'API répond 503 « la façade n'a pas de cerveau configuré »
      et l'UI reste consultable ;
