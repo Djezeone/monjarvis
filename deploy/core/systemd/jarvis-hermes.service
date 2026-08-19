@@ -1,0 +1,21 @@
+[Unit]
+Description=JARVIS X2 — passerelle Hermes (runtime agent persistant)
+Documentation=https://github.com/Djezeone/monjarvis/blob/main/docs/layers/P3/FREE_LOCAL_STACK.md
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=jarvis
+Group=jarvis
+WorkingDirectory=/opt/jarvis
+# Hermes s'installe en natif ; adaptez le chemin à votre installation.
+ExecStart=/usr/local/bin/hermes gateway
+Restart=on-failure
+RestartSec=5
+
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
