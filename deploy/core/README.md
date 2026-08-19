@@ -99,6 +99,25 @@ L'endpoint santé ne rapporte que du **vérifié** : `connected` /
 de santé documenté : il ne rapporte que sa configuration, jamais un verdict
 fabriqué.
 
+## 6 bis. Vérification d'acceptation — la chaîne fonctionne-t-elle ?
+
+Le pendant du préflight, à lancer **après** le déploiement, contre l'URL
+réelle (façade publique ou Core) :
+
+```bash
+cd apps/web
+npm run smoke -- --base https://votre-app.vercel.app --secret '…'
+npm run smoke -- --base http://127.0.0.1:3000            # Core local
+```
+
+Rien n'y est simulé : le run traverse Hermes pour de bon, un appareil de test
+est réellement enrôlé, une commande réellement dispatchée puis exécutée — et
+l'appareil est **révoqué** en fin de course. Les organes non configurés sont
+comptés comme *annoncés, pas cassés* ; seules les étapes essentielles font
+sortir en erreur.
+
+À lancer après chaque changement de `JARVIS_CORE_URL`, de secret ou de relay.
+
 ## 7. Exposer le Core — sans ouvrir de port
 
 La façade doit joindre le Core, **le monde non**. Trois voies, par ordre de
