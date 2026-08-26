@@ -14,12 +14,15 @@
  *   node scripts/smoke-deployment.mjs --base https://votre-app.vercel.app \
  *                                     --secret '…'
  *   node scripts/smoke-deployment.mjs --base http://127.0.0.1:3000   # Core local
+ *   node scripts/smoke-deployment.mjs --base … --relay-secret '…'    # Core scellé
  *   node scripts/smoke-deployment.mjs --base … --json
  *
  * Sortie 1 si une étape ESSENTIELLE échoue (la chaîne est cassée).
  * Sortie 0 si seuls des organes optionnels manquent — ils se déclarent
  * eux-mêmes non configurés, ce n'est pas une panne.
  */
+
+import { createHmac } from "node:crypto";
 
 const args = process.argv.slice(2);
 const optionOf = (name) => {
@@ -28,8 +31,21 @@ const optionOf = (name) => {
 };
 const BASE = (optionOf("--base") || "http://127.0.0.1:3000").replace(/\/+$/, "");
 const SECRET = optionOf("--secret") || process.env.JARVIS_AUTH_SECRET || "";
+// P10 : contre un Core scellé, ce script est un appelant comme un autre —
+// il doit signer, sinon il ne voit qu'une porte close et conclurait à tort
+// que le déploiement est cassé.
+const RELAY = optionOf("--relay-secret") || process.env.JARVIS_RELAY_SECRET || "";
 const JSON_OUT = args.includes("--json");
 const DEVICE_ID = `smoke-${Date.now().toString(36)}`;
+
+function relayHeader(method, path) {
+  if (!RELAY) return {};
+  const ts = Date.now();
+  const mac = createHmac("sha256", RELAY)
+    .update(`jarvis-relay:${ts}:${method.toUpperCase()}:${path}`)
+    .digest("hex");
+  return { "x-jarvis-relay": `${ts}.${mac}` };
+}
 
 let cookie = "";
 const steps = [];
@@ -41,7 +57,10 @@ function record(name, { ok, essential = true, detail = "", skipped = false }) {
 }
 
 async function call(path, init = {}) {
-  const headers = { ...(init.headers || {}) };
+  const method = init.method || "GET";
+  // The signature covers the pathname only — the query string is not part
+  // of the contract (see src/server/relay-guard.ts).
+  const headers = { ...relayHeader(method, path.split("?")[0]), ...(init.headers || {}) };
   if (cookie) headers.cookie = cookie;
   if (init.body && !headers["content-type"]) headers["content-type"] = "application/json";
   const r = await fetch(`${BASE}${path}`, {
@@ -84,6 +103,15 @@ async function main() {
   // 2 — Authentification D'ABORD : sur un déploiement fermé, tout le reste
   // (y compris le statut de rôle) vit derrière la porte.
   const auth = await call("/api/jarvis/auth/status");
+  // P10 : un Core scellé refuse avant l'authentification. Le dire ici évite
+  // de conclure « déploiement cassé » quand seul le sceau ne correspond pas.
+  if (auth.status === 403 && auth.json?.relay) {
+    record("Sceau de relais accepté", {
+      ok: false,
+      detail: `${auth.json.relay} — vérifiez --relay-secret et l'horloge des deux machines`,
+    });
+    return finish();
+  }
   const authEnabled = auth.json?.enabled === true;
   if (authEnabled && auth.json?.secretStrong === false) {
     record("Force du secret de façade", {

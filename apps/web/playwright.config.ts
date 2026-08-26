@@ -146,6 +146,40 @@ export default defineConfig({
         JARVIS_DATA_DIR: "./test-results/e2e-weak-data",
       },
     },
+    {
+      // Sixth instance: a SEALED Core (P10) — the posture of a Core exposed
+      // through a tunnel. Its API answers only a caller that can sign.
+      command: "npm run start -- --port 3105",
+      // The landing, not an API path: every /api/jarvis/* answer from this
+      // instance is a 403 by design, which is not a readiness signal.
+      url: "http://127.0.0.1:3105/",
+      reuseExistingServer: true,
+      timeout: 60_000,
+      env: {
+        JARVIS_ROLE: "core",
+        JARVIS_DATA_DIR: "./test-results/e2e-relay-core-data",
+        HERMES_API_URL: "http://127.0.0.1:3199",
+        HERMES_API_KEY: "e2e-mock-key",
+        JARVIS_AUTH_SECRET: "e2e-Ph4se-Jarvis-X2-Secret-2026",
+        JARVIS_RELAY_SECRET: "e2e-Rel4y-Jarvis-X2-Seal-2026",
+        JARVIS_TRUSTED_ORIGINS: "http://127.0.0.1:3106",
+      },
+    },
+    {
+      // Seventh instance: the façade that holds the same seal. The pair
+      // proves the link end to end; :3105 hit directly proves the seal.
+      command: "npm run start -- --port 3106",
+      url: "http://127.0.0.1:3106/login",
+      reuseExistingServer: true,
+      timeout: 60_000,
+      env: {
+        JARVIS_ROLE: "facade",
+        JARVIS_CORE_URL: "http://127.0.0.1:3105",
+        JARVIS_AUTH_SECRET: "e2e-Ph4se-Jarvis-X2-Secret-2026",
+        JARVIS_RELAY_SECRET: "e2e-Rel4y-Jarvis-X2-Seal-2026",
+        JARVIS_DATA_DIR: "./test-results/e2e-relay-facade-data",
+      },
+    },
   ],
   projects: [
     { name: "desktop", use: { ...devices["Desktop Chrome"] } },
