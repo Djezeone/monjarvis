@@ -1,0 +1,140 @@
+name: Hermes VPS Control
+
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: "Operation Hermes"
+        required: true
+        default: "restart"
+        type: choice
+        options:
+          - restart
+          - status
+          - logs
+  issues:
+    types: [opened]
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: hermes-vps-control
+  cancel-in-progress: false
+
+jobs:
+  authorize:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'issues' &&
+       github.actor == github.repository_owner &&
+       startsWith(github.event.issue.title, '[OPS] hermes '))
+    runs-on: ubuntu-latest
+    outputs:
+      operation: ${{ steps.operation.outputs.value }}
+    steps:
+      - name: Resolve operation
+        id: operation
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          INPUT_OPERATION: ${{ inputs.operation }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+        run: |
+          set -euo pipefail
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            op="$INPUT_OPERATION"
+          else
+            case "$ISSUE_TITLE" in
+              "[OPS] hermes restart") op="restart" ;;
+              "[OPS] hermes status")  op="status" ;;
+              "[OPS] hermes logs")    op="logs" ;;
+              *) echo "Unsupported owner command" >&2; exit 2 ;;
+            esac
+          fi
+          echo "value=$op" >> "$GITHUB_OUTPUT"
+
+  hermes:
+    needs: authorize
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      VPS_HOST: ${{ secrets.VPS_HOST }}
+      VPS_USER: ${{ secrets.VPS_USER }}
+      VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+      VPS_PORT: ${{ secrets.VPS_PORT || '22' }}
+      OPERATION: ${{ needs.authorize.outputs.operation }}
+    steps:
+      - name: Validate required secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$VPS_HOST" || { echo "VPS_HOST missing" >&2; exit 1; }
+          test -n "$VPS_USER" || { echo "VPS_USER missing" >&2; exit 1; }
+          test -n "$VPS_SSH_KEY" || { echo "VPS_SSH_KEY missing" >&2; exit 1; }
+
+      - name: Prepare SSH
+        shell: bash
+        run: |
+          set -euo pipefail
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$VPS_SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -p "$VPS_PORT" -H "$VPS_HOST" >> ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Execute Hermes operation
+        shell: bash
+        run: |
+          set -euo pipefail
+          ssh -p "$VPS_PORT" \
+            -i ~/.ssh/id_ed25519 \
+            -o BatchMode=yes \
+            -o ConnectTimeout=10 \
+            "$VPS_USER@$VPS_HOST" \
+            "OPERATION='$OPERATION' bash -s" <<'REMOTE'
+          set -euo pipefail
+
+          case "$OPERATION" in
+            restart)
+              docker restart hermes
+              sleep 3
+              echo "--- STATUS ---"
+              docker inspect --format='{{.Name}} {{.State.Status}} running={{.State.Running}} started={{.State.StartedAt}}' hermes
+              echo "--- LOGS (last 40) ---"
+              docker logs --tail 40 hermes 2>&1
+              ;;
+            status)
+              docker inspect --format='{{.Name}} {{.State.Status}} running={{.State.Running}} started={{.State.StartedAt}}' hermes
+              ;;
+            logs)
+              docker logs --tail 100 hermes 2>&1
+              ;;
+            *)
+              echo "Unsupported operation: $OPERATION" >&2
+              exit 2
+              ;;
+          esac
+          REMOTE
+
+      - name: Close command issue with result
+        if: always() && github.event_name == 'issues'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const ok = '${{ job.status }}' === 'success';
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: ok
+                ? '✅ Opération Hermes exécutée avec succès. Voir le run GitHub Actions pour les détails.'
+                : '❌ Opération Hermes en échec. Voir le run GitHub Actions pour les détails.'
+            });
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              state: 'closed'
+            });
