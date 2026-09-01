@@ -108,6 +108,7 @@ réelle (façade publique ou Core) :
 cd apps/web
 npm run smoke -- --base https://votre-app.vercel.app --secret '…'
 npm run smoke -- --base http://127.0.0.1:3000            # Core local
+npm run smoke -- --base http://127.0.0.1:3000 --secret '…' --relay-secret '…'  # Core scellé (§7 bis)
 ```
 
 Rien n'y est simulé : le run traverse Hermes pour de bon, un appareil de test
@@ -133,6 +134,36 @@ préférence :
 Dans les trois cas, `HERMES_API_URL` (8642), Neo4j et n8n restent sur
 `127.0.0.1`. Seul le port 3000 du Core est joignable, et seulement par la
 façade.
+
+### 7 bis. Sceller le lien — quand le réseau ne suffit plus
+
+Les voies 2 et 3 rendent le Core **atteignable depuis l'internet**. Le réseau
+ne dit plus qui appelle : il faut que le Core le vérifie lui-même.
+
+```bash
+openssl rand -base64 32     # le même secret des deux côtés
+# .env.local du Core   :  JARVIS_RELAY_SECRET=…
+# variables Vercel     :  JARVIS_RELAY_SECRET=…   (identique)
+```
+
+Dès lors, chaque requête de la façade est signée (`x-jarvis-relay`), horodatée
+et **liée à sa route et à sa méthode** : une signature captée sur un `GET`
+inoffensif ne se rejoue ni ailleurs, ni en `POST`, ni cinq minutes plus tard.
+Un inconnu qui trouve l'adresse n'atteint plus le formulaire de connexion :
+il est refusé avant.
+
+Trois conséquences, dites franchement :
+
+- **Les satellites continuent** — ils portent leur jeton d'appareil, une preuve
+  par machine, plus forte que le secret partagé.
+- **Le cockpit passe par la façade, même chez vous.** Sceller, c'est décider
+  que l'adresse de JARVIS est celle de la façade.
+- **Les horloges comptent.** Plus de cinq minutes de dérive entre Vercel et
+  votre Core et le verdict est `expiré` — le cockpit et `npm run smoke` le
+  nomment tel quel, sans vous laisser chercher une panne réseau.
+
+Derrière Tailscale (voie 1), le sceau est superflu : le réseau privé fait déjà
+ce travail. Détails et limites : `docs/product/P10_RELAY.md`.
 
 ## 8. Déménager le cerveau (VPS → maison)
 

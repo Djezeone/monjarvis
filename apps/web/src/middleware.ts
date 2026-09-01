@@ -2,6 +2,13 @@ import { NextResponse, type NextRequest } from "next/server";
 import { authSecret, SESSION_COOKIE, verifySessionToken } from "@/server/facade-auth";
 import { coreUrl, deploymentRole } from "@/server/deployment";
 import { isStateChanging, originAllowed, trustedOrigins } from "@/server/origin-guard";
+import {
+  RELAY_HEADER,
+  relayCovers,
+  relaySecret,
+  signRelay,
+  verifyRelay,
+} from "@/server/relay-guard";
 
 /**
  * P6 brick 1 — façade gate. With JARVIS_AUTH_SECRET set, /app and
@@ -27,7 +34,7 @@ const OPEN_PATHS = [/^\/api\/jarvis\/auth\//, /^\/api\/jarvis\/devices\/enroll\/
 /** Routes the façade answers itself — never proxied to the Core. */
 const FACADE_LOCAL_PATHS = [/^\/api\/jarvis\/auth\//, /^\/api\/jarvis\/facade\//];
 
-function facadeRewrite(req: NextRequest): NextResponse {
+async function facadeRewrite(req: NextRequest): Promise<NextResponse> {
   const core = coreUrl();
   if (!core) {
     return NextResponse.json(
@@ -36,10 +43,19 @@ function facadeRewrite(req: NextRequest): NextResponse {
     );
   }
   const { pathname, search } = req.nextUrl;
-  return NextResponse.rewrite(new URL(`${pathname}${search}`, core));
+  const target = new URL(`${pathname}${search}`, core);
+
+  // P10: sign the hop when a relay secret is configured. Unsigned when it
+  // is not — an unsealed Core is exactly as reachable as before.
+  const relay = relaySecret();
+  if (!relay) return NextResponse.rewrite(target);
+
+  const headers = new Headers(req.headers);
+  headers.set(RELAY_HEADER, await signRelay(relay, req.method, pathname));
+  return NextResponse.rewrite(target, { request: { headers } });
 }
 
-function forwardOrNext(req: NextRequest): NextResponse {
+async function forwardOrNext(req: NextRequest): Promise<NextResponse> {
   const { pathname } = req.nextUrl;
   if (
     deploymentRole() === "facade" &&
@@ -49,6 +65,34 @@ function forwardOrNext(req: NextRequest): NextResponse {
     return facadeRewrite(req);
   }
   return NextResponse.next();
+}
+
+/**
+ * P10 — the seal, Core-side. Runs before authentication: a caller who
+ * cannot sign never reaches the login endpoint at all, so an exposed Core
+ * offers nothing to brute-force. The verdict travels in the body so a
+ * misconfigured façade is diagnosable (drifted clock vs wrong secret)
+ * instead of silently broken.
+ */
+async function relayRefusal(req: NextRequest): Promise<NextResponse | null> {
+  const secret = relaySecret();
+  if (!secret || deploymentRole() !== "core") return null;
+
+  const { pathname } = req.nextUrl;
+  if (!relayCovers(pathname, req.headers.get("x-jarvis-device-token"))) return null;
+
+  const verdict = await verifyRelay({
+    secret,
+    method: req.method,
+    pathname,
+    header: req.headers.get(RELAY_HEADER),
+  });
+  if (verdict === "ok") return null;
+
+  return NextResponse.json(
+    { error: `lien de relais refusé (${verdict}) — ce Core ne répond qu'à sa façade`, relay: verdict },
+    { status: 403 }
+  );
 }
 
 const DEVICE_TOKEN_PATHS = [
@@ -72,6 +116,9 @@ export async function middleware(req: NextRequest) {
       { status: 403 }
     );
   }
+
+  const refused = await relayRefusal(req);
+  if (refused) return refused;
 
   const secret = authSecret();
   if (!secret) return forwardOrNext(req);

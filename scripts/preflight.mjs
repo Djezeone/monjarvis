@@ -124,6 +124,14 @@ const LAYERS = [
         consequence:
           "une façade distante recevra 403 sur chaque écriture (garde d'origine P9)",
       },
+      {
+        key: "JARVIS_RELAY_SECRET",
+        blocking: false,
+        secret: true,
+        expect: (v) => v === "" || v.length >= 24,
+        consequence:
+          "absent = Core non scellé : quiconque atteint son adresse atteint son API (acceptable derrière Tailscale, jamais sur un port public) ; présent = il faut LE MÊME secret côté façade, sinon elle est refusée",
+      },
     ],
   },
   {

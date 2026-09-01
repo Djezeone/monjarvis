@@ -18,7 +18,14 @@ test("chaque instance annonce honnêtement son rôle", async ({ request }) => {
   await request.post("/api/jarvis/auth/login", { data: { secret: SECRET } });
 
   const facade = await (await request.get("/api/jarvis/facade/status")).json();
-  expect(facade).toEqual({ role: "facade", coreConfigured: true, coreReachable: true });
+  // P10 added a `relay` verdict to this contract: « off » is the honest
+  // answer for a link that carries no seal, which is this pair's posture.
+  expect(facade).toEqual({
+    role: "facade",
+    coreConfigured: true,
+    coreReachable: true,
+    relay: "off",
+  });
 
   const core = await (await request.get(`${CORE}/api/jarvis/facade/status`)).json();
   expect(core.role).toBe("core");

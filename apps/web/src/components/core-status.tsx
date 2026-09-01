@@ -12,6 +12,8 @@ interface FacadeStatus {
   role: "facade" | "core";
   coreConfigured: boolean;
   coreReachable: boolean;
+  /** P10 — "refused" when the brain answers but seals this façade out. */
+  relay?: "off" | "ok" | "refused";
 }
 
 /**
@@ -80,8 +82,12 @@ export function CoreStatus() {
   // Core role, or façade with a healthy brain and nothing queued: stay out
   // of the way (replay reports remain visible until dismissed by reload).
   if (!status || status.role === "core") return null;
-  const offline = !status.coreConfigured || !status.coreReachable;
-  if (!offline && pending.length === 0 && replayed.length === 0) return null;
+  // P10: a sealed-out façade is neither offline (the brain answers) nor
+  // healthy (nothing it asks will be honoured). Its own verdict, or the
+  // operator hunts a phantom outage.
+  const refused = status.relay === "refused";
+  const offline = !refused && (!status.coreConfigured || !status.coreReachable);
+  if (!offline && !refused && pending.length === 0 && replayed.length === 0) return null;
 
   function keep(e: React.FormEvent) {
     e.preventDefault();
@@ -93,7 +99,16 @@ export function CoreStatus() {
 
   return (
     <section className="panel" role="alert" data-testid="core-status">
-      {offline ? (
+      {refused ? (
+        <>
+          <h2>Le Core refuse cette façade</h2>
+          <p className="muted">
+            Le cerveau répond, mais il est scellé : il n&apos;accepte que sa façade.
+            Vérifiez que <code>JARVIS_RELAY_SECRET</code> est identique des deux
+            côtés, et que les horloges ne dérivent pas de plus de cinq minutes.
+          </p>
+        </>
+      ) : offline ? (
         <>
           <h2>JARVIS Core hors ligne</h2>
           <p className="muted">
