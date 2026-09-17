@@ -219,6 +219,13 @@ export class HermesRunsAdapter implements IntelligenceAdapter {
       });return;
     }
 
+    // `run.cancelled` matches none of the heuristics below ("cancelled" is not
+    // "complete" and not "fail"), so without this branch a stopped run emits
+    // nothing and the cockpit leaves it spinning forever.
+    if(/cancel/i.test(name) || data.status==="cancelled"){
+      onEvent({type:"run.status",runId,status:"cancelled"});return;
+    }
+
     if(/complete/i.test(name) || data.status==="completed"){
       onEvent({type:"run.status",runId,status:"completed"});return;
     }
