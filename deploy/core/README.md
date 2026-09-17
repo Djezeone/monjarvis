@@ -61,6 +61,12 @@ Hermes, puis `services/local-stack/graphiti_service.py` dans un venv).
 Inventer une image Docker pour eux documenterait un déploiement qui n'existe
 pas.
 
+**Monter Hermes en version** : `deploy/core/HERMES_UPGRADE.md`. Hermes est le
+seul organe bloquant du Core — sa mise à jour passe par `hermes update` en SSH,
+avec sauvegarde avant et `verify-local-stack.mjs` après. Aucune API Hermes ne
+met Hermes à jour : ni le cockpit, ni n8n, ni un agent branché sur l'API ne
+peuvent faire cette opération.
+
 ## 4. Configuration
 
 ```bash
@@ -131,9 +137,9 @@ préférence :
 3. **Pare-feu strict** sur un VPS : n'autorisez que les IP sortantes de la
    façade, en HTTPS.
 
-Dans les trois cas, `HERMES_API_URL` (8642), Neo4j et n8n restent sur
-`127.0.0.1`. Seul le port 3000 du Core est joignable, et seulement par la
-façade.
+Dans les trois cas, la posture visée est la suivante : `HERMES_API_URL` (8642),
+Neo4j et n8n restent sur `127.0.0.1`, et seul le port 3000 du Core est
+joignable, uniquement par la façade.
 
 ### 7 bis. Sceller le lien — quand le réseau ne suffit plus
 
@@ -164,6 +170,40 @@ Trois conséquences, dites franchement :
 
 Derrière Tailscale (voie 1), le sceau est superflu : le réseau privé fait déjà
 ce travail. Détails et limites : `docs/product/P10_RELAY.md`.
+
+### 7 ter. Quand Hermes porte son propre nom de domaine
+
+L'installation UNTAKA publie Hermes et n8n sous leurs propres noms d'hôte
+(`hermes.untakacorp.com`, `n8n.untakacorp.com`) derrière un reverse proxy. Ce
+n'est pas la posture de §7 : le port n'est plus sur `127.0.0.1`, il est
+joignable depuis l'internet, et c'est le reverse proxy — plus le réseau — qui
+décide qui entre.
+
+Ce que cela change, dit franchement : la documentation amont de Hermes avertit
+que **l'API server donne accès à la totalité de l'outillage de l'agent**. Une
+clé qui fuit ne donne pas « un peu » de Hermes, elle donne l'agent entier :
+ses outils, ses fichiers, ses intégrations. Sur un port loopback, la clé est
+une seconde barrière ; publiée, elle est la seule.
+
+Les durcissements qui comptent, par ordre d'effet :
+
+1. **Une clé par profil.** Depuis juillet 2026, une clé du profil par défaut
+   n'est plus acceptée sur un préfixe `/p/<profil>/` — chaque profil porte son
+   `API_SERVER_KEY` dans son `.env`, sinon `401`. Ne partagez jamais une clé
+   unique entre profils, et faites-la tourner après toute exposition douteuse.
+2. **Allowlist des IP sortantes de la façade** au niveau du reverse proxy. La
+   façade Vercel est le seul appelant légitime du Core ; Hermes lui-même n'a
+   aucune raison d'accepter le monde entier.
+3. **Rate-limit au reverse proxy**, sur `/v1/runs` en particulier : un run est
+   une dépense de tokens. Sans plafond, un inconnu qui tient la clé consomme
+   votre budget LLM autant qu'il veut.
+4. **Le sceau de §7 bis**, qui vérifie l'appelant côté Core plutôt que de s'en
+   remettre à l'adresse.
+5. **Ne publiez pas `/health/detailed`** : il est authentifié, mais il décrit
+   votre stack. `/health` suffit à un check de disponibilité externe.
+
+Le plus sûr reste de ne pas publier Hermes du tout : Tailscale (voie 1) rend
+ces cinq points superflus, parce que le port redevient privé.
 
 ## 8. Déménager le cerveau (VPS → maison)
 

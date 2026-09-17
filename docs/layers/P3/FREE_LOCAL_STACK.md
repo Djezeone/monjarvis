@@ -67,7 +67,15 @@ Verify:
 curl http://127.0.0.1:8642/health
 ```
 
+`/health` et `/v1/health` répondent sans authentification et ne renvoient qu'un
+statut. `/health/detailed` porte le vrai verdict de readiness, mais exige le
+bearer. Aucun de ces endpoints ne renvoie la version : elle s'obtient par
+`hermes --version`, en CLI.
+
 Do not expose port 8642 publicly.
+
+Montée de version : `deploy/core/HERMES_UPGRADE.md`. Hermes est l'organe
+bloquant du Core, sa mise à jour se traite comme un déploiement.
 
 ## 3. Graphiti memory
 

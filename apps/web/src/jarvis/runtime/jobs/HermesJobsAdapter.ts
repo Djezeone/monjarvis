@@ -23,6 +23,16 @@ export class HermesJobsAdapter {
     if(!r.ok) throw new Error(`Jobs create ${r.status}`);
     return r.json();
   }
+  async get(id:string){
+    const r=await fetch(`${this.baseUrl}/api/jobs/${encodeURIComponent(id)}`,{headers:this.headers(),cache:"no-store"});
+    if(!r.ok) throw new Error(`Jobs get ${r.status}`);
+    return r.json();
+  }
+  async update(id:string,patch:Partial<HermesJob>){
+    const r=await fetch(`${this.baseUrl}/api/jobs/${encodeURIComponent(id)}`,{method:"PATCH",headers:this.headers(),body:JSON.stringify(patch)});
+    if(!r.ok) throw new Error(`Jobs update ${r.status}`);
+    return r.json();
+  }
   async pause(id:string){return this.post(id,"pause")}
   async resume(id:string){return this.post(id,"resume")}
   async runNow(id:string){return this.post(id,"run")}
